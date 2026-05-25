@@ -35,11 +35,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## GitHub Pages
+## Deploy on Vercel
 
-Сайт публикуется на **https://shake-ass.github.io/sleb/** при пуше в `main`.
-
-1. В репозитории: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Workflow: `.github/workflows/deploy-github-pages.yml` (сборка `npm run build:pages`, деплой папки `out`).
-
-Локально dev без base path: `npm run dev -- -p 3001`. Статическая сборка под Pages только в CI (удаляется `app/api`, т.к. API не поддерживается static export).
+Подключите репозиторий в [Vercel](https://vercel.com). Сборка: `npm run build` (Prisma Client генерируется в `postinstall`). Укажите `DATABASE_URL` в Environment Variables, если используете API и БД.
