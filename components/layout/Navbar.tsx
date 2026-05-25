@@ -30,7 +30,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between gap-4 container-page h-[var(--nav-h)]"
+        className="site-chrome-nav fixed top-0 left-0 right-0 z-50 flex items-center justify-between gap-4 container-page h-[var(--nav-h)]"
         style={{
           background: 'rgba(14,12,10,.92)',
           backdropFilter: 'blur(12px)',

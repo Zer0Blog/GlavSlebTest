@@ -18,16 +18,18 @@
   :root { --nav-h: 4.5rem; }
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-body), sans-serif;
-  font-weight: 300;
   -webkit-font-smoothing: antialiased;
 }
-.font-display { font-family: var(--font-display), Georgia, serif; }
+
+.site-main {
+  font-family: var(--font-body), sans-serif;
+  font-weight: 300;
+}
+.font-display { font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif; }
 
 .container-page {
   margin-inline: auto;
@@ -115,7 +117,9 @@ body {
     transparent 28px, transparent 52px);
 }
 
-input, textarea, select {
+body:not(:has(.modern-home)) input,
+body:not(:has(.modern-home)) textarea,
+body:not(:has(.modern-home)) select {
   background: var(--surface);
   border: 0.5px solid var(--border);
   color: var(--text);
@@ -123,5 +127,25 @@ input, textarea, select {
   outline: none;
   transition: border-color .2s;
 }
-input:focus, textarea:focus { border-color: var(--accent); }
-input::placeholder, textarea::placeholder { color: var(--muted); }
+body:not(:has(.modern-home)) input:focus,
+body:not(:has(.modern-home)) textarea:focus {
+  border-color: var(--accent);
+}
+body:not(:has(.modern-home)) input::placeholder,
+body:not(:has(.modern-home)) textarea::placeholder {
+  color: var(--muted);
+}
+
+/* Homepage: use Arena mockup layout (see app/modern-home.css) */
+body:has(.modern-home) .site-chrome-nav,
+body:has(.modern-home) .site-chrome-footer {
+  display: none;
+}
+
+main.site-main:has(> .modern-home) {
+  margin-top: 0;
+  min-height: 0;
+  padding: 0;
+  font-family: unset;
+  font-weight: unset;
+}

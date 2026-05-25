@@ -1,0 +1,158 @@
+/* Styles from Patches/extracted-redesign/src/index.css (Arena mockup parity) */
+
+@theme {
+  --transition-duration-400: 400ms;
+}
+
+[data-theme="thermo"] {
+  --bg-primary: #1A1410;
+  --bg-alt: #231C14;
+  --bg-card: #2A2017;
+  --bg-card-hover: #33281D;
+  --bg-nav: rgba(26, 20, 16, 0.88);
+  --text-primary: #F5F0EA;
+  --text-secondary: #9A8B7E;
+  --text-tertiary: #6B5E52;
+  --accent: #B87333;
+  --accent-hover: #D48A3E;
+  --accent-gold: #D4A76A;
+  --accent-soft: rgba(184, 115, 51, 0.08);
+  --border: rgba(245, 240, 234, 0.07);
+  --border-strong: rgba(245, 240, 234, 0.14);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.4);
+  --glass: rgba(26, 20, 16, 0.6);
+}
+
+[data-theme="nature"] {
+  --bg-primary: #F7F4EF;
+  --bg-alt: #EDE5D8;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FBF9F6;
+  --bg-nav: rgba(247, 244, 239, 0.88);
+  --text-primary: #2A2520;
+  --text-secondary: #7D7368;
+  --text-tertiary: #A89E94;
+  --accent: #8B6F4E;
+  --accent-hover: #A37F5A;
+  --accent-gold: #C75B39;
+  --accent-soft: rgba(139, 111, 78, 0.06);
+  --border: rgba(42, 37, 32, 0.06);
+  --border-strong: rgba(42, 37, 32, 0.12);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.08);
+  --glass: rgba(247, 244, 239, 0.6);
+}
+
+body:has(.modern-home) {
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif !important;
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  font-weight: 400 !important;
+  overflow-x: hidden;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-home {
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.modern-home .font-display {
+  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+}
+
+.modern-home .font-serif {
+  font-family: var(--font-serif), 'Cormorant Garamond', Georgia, serif;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.marquee-track {
+  animation: marquee 55s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.hero-fade {
+  animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+.hero-fade-d1 { animation-delay: 0.2s; }
+.hero-fade-d2 { animation-delay: 0.4s; }
+.hero-fade-d3 { animation-delay: 0.6s; }
+.hero-fade-d4 { animation-delay: 0.8s; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+.reveal-d5 { transition-delay: 0.5s; }
+.reveal-d6 { transition-delay: 0.6s; }
+
+.materials-scroll {
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.materials-scroll::-webkit-scrollbar { display: none; }
+.materials-scroll.dragging { cursor: grabbing; user-select: none; }
+
+.img-ph {
+  position: relative;
+  overflow: hidden;
+}
+.img-ph::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(184, 115, 51, 0.05) 0%,
+    transparent 50%,
+    rgba(184, 115, 51, 0.03) 100%);
+  pointer-events: none;
+}
+
+.card-glow {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.t-transition {
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-home button {
+  font-family: inherit;
+  cursor: pointer;
+}

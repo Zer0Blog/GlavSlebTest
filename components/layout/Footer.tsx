@@ -30,7 +30,7 @@ const cols = [
 
 export default function Footer() {
   return (
-    <footer className="pt-10 pb-8 md:pt-12" style={{ background: 'var(--bg2)', borderTop: '0.5px solid var(--border)' }}>
+    <footer className="site-chrome-footer pt-10 pb-8 md:pt-12" style={{ background: 'var(--bg2)', borderTop: '0.5px solid var(--border)' }}>
       <div className="container-page flex flex-col gap-10 lg:flex-row lg:justify-between lg:items-start mb-10 md:mb-12">
         <div>
           <p className="font-display text-xl md:text-2xl">
