@@ -1,0 +1,151 @@
+// Glavsleb — слэбы, породы, работы, заявки
+// https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum WoodTexture {
+  WOOD_1
+  WOOD_2
+  WOOD_3
+}
+
+enum StockStatus {
+  IN_STOCK
+  ON_ORDER
+  RESERVED
+  SOLD
+}
+
+enum WorkCategory {
+  TABLES
+  COUNTERTOPS
+  BAR
+  OTHER
+}
+
+enum LeadSource {
+  MODAL
+  CONTACTS
+  PRODUCT
+  OTHER
+}
+
+enum LeadStatus {
+  NEW
+  IN_PROGRESS
+  DONE
+  SPAM
+}
+
+/// Порода дерева (справочник)
+model Breed {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  abbr        String
+  name        String
+  latinName   String   @map("latin_name")
+  tag         String?
+  hardness    String?
+  colorHex    String?  @map("color_hex")
+  description String   @db.Text
+  woodTexture WoodTexture @default(WOOD_1) @map("wood_texture")
+  sortOrder   Int      @default(0) @map("sort_order")
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  slabs Slab[]
+
+  @@map("breeds")
+}
+
+/// Слэб в каталоге
+model Slab {
+  id              String      @id @default(cuid())
+  sku             String      @unique
+  breedId         String      @map("breed_id")
+  lengthCm        Int         @map("length_cm")
+  widthCm         Int         @map("width_cm")
+  thicknessCm     Int         @map("thickness_cm")
+  weightKg        Int?        @map("weight_kg")
+  priceRub        Int         @map("price_rub")
+  woodTexture     WoodTexture @map("wood_texture")
+  stockStatus     StockStatus @default(IN_STOCK) @map("stock_status")
+  origin          String?
+  description     String?     @db.Text
+  dryingMethod    String?     @map("drying_method")
+  moisturePercent String?     @map("moisture_percent")
+  edgeTreatment   String?     @map("edge_treatment")
+  featured        Boolean     @default(false)
+  published       Boolean     @default(true)
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  breed  Breed       @relation(fields: [breedId], references: [id])
+  images SlabImage[]
+  leads  Lead[]
+
+  @@index([breedId])
+  @@index([stockStatus])
+  @@index([priceRub])
+  @@index([published, featured])
+  @@map("slabs")
+}
+
+/// Фото слэба (галерея на карточке товара)
+model SlabImage {
+  id        String   @id @default(cuid())
+  slabId    String   @map("slab_id")
+  url       String?
+  texture   WoodTexture?
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  slab Slab @relation(fields: [slabId], references: [id], onDelete: Cascade)
+
+  @@index([slabId])
+  @@map("slab_images")
+}
+
+/// Готовые работы / портфолио
+model Work {
+  id          String       @id @default(cuid())
+  title       String
+  species     String
+  sizeLabel   String       @map("size_label")
+  category    WorkCategory
+  woodTexture WoodTexture  @map("wood_texture")
+  sortOrder   Int          @default(0) @map("sort_order")
+  published   Boolean      @default(true)
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  @@index([category])
+  @@map("works")
+}
+
+/// Заявка с сайта
+model Lead {
+  id        String     @id @default(cuid())
+  name      String
+  contact   String
+  message   String?    @db.Text
+  source    LeadSource @default(OTHER)
+  status    LeadStatus @default(NEW)
+  slabId    String?    @map("slab_id")
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  slab Slab? @relation(fields: [slabId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("leads")
+}
