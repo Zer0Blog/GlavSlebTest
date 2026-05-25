@@ -15,6 +15,7 @@ import {
   USP_ITEMS,
   WOOD_SPECIES,
 } from './data'
+import { assetUrl } from '@/lib/base-path'
 import {
   ADV_ICONS,
   ArrowRight,
@@ -177,7 +178,7 @@ export default function ModernHomePage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3 text-decoration-none">
-            <img src="/media/logo.png" alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
+            <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
             <span className="font-display text-lg md:text-xl tracking-wide" style={{ color: 'var(--text-primary)' }}>
               Главный <span style={{ color: 'var(--accent-gold)' }}>по слэбам</span>
             </span>
@@ -254,7 +255,7 @@ export default function ModernHomePage() {
           <div className="hero-fade relative w-full overflow-hidden rounded-3xl sm:rounded-[2rem]" style={{ aspectRatio: '21/9' }}>
             <video
               className="absolute inset-0 h-full w-full object-cover"
-              poster="/media/hero-poster.png"
+              poster={assetUrl('/media/hero-poster.png')}
               autoPlay
               muted
               loop
@@ -262,9 +263,7 @@ export default function ModernHomePage() {
               preload="auto"
             >
               {/* hero.mov — H.264 в контейнере MOV; Safari и часть браузеров */}
-              <source src="/media/hero.mov" type="video/mp4" />
-              {/* Web-версия из hero.mov для Chrome / Edge / Firefox */}
-              <source src="/media/hero-web.mp4" type="video/mp4" />
+              <source src={assetUrl('/media/hero-web.mp4')} type="video/mp4" />
             </video>
             {/* Bottom gradient overlay */}
             <div className="absolute bottom-0 left-0 right-0 h-2/3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }} />
@@ -382,7 +381,7 @@ export default function ModernHomePage() {
             style={{ backgroundColor: 'var(--bg-card)', boxShadow: 'var(--shadow-sm)' }}
           >
             <img
-              src="/media/product-hit.png"
+              src={assetUrl('/media/product-hit.png')}
               alt=""
               className="h-44 w-full object-cover"
               loading="lazy"
@@ -546,7 +545,7 @@ export default function ModernHomePage() {
                   }}
                 >
                   <img
-                    src={item.image}
+                    src={assetUrl(item.image)}
                     alt=""
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
@@ -637,7 +636,7 @@ export default function ModernHomePage() {
                 style={{ aspectRatio: '4/5' }}
               >
                 <img
-                  src="/media/process.png"
+                  src={assetUrl('/media/process.png')}
                   alt=""
                   className="h-full w-full object-cover"
                   loading="lazy"
@@ -700,7 +699,7 @@ export default function ModernHomePage() {
                 style={{ width: 280, scrollSnapAlign: 'start' }}
               >
                 <img
-                  src={`/media/material-${i + 1}.png`}
+                  src={assetUrl(`/media/material-${i + 1}.png`)}
                   alt=""
                   className="h-[400px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
@@ -755,7 +754,7 @@ export default function ModernHomePage() {
                 style={{ aspectRatio: '3/4' }}
               >
                 <img
-                  src={proj.image}
+                  src={assetUrl(proj.image)}
                   alt=""
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
@@ -824,7 +823,7 @@ export default function ModernHomePage() {
         {/* Background */}
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0D0905 0%, #1A1208 50%, #0A0704 100%)' }} />
         <img
-          src="/media/contact-bg.png"
+          src={assetUrl('/media/contact-bg.png')}
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
           loading="lazy"

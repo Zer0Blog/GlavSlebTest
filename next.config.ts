@@ -1,7 +1,16 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
+
+const isGithubPages = process.env.GITHUB_PAGES === 'true'
+const repoBasePath = '/sleb'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  ...(isGithubPages ? { output: 'export' as const } : {}),
+  basePath: isGithubPages ? repoBasePath : undefined,
+  assetPrefix: isGithubPages ? repoBasePath : undefined,
+  trailingSlash: isGithubPages,
+  images: {
+    unoptimized: true,
+  },
+}
 
-export default nextConfig;
+export default nextConfig

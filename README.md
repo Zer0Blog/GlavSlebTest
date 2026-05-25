@@ -34,4 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# sleb
+
+## GitHub Pages
+
+Сайт публикуется на **https://shake-ass.github.io/sleb/** при пуше в `main`.
+
+1. В репозитории: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Workflow: `.github/workflows/deploy-github-pages.yml` (сборка `npm run build:pages`, деплой папки `out`).
+
+Локально dev без base path: `npm run dev -- -p 3001`. Статическая сборка под Pages только в CI (удаляется `app/api`, т.к. API не поддерживается static export).

@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import ContactModal from '@/components/ui/ContactModal'
+import { assetUrl } from '@/lib/base-path'
 
 const links = [
   { href: '/catalog', label: 'Каталог' },
@@ -37,7 +38,7 @@ export default function Navbar() {
           borderBottom: '0.5px solid var(--border)',
         }}>
         <Link href="/" className="flex items-center gap-3 shrink-0">
-          <img src="/media/logo.png" alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
+          <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
           <span className="font-display text-lg md:text-xl tracking-wide" style={{ color: 'var(--text)' }}>
             Главный <span style={{ color: 'var(--accent)' }}>по слэбам</span>
           </span>
