@@ -24,13 +24,13 @@ export const ADVANTAGES = [
 ]
 
 export const CATALOG_ITEMS = [
-  { id: 1, cat: 'river', species: 'Грецкий орех · Эпоксид', name: 'Стол-река «Синяя лагуна»', large: true, gradient: 'from-[#1A1208] to-[#2A1A0E]' },
-  { id: 2, cat: 'epoxy', species: 'Каповый тополь', name: 'Арт-стол «Туман»', large: false, gradient: 'from-[#1C1508] to-[#251A0E]' },
-  { id: 3, cat: 'slab', species: 'Горный дуб', name: 'Обеденный «Граница»', large: false, gradient: 'from-[#251506] to-[#3A2210]' },
-  { id: 4, cat: 'office', species: 'Черешня · Металл', name: 'Переговорный «Сенат»', large: false, gradient: 'from-[#1A0F05] to-[#2A1A0E]' },
-  { id: 5, cat: 'river', species: 'Ясень · Синий эпоксид', name: 'Обеденный «Океан»', large: false, gradient: 'from-[#0D1520] to-[#162030]' },
-  { id: 6, cat: 'slab', species: 'Пицундский кедр', name: 'Слэб «Горный лес»', large: false, gradient: 'from-[#2A1A0E] to-[#1A1008]' },
-]
+  { id: 1, image: '/media/catalog-1.png', cat: 'river', species: 'Грецкий орех · Эпоксид', name: 'Стол-река «Синяя лагуна»', large: true, gradient: 'from-[#1A1208] to-[#2A1A0E]' },
+  { id: 2, image: '/media/catalog-2.png', cat: 'epoxy', species: 'Каповый тополь', name: 'Арт-стол «Туман»', large: false, gradient: 'from-[#1C1508] to-[#251A0E]' },
+  { id: 3, image: '/media/catalog-3.jpg', cat: 'slab', species: 'Горный дуб', name: 'Обеденный «Граница»', large: false, gradient: 'from-[#251506] to-[#3A2210]' },
+  { id: 4, image: '/media/catalog-4.png', cat: 'office', species: 'Черешня · Металл', name: 'Переговорный «Сенат»', large: false, gradient: 'from-[#1A0F05] to-[#2A1A0E]' },
+  { id: 5, image: '/media/catalog-5.png', cat: 'river', species: 'Ясень · Синий эпоксид', name: 'Обеденный «Океан»', large: false, gradient: 'from-[#0D1520] to-[#162030]' },
+  { id: 6, image: '/media/catalog-6.png', cat: 'slab', species: 'Пицундский кедр', name: 'Слэб «Горный лес»', large: false, gradient: 'from-[#2A1A0E] to-[#1A1008]' },
+] as const
 
 export const FILTER_TABS = [
   { key: 'all', label: 'Все' },
@@ -67,9 +67,9 @@ export const MATERIALS = [
 ]
 
 export const PROJECTS = [
-  { type: 'Жилой интерьер', title: 'Обеденная зона в частном доме', gradient: 'from-[#0D0805] to-[#1A120A]' },
-  { type: 'Офис · Переговорная', title: 'Конференц-стол для IT-компании', gradient: 'from-[#080D14] to-[#101822]' },
-  { type: 'Ресторан', title: 'Барная стойка и столешницы', gradient: 'from-[#1A0A05] to-[#2A180E]' },
+  { image: '/media/project-1.jpg', type: 'Жилой интерьер', title: 'Обеденная зона в частном доме', gradient: 'from-[#0D0805] to-[#1A120A]' },
+  { image: '/media/project-2.png', type: 'Офис · Переговорная', title: 'Конференц-стол для IT-компании', gradient: 'from-[#080D14] to-[#101822]' },
+  { image: '/media/project-3.jpg', type: 'Ресторан', title: 'Барная стойка и столешницы', gradient: 'from-[#1A0A05] to-[#2A180E]' },
 ]
 
 export const TESTIMONIALS = [

@@ -20,7 +20,6 @@ import {
   ArrowRight,
   ChevronRight,
   CloseIcon,
-  PlayIcon,
   USP_ICONS,
   InstagramIcon,
   TelegramIcon,
@@ -178,20 +177,10 @@ export default function ModernHomePage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3 text-decoration-none">
-            <svg width="30" height="30" viewBox="0 0 36 36" fill="none" style={{ color: 'var(--accent)' }}>
-              <circle cx="18" cy="18" r="17" stroke="currentColor" strokeWidth="0.8" opacity="0.3" />
-              <circle cx="18" cy="18" r="11" stroke="currentColor" strokeWidth="0.8" opacity="0.5" />
-              <circle cx="18" cy="18" r="5.5" stroke="currentColor" strokeWidth="0.8" />
-              <path d="M18 1Q26 10 18 18Q10 26 18 35" stroke="currentColor" strokeWidth="0.8" fill="none" opacity="0.4" />
-            </svg>
-            <div>
-              <span className="font-serif text-lg font-semibold tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>
-                SEQUOIA
-              </span>
-              <span className="block text-[8px] tracking-[0.25em] uppercase" style={{ color: 'var(--accent)' }}>
-                Wood Company
-              </span>
-            </div>
+            <img src="/media/logo.png" alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
+            <span className="font-display text-lg md:text-xl tracking-wide" style={{ color: 'var(--text-primary)' }}>
+              Главный <span style={{ color: 'var(--accent-gold)' }}>по слэбам</span>
+            </span>
           </a>
 
           {/* Desktop Links */}
@@ -263,26 +252,20 @@ export default function ModernHomePage() {
         <div className="w-full max-w-[1400px]">
           {/* Video container */}
           <div className="hero-fade relative w-full overflow-hidden rounded-3xl sm:rounded-[2rem]" style={{ aspectRatio: '21/9' }}>
-            {/* Video placeholder gradient */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(135deg, #1E1208 0%, #3A2510 30%, #1A0C04 60%, #0E0805 100%)`,
-              }}
-            />
-            {/* Wood grain lines */}
-            <svg className="absolute inset-0 h-full w-full opacity-10" viewBox="0 0 1400 600" preserveAspectRatio="none">
-              <path d="M0 200Q350 170 700 200Q1050 230 1400 200" stroke="#B87333" strokeWidth="2" fill="none" />
-              <path d="M0 260Q350 230 700 260Q1050 290 1400 260" stroke="#B87333" strokeWidth="1.5" fill="none" />
-              <path d="M0 330Q350 300 700 330Q1050 360 1400 330" stroke="#B87333" strokeWidth="1" fill="none" />
-              <path d="M0 400Q350 370 700 400Q1050 430 1400 400" stroke="#B87333" strokeWidth="1" fill="none" opacity="0.6" />
-            </svg>
-            {/* Play button */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-white/40 transition-transform duration-500 hover:scale-110 hover:text-white/60 cursor-pointer">
-                <PlayIcon />
-              </div>
-            </div>
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              poster="/media/hero-poster.png"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+            >
+              {/* hero.mov — H.264 в контейнере MOV; Safari и часть браузеров */}
+              <source src="/media/hero.mov" type="video/mp4" />
+              {/* Web-версия из hero.mov для Chrome / Edge / Firefox */}
+              <source src="/media/hero-web.mp4" type="video/mp4" />
+            </video>
             {/* Bottom gradient overlay */}
             <div className="absolute bottom-0 left-0 right-0 h-2/3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }} />
             {/* Text overlay */}
@@ -398,9 +381,11 @@ export default function ModernHomePage() {
             className="reveal reveal-d2 card-glow overflow-hidden rounded-2xl t-transition"
             style={{ backgroundColor: 'var(--bg-card)', boxShadow: 'var(--shadow-sm)' }}
           >
-            <div
-              className="img-ph h-44 w-full"
-              style={{ background: 'linear-gradient(135deg, #2A1A0E, #3D2510, #1A0C04)' }}
+            <img
+              src="/media/product-hit.png"
+              alt=""
+              className="h-44 w-full object-cover"
+              loading="lazy"
             />
             <div className="flex flex-col p-6">
               <div className="font-serif text-xl font-semibold" style={{ color: 'var(--text-primary)' }}>
@@ -560,8 +545,12 @@ export default function ModernHomePage() {
                     minHeight: item.large ? 420 : 280,
                   }}
                 >
-                  {/* Image placeholder */}
-                  <div className={`img-ph absolute inset-0 bg-gradient-to-br ${item.gradient} transition-transform duration-700 group-hover:scale-105`} />
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
                   {/* Bottom gradient */}
                   <div className="absolute inset-x-0 bottom-0 h-2/3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)' }} />
                   {/* Info */}
@@ -643,23 +632,16 @@ export default function ModernHomePage() {
 
             {/* Visual */}
             <div className="lg:sticky lg:top-28 lg:self-start">
-              {/* Image placeholder */}
               <div
-                className="img-ph mb-5 w-full overflow-hidden rounded-3xl"
-                style={{
-                  aspectRatio: '4/5',
-                  background: 'linear-gradient(160deg, #1E1208 0%, #2C1A08 40%, #0E0905 100%)',
-                }}
+                className="mb-5 w-full overflow-hidden rounded-3xl"
+                style={{ aspectRatio: '4/5' }}
               >
-                <div className="flex h-full flex-col items-center justify-center gap-4 opacity-25">
-                  <svg width="56" height="56" viewBox="0 0 56 56" fill="none" style={{ color: 'var(--accent)' }}>
-                    <path d="M8 48V24L28 8l20 16v24" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" />
-                    <path d="M18 48V32h20v16" stroke="currentColor" strokeWidth="1" />
-                  </svg>
-                  <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: 'var(--text-secondary)' }}>
-                    Фото производства
-                  </span>
-                </div>
+                <img
+                  src="/media/process.png"
+                  alt=""
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
               </div>
               {/* Stats */}
               <div className="grid grid-cols-2 gap-4">
@@ -711,15 +693,17 @@ export default function ModernHomePage() {
           style={{ scrollSnapType: 'x mandatory' }}
         >
           <div className="flex gap-6 pl-[max(calc((100vw-1280px)/2),1.5rem)]">
-            {MATERIALS.map((mat) => (
+            {MATERIALS.map((mat, i) => (
               <div
                 key={mat.name}
                 className="group relative flex-shrink-0 overflow-hidden rounded-2xl"
                 style={{ width: 280, scrollSnapAlign: 'start' }}
               >
-                {/* Image */}
-                <div
-                  className={`img-ph h-[400px] w-full bg-gradient-to-br transition-transform duration-700 group-hover:scale-105 ${mat.gradient}`}
+                <img
+                  src={`/media/material-${i + 1}.png`}
+                  alt=""
+                  className="h-[400px] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
                 />
                 {/* Info overlay */}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-16">
@@ -770,7 +754,12 @@ export default function ModernHomePage() {
                 className={`reveal reveal-d${i + 1} group relative overflow-hidden rounded-2xl`}
                 style={{ aspectRatio: '3/4' }}
               >
-                <div className={`img-ph absolute inset-0 bg-gradient-to-br transition-transform duration-700 group-hover:scale-105 ${proj.gradient}`} />
+                <img
+                  src={proj.image}
+                  alt=""
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-80 transition-opacity duration-400 group-hover:opacity-100" />
                 <div className="absolute inset-x-0 bottom-0 translate-y-2 p-7 transition-transform duration-500 group-hover:translate-y-0">
                   <div className="mb-2 text-[10px] font-medium tracking-[0.3em] uppercase" style={{ color: 'var(--accent-gold)' }}>
@@ -834,7 +823,19 @@ export default function ModernHomePage() {
       <section id="contact" className="relative px-6 py-28 md:py-36">
         {/* Background */}
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0D0905 0%, #1A1208 50%, #0A0704 100%)' }} />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%)' }} />
+        <img
+          src="/media/contact-bg.png"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.52) 50%, rgba(0,0,0,0.58) 100%)',
+          }}
+        />
 
         {/* Decorative lines */}
         <svg className="absolute inset-0 h-full w-full opacity-[0.04]" viewBox="0 0 1400 800" preserveAspectRatio="xMidYMid slice">
