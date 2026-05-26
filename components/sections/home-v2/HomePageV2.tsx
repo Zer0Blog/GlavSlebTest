@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {
   ADVANTAGES,
   CATALOG_ITEMS,
@@ -9,7 +9,6 @@ import {
   NAV_LINKS,
   PROCESS_STATS,
   PROCESS_STEPS,
-  PROJECTS,
   TESTIMONIALS,
   USP_ITEMS,
   WOOD_SPECIES,
@@ -111,6 +110,8 @@ const CATALOG_BENTO_SLOT: Record<number, string> = {
   6: 'v2-catalog-card--b3',
 }
 
+const V2_NAV_LINKS = NAV_LINKS.filter(link => link.href !== '#projects')
+
 function catalogShortName(name: string) {
   const match = name.match(/«([^»]+)»/)
   return match ? match[1] : name
@@ -169,19 +170,6 @@ export default function HomePageV2() {
     return () => observer.disconnect()
   }, [])
 
-  /* Drag scroll for materials */
-  const matRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    const el = matRef.current; if (!el) return
-    let down = false, startX = 0, sl = 0
-    const onDown  = (e: MouseEvent) => { down = true; el.classList.add('dragging'); startX = e.pageX - el.offsetLeft; sl = el.scrollLeft }
-    const onUp    = () => { down = false; el.classList.remove('dragging') }
-    const onMove  = (e: MouseEvent) => { if (!down) return; e.preventDefault(); el.scrollLeft = sl - (e.pageX - el.offsetLeft - startX) * 1.5 }
-    el.addEventListener('mousedown', onDown); el.addEventListener('mouseup', onUp)
-    el.addEventListener('mouseleave', onUp); el.addEventListener('mousemove', onMove)
-    return () => { el.removeEventListener('mousedown', onDown); el.removeEventListener('mouseup', onUp); el.removeEventListener('mouseleave', onUp); el.removeEventListener('mousemove', onMove) }
-  }, [])
-
   const handleSubmit = useCallback((e: React.FormEvent, type: 'contact' | 'consult') => {
     e.preventDefault()
     const set = type === 'contact' ? setFormStatus : setConsultStatus
@@ -205,7 +193,7 @@ export default function HomePageV2() {
           >
             <CloseIcon />
           </button>
-          {NAV_LINKS.map((link) => (
+          {V2_NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -246,7 +234,7 @@ export default function HomePageV2() {
           </a>
 
           <ul className="hidden items-center gap-8 lg:flex">
-            {NAV_LINKS.map((link) => (
+            {V2_NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
@@ -559,51 +547,32 @@ export default function HomePageV2() {
       {/* ═══ МАТЕРИАЛЫ ═══════════════════════════════════════ */}
       <section id="materials" className="v2-materials">
         <div className="container-page v2-materials__header v2-reveal">
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
-            <div>
-              <p className="v2-section-label" style={{ marginBottom: 16 }}>Материалы</p>
-              <h2 className="v2-heading-sm">Редкие породы<br />со всего мира</h2>
-            </div>
-            <p style={{ fontSize: 13, color: 'var(--v2-muted)', maxWidth: 280, lineHeight: 1.7 }}>
+          <div className="v2-materials__header-inner">
+            <p className="v2-materials-lead">
               Каждая порода — свой характер, история, аромат.
             </p>
+            <header className="v2-materials-head">
+              <p className="v2-section-label">Материалы</p>
+              <h2 className="v2-heading-sm">Редкие породы<br />со всего мира</h2>
+            </header>
           </div>
         </div>
 
-        <div className="v2-mat-track" ref={matRef}>
-          {MATERIALS.map((mat, i) => (
-            <div className="v2-mat-card" key={mat.name}>
-              <img src={assetUrl(`/media/material-${i + 1}.png`)} alt="" loading="lazy" />
-              <div className="v2-mat-overlay">
-                <span className="v2-mat-tag">{mat.tag}</span>
-                <div className="v2-mat-name">{mat.name}</div>
-                <div className="v2-mat-desc">{mat.desc}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ═══ ПРОЕКТЫ ═════════════════════════════════════════ */}
-      <section id="projects" className="v2-projects">
-        <div className="container-page">
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24 }}>
-            <div className="v2-reveal">
-              <p className="v2-section-label" style={{ marginBottom: 16 }}>Работы</p>
-              <h2 className="v2-heading-sm">Реализованные<br />проекты</h2>
-            </div>
-            <a href="/works" className="v2-btn v2-reveal">Смотреть все</a>
-          </div>
-          <div className="v2-projects-grid">
-            {PROJECTS.map((proj, i) => (
-              <div className={`v2-proj-card v2-reveal v2-reveal-d${i + 1}`} key={proj.title}>
-                <img src={assetUrl(proj.image)} alt="" loading="lazy" />
-                <div className="v2-proj-grad" />
-                <div className="v2-proj-info">
-                  <div className="v2-proj-type">{proj.type}</div>
-                  <div className="v2-proj-title">{proj.title}</div>
+        <div className="v2-mat-marquee" aria-label="Породы дерева">
+          <div className="v2-mat-marquee__track">
+            {[...MATERIALS, ...MATERIALS].map((mat, i) => (
+              <article className="v2-mat-card" key={`${mat.name}-${i}`}>
+                <img
+                  src={assetUrl(`/media/material-${(i % MATERIALS.length) + 1}.png`)}
+                  alt=""
+                  loading="lazy"
+                />
+                <div className="v2-mat-overlay">
+                  <span className="v2-mat-tag">{mat.tag}</span>
+                  <div className="v2-mat-name">{mat.name}</div>
+                  <div className="v2-mat-desc">{mat.desc}</div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
