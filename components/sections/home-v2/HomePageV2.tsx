@@ -307,7 +307,7 @@ export default function HomePageV2() {
       <section id="home" className="v2-hero">
         <img
           className="v2-hero__bg"
-          src={assetUrl('/media/banner_dark.png')}
+          src={assetUrl('/media/hero-forestoff.png')}
           alt=""
           fetchPriority="high"
         />
@@ -660,7 +660,7 @@ export default function HomePageV2() {
         <div className="container-page">
           <div className="v2-footer__grid">
             <div>
-              <div className="v2-footer__brand">Главный по слэбам</div>
+              <div className="v2-footer__brand">FORESTOFF</div>
               <div className="v2-footer__tagline">Wood Company · Сочи</div>
               <p className="v2-footer__desc">
                 Эксклюзивная мебель из редких пород дерева. Полный цикл производства. Индивидуальные проекты любой сложности.
@@ -700,7 +700,7 @@ export default function HomePageV2() {
           </div>
 
           <div className="v2-footer__bottom">
-            <span className="v2-footer__copy">© 2025 Главный по слэбам · Премиальная термодревесина</span>
+            <span className="v2-footer__copy">© 2025 FORESTOFF · Премиальная термодревесина</span>
             <div className="v2-footer__socials">
               <a href="#" aria-label="Instagram"><IconIG /></a>
               <a href="#" aria-label="Telegram"><IconTG /></a>

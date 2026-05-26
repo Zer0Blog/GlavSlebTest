@@ -7,15 +7,15 @@
 .home-v2 {
   /* Цвета — идентичны thermo-теме V1 */
   --v2-bg:         #1A1410;
-  --v2-bg-alt:     #141008;
-  --v2-card:       #221A12;
-  --v2-card-2:     #2A2017;
-  --v2-nav:        #0F0D09;
+  --v2-bg-alt:     #2C2218;
+  --v2-card:       #2A2017;
+  --v2-card-2:     #33281D;
+  --v2-nav:        #1A1410;
   --v2-accent:     #B87333;
   --v2-gold:       #D4A76A;
   --v2-text:       #F5F0EA;
   --v2-muted:      #9A8B7E;
-  --v2-dim:        #5A4E44;
+  --v2-dim:        #7A6B5E;
   --v2-border:     rgba(245,240,234,0.07);
   --v2-border-s:   rgba(245,240,234,0.13);
   --v2-font:       var(--font-inter), 'Montserrat', system-ui, sans-serif;
@@ -159,7 +159,7 @@ main.site-main:has(.home-v2) {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: #0f0d09;
+  background: #2c2218;
 }
 .v2-hero__bg {
   position: absolute;
