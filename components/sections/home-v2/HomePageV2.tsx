@@ -64,6 +64,18 @@ const IconChevronRight = () => (
     <polyline points="9 18 15 12 9 6" />
   </svg>
 )
+const IconHammer = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+    <path d="M14 4l6 6M4 20l8.5-8.5M15 5l4 4" />
+    <path d="M5 19l3-3" />
+  </svg>
+)
+const IconLogs = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+    <ellipse cx="12" cy="5" rx="7" ry="2.5" />
+    <path d="M5 5v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V5M5 9v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V9" />
+  </svg>
+)
 const IconIG = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
     <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -83,6 +95,7 @@ const IconWA = () => (
 
 const ADV_ICONS = [<IconShield key="s" />, <IconLeaf key="l" />, <IconAward key="a" />]
 const USP_ICONS = [<IconFactory key="f" />, <IconGrid key="g" />, <IconPackage key="p" />, <IconMap key="m" />]
+const PROCESS_STAT_ICONS = [<IconLeaf key="t" />, <IconHammer key="h" />, <IconLogs key="l" />, <IconShield key="s" />]
 
 const CATALOG_CAT_LABELS: Record<string, string> = {
   river: 'Стол-река',
@@ -479,39 +492,68 @@ export default function HomePageV2() {
         </div>
       </section>
 
-      {/* ═══ ПРОЦЕСС ═════════════════════════════════════════ */}
+      {/* ═══ ОТЗЫВЫ ══════════════════════════════════════════ */}
+      <section id="trust" className="v2-testimonials">
+        <div className="container-page">
+          <header className="v2-testimonials-head v2-reveal">
+            <p className="v2-section-label">Отзывы</p>
+            <h2 className="v2-heading-sm">Что говорят<br />клиенты</h2>
+          </header>
+          <div className="v2-test-grid">
+            {TESTIMONIALS.map((t, i) => (
+              <div className={`v2-test-card v2-reveal v2-reveal-d${i + 1}`} key={t.author}>
+                <div className="v2-test-quote">"</div>
+                <p className="v2-test-text">{t.text}</p>
+                <div className="v2-test-author">{t.author}</div>
+                <div className="v2-test-role">{t.role}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ ПРОЦЕСС — показатели | фото | этапы ═════════════════ */}
       <section id="process" className="v2-process">
         <div className="container-page">
-          <div className="v2-reveal" style={{ marginBottom: 60 }}>
-            <p className="v2-section-label" style={{ marginBottom: 16 }}>Как мы работаем</p>
-            <h2 className="v2-heading-sm">
-              Производство<br />полного цикла
-            </h2>
-            <p style={{ marginTop: 20, fontSize: 14, color: 'var(--v2-muted)', lineHeight: 1.7, maxWidth: 440 }}>
+          <header className="v2-process-head v2-reveal">
+            <p className="v2-process-kicker">Производство</p>
+            <h2 className="v2-process-title">Производство полного цикла</h2>
+            <p className="v2-process-lead">
               От валки леса до финальной полировки — каждый этап под нашим контролем.
             </p>
-          </div>
+          </header>
 
           <div className="v2-process__layout">
-            <div>
-              {PROCESS_STEPS.map((step, i) => (
-                <div className={`v2-step v2-reveal v2-reveal-d${Math.min(i + 1, 4)}`} key={step.num}>
-                  <span className="v2-step-num">{step.num}</span>
-                  <div>
-                    <div className="v2-step-title">{step.title}</div>
-                    <div className="v2-step-desc">{step.desc}</div>
+            <div className="v2-process-stats v2-reveal">
+              {PROCESS_STATS.map((stat, i) => (
+                <div
+                  className={`v2-stat-box v2-reveal v2-reveal-d${Math.min(i + 1, 4)}`}
+                  key={stat.label}
+                >
+                  <div className="v2-stat-icon" aria-hidden>
+                    {PROCESS_STAT_ICONS[i]}
+                  </div>
+                  <div className="v2-stat-body">
+                    <div className="v2-stat-num">{stat.num}</div>
+                    <div className="v2-stat-label">{stat.label}</div>
+                    {stat.desc ? <div className="v2-stat-desc">{stat.desc}</div> : null}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="v2-process-visual">
-              <img src={assetUrl('/media/process.png')} alt="" className="v2-process-img" loading="lazy" />
-              <div className="v2-stats-grid">
-                {PROCESS_STATS.map(stat => (
-                  <div className="v2-stat-box" key={stat.label}>
-                    <div className="v2-stat-num">{stat.num}</div>
-                    <div className="v2-stat-label">{stat.label}</div>
+            <div className="v2-process-center v2-reveal v2-reveal-d1">
+              <div className="v2-process-visual">
+                <img src={assetUrl('/media/process.png')} alt="" className="v2-process-img" loading="lazy" />
+              </div>
+              <div className="v2-process-steps v2-reveal v2-reveal-d2">
+                {PROCESS_STEPS.slice(0, 4).map((step, i) => (
+                  <div className={`v2-step v2-reveal v2-reveal-d${Math.min(i + 1, 4)}`} key={step.num}>
+                    <span className="v2-step-num">{step.num}</span>
+                    <div>
+                      <div className="v2-step-title">{step.title}</div>
+                      <div className="v2-step-desc">{step.desc}</div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -567,26 +609,6 @@ export default function HomePageV2() {
                   <div className="v2-proj-type">{proj.type}</div>
                   <div className="v2-proj-title">{proj.title}</div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ ОТЗЫВЫ ══════════════════════════════════════════ */}
-      <section id="trust" className="v2-testimonials">
-        <div className="container-page">
-          <div className="v2-reveal">
-            <p className="v2-section-label" style={{ marginBottom: 16 }}>Отзывы</p>
-            <h2 className="v2-heading-sm">Что говорят<br />клиенты</h2>
-          </div>
-          <div className="v2-test-grid">
-            {TESTIMONIALS.map((t, i) => (
-              <div className={`v2-test-card v2-reveal v2-reveal-d${i + 1}`} key={t.author}>
-                <div className="v2-test-quote">"</div>
-                <p className="v2-test-text">{t.text}</p>
-                <div className="v2-test-author">{t.author}</div>
-                <div className="v2-test-role">{t.role}</div>
               </div>
             ))}
           </div>

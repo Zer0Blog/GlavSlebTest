@@ -758,78 +758,158 @@ main.site-main:has(.home-v2) {
   letter-spacing: 0.12em;
 }
 
-/* ── Процесс ─────────────────────────────────────────────── */
+/* ── Производство — показатели | фото | этапы ────────────── */
 .v2-process {
   background: var(--v2-bg-alt);
-  padding: 100px 0;
+  padding: clamp(83px, 9.2vw, 120px) 0;
   border-top: 1px solid var(--v2-border);
+}
+.v2-process-head {
+  margin-bottom: clamp(48px, 5vw, 64px);
+  max-width: 640px;
+}
+.v2-process-kicker {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--v2-accent);
+  margin: 0 0 16px;
+}
+.v2-process-title {
+  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--v2-text);
+  margin: 0;
+}
+.v2-process-lead {
+  margin: 20px 0 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--v2-muted);
+  max-width: 480px;
 }
 .v2-process__layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.7fr);
+  gap: clamp(24px, 3.2vw, 44px);
   align-items: start;
+}
+.v2-process-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+}
+/* Фото + этапы: высота фото = высоте списка этапов (до «04») */
+.v2-process-center {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(24px, 3.2vw, 44px);
+  min-width: 0;
+}
+.v2-process-visual {
+  flex: 0 0 clamp(280px, 63%, 520px);
+  width: clamp(280px, 63%, 520px);
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
+  border-radius: var(--v2-radius-xl);
+}
+.v2-process-img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: inherit;
+}
+.v2-process-steps {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 .v2-step {
   display: flex;
-  gap: 28px;
-  padding: 28px 0;
+  gap: 20px;
+  padding: 22px 0;
   border-bottom: 1px solid var(--v2-border);
 }
-.v2-step:first-child { border-top: 1px solid var(--v2-border); }
+.v2-step:first-child {
+  border-top: 1px solid var(--v2-border);
+}
 .v2-step-num {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--v2-accent);
+  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2rem, 2.8vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--v2-gold);
   flex-shrink: 0;
-  width: 28px;
-  padding-top: 2px;
+  width: 44px;
 }
 .v2-step-title {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--v2-text);
-  margin-bottom: 8px;
+  color: var(--v2-gold);
+  margin-bottom: 10px;
 }
 .v2-step-desc {
   font-size: 13px;
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--v2-muted);
 }
-.v2-process-visual { position: sticky; top: 88px; }
-.v2-process-img {
-  width: 100%;
-  aspect-ratio: 4/5;
-  object-fit: cover;
-  display: block;
-  border-radius: var(--v2-radius-xl);
-}
-.v2-stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 12px;
-}
 .v2-stat-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
   background: var(--v2-card);
-  padding: 24px 28px;
+  padding: clamp(18px, 2vw, 24px);
   border-radius: var(--v2-radius-lg);
+  border: 1px solid var(--v2-border);
+}
+.v2-stat-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(184, 115, 51, 0.38);
+  border-radius: 50%;
+  color: var(--v2-accent);
+}
+.v2-stat-body {
+  min-width: 0;
 }
 .v2-stat-num {
-  font-size: 28px;
-  font-weight: 800;
+  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.85rem, 2.8vw, 2.35rem);
+  font-weight: 500;
+  line-height: 1.05;
   color: var(--v2-text);
-  letter-spacing: -0.03em;
+  letter-spacing: 0.01em;
 }
 .v2-stat-label {
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--v2-dim);
+  color: var(--v2-gold);
+  margin-top: 6px;
+}
+.v2-stat-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--v2-muted);
   margin-top: 4px;
 }
 
@@ -961,6 +1041,14 @@ main.site-main:has(.home-v2) {
   padding: 100px 0;
   border-top: 1px solid var(--v2-border);
 }
+.v2-testimonials-head {
+  text-align: right;
+  margin-left: auto;
+  max-width: 520px;
+}
+.v2-testimonials-head .v2-section-label {
+  margin: 0 0 16px;
+}
 .v2-test-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -968,21 +1056,22 @@ main.site-main:has(.home-v2) {
   margin-top: 60px;
 }
 .v2-test-card {
-  background: var(--v2-card);
+  background: #f5f0ea;
   padding: 44px 36px;
   border-radius: var(--v2-radius-lg);
+  border: 1px solid rgba(42, 37, 32, 0.08);
 }
 .v2-test-quote {
   font-size: 48px;
   line-height: 1;
-  color: var(--v2-accent);
+  color: #b87333;
   margin-bottom: 20px;
   font-family: Georgia, serif;
 }
 .v2-test-text {
   font-size: 13px;
   line-height: 1.75;
-  color: var(--v2-muted);
+  color: #4a433c;
   margin-bottom: 28px;
   font-style: italic;
 }
@@ -991,11 +1080,11 @@ main.site-main:has(.home-v2) {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--v2-text);
+  color: #2a2520;
 }
 .v2-test-role {
   font-size: 10px;
-  color: var(--v2-dim);
+  color: #7d7368;
   margin-top: 4px;
   letter-spacing: 0.06em;
 }
@@ -1235,8 +1324,30 @@ main.site-main:has(.home-v2) {
   .v2-hero__h1 { font-size: clamp(2.25rem, 8vw, 3.5rem); }
   .v2-hero__sub { font-size: clamp(14px, 3.8vw, 17px); max-width: 100%; }
   .v2-hero__bg { object-position: 65% center; }
-  .v2-process__layout { grid-template-columns: 1fr; }
-  .v2-process-visual { position: static; }
+  .v2-process__layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .v2-process-center {
+    flex-direction: column;
+    order: 1;
+  }
+  .v2-process-visual {
+    flex: none;
+    width: 100%;
+    max-width: min(520px, 100%);
+    margin-inline: auto;
+    min-height: clamp(280px, 52vw, 400px);
+  }
+  .v2-process-stats {
+    order: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .v2-process-steps {
+    order: 0;
+  }
   .v2-catalog-head {
     grid-column: 1 / -1;
     grid-row: auto;

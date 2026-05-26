@@ -49,10 +49,10 @@ export const PROCESS_STEPS = [
 ]
 
 export const PROCESS_STATS = [
-  { num: '2 500', label: 'кв. метров' },
-  { num: '4', label: 'цеха' },
-  { num: '1 200+', label: 'слэбов в наличии' },
-  { num: '25+', label: 'пород дерева' },
+  { num: '2 500', label: 'кв. метров', desc: 'производственных площадей' },
+  { num: '4', label: 'цеха', desc: 'полного цикла' },
+  { num: '1 200+', label: 'слэбов в наличии', desc: 'на складе' },
+  { num: '25+', label: 'мастеров', desc: 'опыт и внимание к деталям' },
 ]
 
 export const MATERIALS = [
