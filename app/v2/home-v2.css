@@ -18,8 +18,9 @@
   --v2-dim:        #5A4E44;
   --v2-border:     rgba(245,240,234,0.07);
   --v2-border-s:   rgba(245,240,234,0.13);
+  --v2-font:       var(--font-inter), 'Montserrat', system-ui, sans-serif;
 
-  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
+  font-family: var(--v2-font);
   background: var(--v2-bg);
   color: var(--v2-text);
   overflow-x: hidden;
@@ -68,7 +69,12 @@ main.site-main:has(.home-v2) {
   --v2-radius-xl: 24px;
 }
 
-/* ── Типографика ─────────────────────────────────────────── */
+/* ── Типографика (единый sans-serif) ─────────────────────── */
+.home-v2 .font-display,
+.home-v2 .font-serif {
+  font-family: var(--v2-font);
+}
+
 .v2-label {
   font-size: 10px;
   font-weight: 600;
@@ -77,7 +83,7 @@ main.site-main:has(.home-v2) {
   color: var(--v2-muted);
 }
 .v2-heading {
-  font-family: var(--font-inter), 'Montserrat', sans-serif;
+  font-family: var(--v2-font);
   font-size: clamp(2.6rem, 6vw, 5.2rem);
   font-weight: 800;
   line-height: 0.95;
@@ -86,6 +92,7 @@ main.site-main:has(.home-v2) {
   color: var(--v2-text);
 }
 .v2-heading-sm {
+  font-family: var(--v2-font);
   font-size: clamp(1.8rem, 4vw, 3.2rem);
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -189,11 +196,11 @@ main.site-main:has(.home-v2) {
   max-width: min(52rem, 58vw);
 }
 .v2-hero__h1 {
-  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--v2-font);
   font-size: clamp(2.5rem, 5.5vw, 7rem);
-  font-weight: 500;
-  line-height: 1.06;
-  letter-spacing: 0.02em;
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   color: #f5f0ea;
   margin: 0 0 clamp(20px, 2.5vh, 32px);
@@ -348,9 +355,9 @@ main.site-main:has(.home-v2) {
   border-color: rgba(42, 37, 32, 0.1);
 }
 .v2-intro-heading {
-  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--v2-font);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--v2-gold);
@@ -405,9 +412,9 @@ main.site-main:has(.home-v2) {
   border: 1px solid rgba(184, 115, 51, 0.38);
 }
 .v2-intro-cell--adv .v2-adv-title {
-  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--v2-font);
   font-size: clamp(14px, 1.2vw, 17px);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--v2-gold);
@@ -569,11 +576,11 @@ main.site-main:has(.home-v2) {
   margin: 0;
 }
 .v2-catalog-title {
-  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--v2-font);
   font-size: clamp(2.2rem, 4.5vw, 3.75rem);
-  font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: 0.02em;
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--v2-text);
   margin: 0;
@@ -677,13 +684,13 @@ main.site-main:has(.home-v2) {
   margin-bottom: 10px;
 }
 .v2-catalog-card__title {
-  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--v2-font);
   font-size: clamp(1.25rem, 2vw, 1.75rem);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.15;
   color: #fff;
   margin: 0;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
 }
 .v2-catalog-card.is-featured .v2-catalog-card__title {
   font-size: clamp(1.75rem, 3vw, 2.5rem);
@@ -777,11 +784,11 @@ main.site-main:has(.home-v2) {
   margin: 0 0 16px;
 }
 .v2-process-title {
-  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--v2-font);
   font-size: clamp(2rem, 4.2vw, 3.5rem);
-  font-weight: 500;
-  line-height: 1.08;
-  letter-spacing: 0.02em;
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--v2-text);
   margin: 0;
@@ -846,10 +853,11 @@ main.site-main:has(.home-v2) {
   border-top: 1px solid var(--v2-border);
 }
 .v2-step-num {
-  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--v2-font);
   font-size: clamp(2rem, 2.8vw, 2.75rem);
-  font-weight: 500;
+  font-weight: 800;
   line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--v2-gold);
   flex-shrink: 0;
   width: 44px;
@@ -891,12 +899,12 @@ main.site-main:has(.home-v2) {
   min-width: 0;
 }
 .v2-stat-num {
-  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--v2-font);
   font-size: clamp(1.85rem, 2.8vw, 2.35rem);
-  font-weight: 500;
+  font-weight: 800;
   line-height: 1.05;
   color: var(--v2-text);
-  letter-spacing: 0.01em;
+  letter-spacing: -0.02em;
 }
 .v2-stat-label {
   font-size: 9px;
@@ -967,6 +975,7 @@ main.site-main:has(.home-v2) {
   margin-bottom: 10px;
 }
 .v2-mat-name {
+  font-family: var(--v2-font);
   font-size: 18px;
   font-weight: 700;
   color: #fff;
@@ -1028,6 +1037,7 @@ main.site-main:has(.home-v2) {
   margin-bottom: 8px;
 }
 .v2-proj-title {
+  font-family: var(--v2-font);
   font-size: 20px;
   font-weight: 700;
   color: #fff;
@@ -1062,11 +1072,12 @@ main.site-main:has(.home-v2) {
   border: 1px solid rgba(42, 37, 32, 0.08);
 }
 .v2-test-quote {
+  font-family: var(--v2-font);
   font-size: 48px;
   line-height: 1;
+  font-weight: 800;
   color: #b87333;
   margin-bottom: 20px;
-  font-family: Georgia, serif;
 }
 .v2-test-text {
   font-size: 13px;
@@ -1117,6 +1128,7 @@ main.site-main:has(.home-v2) {
   gap: 80px;
 }
 .v2-contact-h2 {
+  font-family: var(--v2-font);
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   font-weight: 900;
   text-transform: uppercase;

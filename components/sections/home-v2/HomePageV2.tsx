@@ -210,7 +210,7 @@ export default function HomePageV2() {
               key={link.href}
               href={link.href}
               onClick={closeMenu}
-              className="font-display text-3xl font-medium tracking-wide transition-colors duration-300 hover:opacity-70"
+              className="text-3xl font-bold uppercase tracking-wide transition-colors duration-300 hover:opacity-70"
               style={{ color: 'var(--text-primary)' }}
             >
               {link.label}
@@ -315,14 +315,12 @@ export default function HomePageV2() {
         <div className="container-page v2-hero__frame">
           <div className="v2-hero__content">
           <h1 className="v2-hero__h1 v2-anim v2-anim-d1">
-            Термодревесина
+            Премиум-качество
             <br />
-            премиум-качества
+            деревообработки
           </h1>
           <p className="v2-hero__sub v2-anim v2-anim-d2">
-            Стабильность. Красота. Долговечность.
-            <br />
-            Термообработка для вашего проекта.
+            Термообработка для вашего проекта. Стабильность и долговечность.
           </p>
           <div className="v2-hero__cta v2-anim v2-anim-d3">
             <a href="#catalog" className="v2-btn v2-btn-hero">
