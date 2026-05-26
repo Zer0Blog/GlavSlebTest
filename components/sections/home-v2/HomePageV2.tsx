@@ -5,7 +5,6 @@ import {
   ADVANTAGES,
   CATALOG_ITEMS,
   CATEGORIES,
-  FILTER_TABS,
   MATERIALS,
   NAV_LINKS,
   PROCESS_STATS,
@@ -65,6 +64,18 @@ const IconChevronRight = () => (
     <polyline points="9 18 15 12 9 6" />
   </svg>
 )
+const IconHammer = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+    <path d="M14 4l6 6M4 20l8.5-8.5M15 5l4 4" />
+    <path d="M5 19l3-3" />
+  </svg>
+)
+const IconLogs = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+    <ellipse cx="12" cy="5" rx="7" ry="2.5" />
+    <path d="M5 5v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V5M5 9v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V9" />
+  </svg>
+)
 const IconIG = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
     <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -84,6 +95,26 @@ const IconWA = () => (
 
 const ADV_ICONS = [<IconShield key="s" />, <IconLeaf key="l" />, <IconAward key="a" />]
 const USP_ICONS = [<IconFactory key="f" />, <IconGrid key="g" />, <IconPackage key="p" />, <IconMap key="m" />]
+const PROCESS_STAT_ICONS = [<IconLeaf key="t" />, <IconHammer key="h" />, <IconLogs key="l" />, <IconShield key="s" />]
+
+const CATALOG_CAT_LABELS: Record<string, string> = {
+  river: 'Стол-река',
+  slab: 'Слэб',
+  epoxy: 'Эпоксид',
+  office: 'Офис',
+}
+
+const CATALOG_BENTO_SLOT: Record<number, string> = {
+  1: 'v2-catalog-card--featured',
+  4: 'v2-catalog-card--b1',
+  5: 'v2-catalog-card--b2',
+  6: 'v2-catalog-card--b3',
+}
+
+function catalogShortName(name: string) {
+  const match = name.match(/«([^»]+)»/)
+  return match ? match[1] : name
+}
 
 /* ─── Компонент ─────────────────────────────────────────── */
 type Theme = 'thermo' | 'nature'
@@ -103,7 +134,6 @@ export default function HomePageV2() {
   const [theme, setTheme] = useState<Theme>(readSavedTheme)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [filter, setFilter]     = useState('all')
   const [formStatus, setFormStatus]       = useState<'idle' | 'sent'>('idle')
   const [consultStatus, setConsultStatus] = useState<'idle' | 'sent'>('idle')
 
@@ -210,7 +240,7 @@ export default function HomePageV2() {
           boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
         }}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
+        <div className="v2-nav-inner mx-auto flex w-full max-w-7xl items-center justify-between px-6">
           <a href="#home" className="nav-logo-link text-decoration-none">
             <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
           </a>
@@ -282,7 +312,8 @@ export default function HomePageV2() {
           fetchPriority="high"
         />
         <div className="v2-hero__overlay" aria-hidden />
-        <div className="v2-hero__content">
+        <div className="container-page v2-hero__frame">
+          <div className="v2-hero__content">
           <h1 className="v2-hero__h1 v2-anim v2-anim-d1">
             Термодревесина
             <br />
@@ -298,194 +329,227 @@ export default function HomePageV2() {
               Смотреть каталог
             </a>
           </div>
+          </div>
         </div>
       </section>
 
-      {/* ═══ MARQUEE ═════════════════════════════════════════ */}
-      <div className="v2-marquee-wrap">
-        <div className="v2-marquee-track">
-          {[...WOOD_SPECIES, ...WOOD_SPECIES].map((sp, i) => (
-            <div className="v2-marquee-item" key={i}>
-              <span className="v2-marquee-text">{sp}</span>
-              <span className="v2-marquee-dot" />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ═══ 4-COLUMN GRID ═══════════════════════════════════ */}
-      <section className="v2-grid4">
-        <div className="v2-grid4__inner">
-
-          {/* Col 1 — Категории */}
-          <div className="v2-col v2-reveal">
-            <div className="v2-col__title">Категории</div>
-            <ul className="v2-cat-list">
-              {CATEGORIES.map(cat => (
-                <li className="v2-cat-item" key={cat}>
-                  <a href="#">
-                    <span>{cat}</span>
-                    <span className="v2-cat-chevron"><IconChevronRight /></span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 2 — Преимущества */}
-          <div className="v2-col v2-reveal v2-reveal-d1">
-            <div className="v2-col__title">Преимущества</div>
-            <div className="v2-adv-list">
-              {ADVANTAGES.map((adv, i) => (
-                <div className="v2-adv-item" key={adv.title}>
-                  <div className="v2-adv-icon">{ADV_ICONS[i]}</div>
-                  <div>
-                    <div className="v2-adv-title">{adv.title}</div>
-                    <div className="v2-adv-desc">{adv.desc}</div>
+      {/* ═══ INTRO PANEL — макет под hero ═════════════════════ */}
+      <section className="v2-intro">
+        <div className="v2-intro-panel v2-reveal">
+            <div className="v2-marquee-wrap v2-marquee-wrap--panel">
+              <div className="v2-marquee-track">
+                {[...WOOD_SPECIES, ...WOOD_SPECIES].map((sp, i) => (
+                  <div className="v2-marquee-item" key={i}>
+                    <span className="v2-marquee-text">{sp}</span>
+                    <span className="v2-marquee-dot" />
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Col 3 — Карточка товара */}
-          <div className="v2-col v2-reveal v2-reveal-d2" style={{ padding: 0 }}>
-            <img
-              src={assetUrl('/media/product-hit.png')}
-              alt="Товар хит"
-              style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }}
-              loading="lazy"
-            />
-            <div style={{ padding: '28px 32px 32px' }}>
-              <div className="v2-product-name">Термодоска ясень</div>
-              <div className="v2-product-spec">20 × 120 × 2000 мм</div>
-              <div className="v2-product-price">5&thinsp;420 ₽ / м²</div>
-              <a href="#catalog" className="v2-btn v2-btn-wide">Подробнее</a>
-            </div>
-          </div>
-
-          {/* Col 4 — Форма */}
-          <div className="v2-col v2-reveal v2-reveal-d3">
-            <div className="v2-col__title">Консультация</div>
-            <p style={{ fontSize: 12, color: 'var(--v2-muted)', marginBottom: 20, lineHeight: 1.6 }}>
-              Подберём решение под ваш проект
-            </p>
-            <form onSubmit={e => handleSubmit(e, 'consult')} className="v2-form">
-              <input type="text"  className="v2-input" placeholder="Имя" />
-              <input type="tel"   className="v2-input" placeholder="Телефон" />
-              <textarea           className="v2-input v2-input-area" placeholder="Сообщение" />
-              <button
-                type="submit"
-                className="v2-btn v2-btn-wide"
-                style={{ marginTop: 8, background: consultStatus === 'sent' ? '#3D6B4F' : 'var(--v2-accent)' }}
-              >
-                {consultStatus === 'sent' ? 'Отправлено ✓' : 'Отправить'}
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ USP BAR ═════════════════════════════════════════ */}
-      <section className="v2-usp">
-        <div className="v2-usp__inner">
-          {USP_ITEMS.map((item, i) => (
-            <div className="v2-usp__item v2-reveal" key={item.label} style={{ transitionDelay: `${i * 0.08}s` }}>
-              <div className="v2-usp__icon">{USP_ICONS[i]}</div>
-              <div>
-                <div className="v2-usp__label">{item.label}</div>
-                <div className="v2-usp__value">{item.value}</div>
+                ))}
               </div>
             </div>
-          ))}
+
+            <div className="v2-intro-grid">
+              <div className="v2-intro-cell v2-intro-cell--cats">
+                <h3 className="v2-intro-heading">Категории</h3>
+                <ul className="v2-cat-list">
+                  {CATEGORIES.map(cat => (
+                    <li className="v2-cat-item" key={cat}>
+                      <a href="#catalog">
+                        <span>{cat}</span>
+                        <span className="v2-cat-chevron"><IconChevronRight /></span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="v2-intro-cell v2-intro-cell--adv">
+                <div className="v2-intro-adv">
+                  <div className="v2-intro-adv__main">
+                    <h3 className="v2-intro-heading">Преимущества</h3>
+                    <div className="v2-adv-list">
+                      {ADVANTAGES.map((adv, i) => (
+                        <div className="v2-adv-item" key={adv.title}>
+                          <div className="v2-adv-icon">{ADV_ICONS[i]}</div>
+                          <div>
+                            <div className="v2-adv-title">{adv.title}</div>
+                            <div className="v2-adv-desc">{adv.desc}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="v2-intro-adv__visual" aria-hidden>
+                    <img src={assetUrl('/media/catalog-4.png')} alt="" loading="lazy" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="v2-intro-cell v2-intro-cell--form">
+                <h3 className="v2-intro-heading">Консультация</h3>
+                <p className="v2-intro-lead">Подберём решение под ваш проект</p>
+                <form onSubmit={e => handleSubmit(e, 'consult')} className="v2-form">
+                  <input type="text" className="v2-input" placeholder="Имя" />
+                  <input type="tel" className="v2-input" placeholder="Телефон" />
+                  <textarea className="v2-input v2-input-area" placeholder="Сообщение" rows={4} />
+                  <button
+                    type="submit"
+                    className="v2-btn v2-btn-wide v2-btn-submit"
+                    style={{ background: consultStatus === 'sent' ? '#3D6B4F' : undefined }}
+                  >
+                    {consultStatus === 'sent' ? 'Отправлено ✓' : 'Отправить'}
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div className="v2-intro-usp">
+              {USP_ITEMS.map((item, i) => (
+                <div className="v2-intro-usp__item" key={item.label}>
+                  <div className="v2-intro-usp__icon">{USP_ICONS[i]}</div>
+                  <div>
+                    <div className="v2-intro-usp__label">{item.label}</div>
+                    <div className="v2-intro-usp__value">{item.value}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
         </div>
       </section>
 
-      {/* ═══ КАТАЛОГ ═════════════════════════════════════════ */}
+      {/* ═══ КАТАЛОГ — bento (макет) ══════════════════════════ */}
       <section id="catalog" className="v2-catalog">
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div className="v2-section-header v2-reveal">
-            <div>
-              <p className="v2-section-label" style={{ marginBottom: 16 }}>Коллекция</p>
-              <h2 className="v2-heading-sm">
-                Столы из<br />живого дерева
+        <div className="container-page">
+          <div className="v2-catalog-bento v2-reveal">
+            <header className="v2-catalog-head">
+              <p className="v2-catalog-kicker">Коллекция</p>
+              <h2 className="v2-catalog-title">
+                Столы из
+                <br />
+                живого дерева
               </h2>
-            </div>
-            <div className="v2-filter-bar">
-              {FILTER_TABS.map(tab => (
-                <button
-                  key={tab.key}
-                  className={`v2-filter-btn${filter === tab.key ? ' active' : ''}`}
-                  onClick={() => setFilter(tab.key)}
-                >
-                  {tab.label}
-                </button>
+              <p className="v2-catalog-desc">
+                Эксклюзивные столы, слэбы и изделия из редких пород — подбор под интерьер, размеры и задачу проекта.
+              </p>
+            </header>
+
+            <div className="v2-catalog-bento-stack">
+              {CATALOG_ITEMS.filter(item => item.id === 2 || item.id === 3).map(item => (
+                <article key={item.id} className="v2-catalog-card">
+                  <img src={assetUrl(item.image)} alt="" loading="lazy" />
+                  <div className="v2-catalog-card__shade" aria-hidden />
+                  <div className="v2-catalog-card__body">
+                    <span className="v2-catalog-card__tag">{CATALOG_CAT_LABELS[item.cat] ?? item.cat}</span>
+                    <h3 className="v2-catalog-card__title">{catalogShortName(item.name)}</h3>
+                  </div>
+                  <span className="v2-catalog-card__arrow" aria-hidden>
+                    <IconChevronRight />
+                  </span>
+                </article>
               ))}
             </div>
-          </div>
 
-          <div className="v2-catalog-grid">
-            {CATALOG_ITEMS.map(item => {
-              const visible = filter === 'all' || item.cat === filter
+            {CATALOG_ITEMS.filter(item => item.id !== 2 && item.id !== 3).map(item => {
+              const featured = item.id === 1
+              const slot = CATALOG_BENTO_SLOT[item.id] ?? ''
               return (
-                <div
+                <article
                   key={item.id}
-                  className={`v2-catalog-card${item.large ? ' large' : ' small'}`}
-                  style={{ opacity: visible ? 1 : 0.1, pointerEvents: visible ? 'auto' : 'none', transition: 'opacity 0.4s' }}
+                  className={`v2-catalog-card ${slot}${featured ? ' is-featured' : ''}`}
                 >
                   <img src={assetUrl(item.image)} alt="" loading="lazy" />
-                  <div className="v2-catalog-grad" />
-                  <div className="v2-catalog-info">
-                    <div className="v2-catalog-species">{item.species}</div>
-                    <div className="v2-catalog-name">{item.name}</div>
+                  <div className="v2-catalog-card__shade" aria-hidden />
+                  <div className="v2-catalog-card__body">
+                    <span className="v2-catalog-card__tag">{CATALOG_CAT_LABELS[item.cat] ?? item.cat}</span>
+                    <h3 className="v2-catalog-card__title">{catalogShortName(item.name)}</h3>
+                    {featured && (
+                      <>
+                        <p className="v2-catalog-card__desc">{item.species}</p>
+                        <a href="/catalog" className="v2-btn v2-catalog-card__btn">
+                          Подробнее
+                        </a>
+                      </>
+                    )}
                   </div>
-                  <div className="v2-catalog-hover">
-                    <span className="v2-catalog-tag">Подробнее →</span>
-                  </div>
-                </div>
+                  {!featured && (
+                    <span className="v2-catalog-card__arrow" aria-hidden>
+                      <IconChevronRight />
+                    </span>
+                  )}
+                </article>
               )
             })}
           </div>
 
           <div className="v2-catalog-cta v2-reveal">
-            <a href="/catalog" className="v2-btn" style={{ padding: '16px 48px' }}>Весь каталог</a>
+            <a href="/catalog" className="v2-btn v2-catalog-cta-btn">
+              Смотреть весь каталог
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ═══ ПРОЦЕСС ═════════════════════════════════════════ */}
+      {/* ═══ ОТЗЫВЫ ══════════════════════════════════════════ */}
+      <section id="trust" className="v2-testimonials">
+        <div className="container-page">
+          <header className="v2-testimonials-head v2-reveal">
+            <p className="v2-section-label">Отзывы</p>
+            <h2 className="v2-heading-sm">Что говорят<br />клиенты</h2>
+          </header>
+          <div className="v2-test-grid">
+            {TESTIMONIALS.map((t, i) => (
+              <div className={`v2-test-card v2-reveal v2-reveal-d${i + 1}`} key={t.author}>
+                <div className="v2-test-quote">"</div>
+                <p className="v2-test-text">{t.text}</p>
+                <div className="v2-test-author">{t.author}</div>
+                <div className="v2-test-role">{t.role}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ ПРОЦЕСС — показатели | фото | этапы ═════════════════ */}
       <section id="process" className="v2-process">
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div className="v2-reveal" style={{ marginBottom: 60 }}>
-            <p className="v2-section-label" style={{ marginBottom: 16 }}>Как мы работаем</p>
-            <h2 className="v2-heading-sm">
-              Производство<br />полного цикла
-            </h2>
-            <p style={{ marginTop: 20, fontSize: 14, color: 'var(--v2-muted)', lineHeight: 1.7, maxWidth: 440 }}>
+        <div className="container-page">
+          <header className="v2-process-head v2-reveal">
+            <p className="v2-process-kicker">Производство</p>
+            <h2 className="v2-process-title">Производство полного цикла</h2>
+            <p className="v2-process-lead">
               От валки леса до финальной полировки — каждый этап под нашим контролем.
             </p>
-          </div>
+          </header>
 
           <div className="v2-process__layout">
-            <div>
-              {PROCESS_STEPS.map((step, i) => (
-                <div className={`v2-step v2-reveal v2-reveal-d${Math.min(i + 1, 4)}`} key={step.num}>
-                  <span className="v2-step-num">{step.num}</span>
-                  <div>
-                    <div className="v2-step-title">{step.title}</div>
-                    <div className="v2-step-desc">{step.desc}</div>
+            <div className="v2-process-stats v2-reveal">
+              {PROCESS_STATS.map((stat, i) => (
+                <div
+                  className={`v2-stat-box v2-reveal v2-reveal-d${Math.min(i + 1, 4)}`}
+                  key={stat.label}
+                >
+                  <div className="v2-stat-icon" aria-hidden>
+                    {PROCESS_STAT_ICONS[i]}
+                  </div>
+                  <div className="v2-stat-body">
+                    <div className="v2-stat-num">{stat.num}</div>
+                    <div className="v2-stat-label">{stat.label}</div>
+                    {stat.desc ? <div className="v2-stat-desc">{stat.desc}</div> : null}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="v2-process-visual">
-              <img src={assetUrl('/media/process.png')} alt="" className="v2-process-img" loading="lazy" />
-              <div className="v2-stats-grid">
-                {PROCESS_STATS.map(stat => (
-                  <div className="v2-stat-box" key={stat.label}>
-                    <div className="v2-stat-num">{stat.num}</div>
-                    <div className="v2-stat-label">{stat.label}</div>
+            <div className="v2-process-center v2-reveal v2-reveal-d1">
+              <div className="v2-process-visual">
+                <img src={assetUrl('/media/process.png')} alt="" className="v2-process-img" loading="lazy" />
+              </div>
+              <div className="v2-process-steps v2-reveal v2-reveal-d2">
+                {PROCESS_STEPS.slice(0, 4).map((step, i) => (
+                  <div className={`v2-step v2-reveal v2-reveal-d${Math.min(i + 1, 4)}`} key={step.num}>
+                    <span className="v2-step-num">{step.num}</span>
+                    <div>
+                      <div className="v2-step-title">{step.title}</div>
+                      <div className="v2-step-desc">{step.desc}</div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -496,7 +560,7 @@ export default function HomePageV2() {
 
       {/* ═══ МАТЕРИАЛЫ ═══════════════════════════════════════ */}
       <section id="materials" className="v2-materials">
-        <div className="v2-materials__header v2-reveal" style={{ maxWidth: 1280, margin: '0 auto 60px' }}>
+        <div className="container-page v2-materials__header v2-reveal">
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
             <div>
               <p className="v2-section-label" style={{ marginBottom: 16 }}>Материалы</p>
@@ -524,7 +588,7 @@ export default function HomePageV2() {
 
       {/* ═══ ПРОЕКТЫ ═════════════════════════════════════════ */}
       <section id="projects" className="v2-projects">
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+        <div className="container-page">
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24 }}>
             <div className="v2-reveal">
               <p className="v2-section-label" style={{ marginBottom: 16 }}>Работы</p>
@@ -547,32 +611,12 @@ export default function HomePageV2() {
         </div>
       </section>
 
-      {/* ═══ ОТЗЫВЫ ══════════════════════════════════════════ */}
-      <section id="trust" className="v2-testimonials">
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-          <div className="v2-reveal">
-            <p className="v2-section-label" style={{ marginBottom: 16 }}>Отзывы</p>
-            <h2 className="v2-heading-sm">Что говорят<br />клиенты</h2>
-          </div>
-          <div className="v2-test-grid">
-            {TESTIMONIALS.map((t, i) => (
-              <div className={`v2-test-card v2-reveal v2-reveal-d${i + 1}`} key={t.author}>
-                <div className="v2-test-quote">&ldquo;</div>
-                <p className="v2-test-text">{t.text}</p>
-                <div className="v2-test-author">{t.author}</div>
-                <div className="v2-test-role">{t.role}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ═══ КОНТАКТ ═════════════════════════════════════════ */}
       <section id="contact" className="v2-contact">
         <div className="v2-contact__bg">
           <img src={assetUrl('/media/contact-bg.png')} alt="" />
         </div>
-        <div className="v2-contact__layout">
+        <div className="container-page v2-contact__layout">
           <div className="v2-reveal">
             <p className="v2-section-label" style={{ color: 'rgba(212,167,106,0.7)', marginBottom: 24 }}>Приедьте и потрогайте</p>
             <h2 className="v2-contact-h2">Найдите<br />свой слэб</h2>
@@ -615,7 +659,7 @@ export default function HomePageV2() {
 
       {/* ═══ FOOTER ══════════════════════════════════════════ */}
       <footer className="v2-footer">
-        <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+        <div className="container-page">
           <div className="v2-footer__grid">
             <div>
               <div className="v2-footer__brand">Главный по слэбам</div>
