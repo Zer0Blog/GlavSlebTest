@@ -19,12 +19,35 @@ body:has(.v3-home) {
 .v3-home {
   --v3-bg: #1a1410;
   --v3-section: #2c2218;
+  --v3-card: #2a2017;
+  --v3-card-hover: #33281d;
   --v3-text: #f5f0ea;
   --v3-muted: rgba(245, 240, 234, 0.72);
+  --v3-text-secondary: #9a8b7e;
+  --v3-text-tertiary: #7a6b5e;
   --v3-accent: #b87333;
   --v3-accent-hover: #9c5e22;
   --v3-gold: #d4a76a;
   --v3-radius: 12px;
+  --v3-border: rgba(245, 240, 234, 0.08);
+  --v3-border-strong: rgba(212, 167, 106, 0.22);
+
+  /* Токены для встроенных секций (перекрывают v1 на /v3) */
+  --bg-primary: var(--v3-bg);
+  --bg-alt: var(--v3-section);
+  --bg-card: var(--v3-card);
+  --bg-card-hover: var(--v3-card-hover);
+  --text-primary: var(--v3-text);
+  --text-secondary: var(--v3-text-secondary);
+  --text-tertiary: var(--v3-text-tertiary);
+  --accent: var(--v3-accent);
+  --accent-hover: var(--v3-accent-hover);
+  --accent-gold: var(--v3-gold);
+  --border: var(--v3-border);
+  --border-strong: var(--v3-border-strong);
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 12px 36px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 20px 48px rgba(184, 115, 51, 0.12);
 
   font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
   background: var(--v3-bg);
@@ -443,14 +466,6 @@ body:has(.v3-home) {
     color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.v3-home .font-display {
-  font-family: var(--font-display), 'Cormorant Garamond', Georgia, serif;
-}
-
-.v3-home .font-serif {
-  font-family: var(--font-serif), 'Cormorant Garamond', Georgia, serif;
 }
 
 @media (max-width: 768px) {

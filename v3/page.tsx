@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import V3HomePage from './V3HomePage'
 import './v3.css'
+import './v3-body.css'
 
 export const metadata: Metadata = {
   title: 'FORESTOFF — Термодревесина премиум-качества',

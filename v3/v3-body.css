@@ -1,0 +1,333 @@
+/* ═══════════════════════════════════════════════════════════
+   V3 BODY — редизайн секций под hero (только /v3)
+   ═══════════════════════════════════════════════════════════ */
+
+.v3-body {
+  position: relative;
+}
+
+.v3-body::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 167, 106, 0.45) 50%,
+    transparent 100%
+  );
+}
+
+.v3-body .modern-home {
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
+  background: var(--v3-bg);
+  color: var(--v3-text);
+}
+
+/* ── Типографика: sans как в hero, без serif v1 ─────────── */
+.v3-body .font-display,
+.v3-body .font-serif {
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif !important;
+  font-style: normal !important;
+}
+
+.v3-body .font-display {
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  line-height: 1.15 !important;
+}
+
+.v3-body .font-display.text-4xl,
+.v3-body .font-display.md\:text-5xl,
+.v3-body .font-display.lg\:text-6xl {
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem) !important;
+}
+
+.v3-body .font-display em {
+  color: var(--v3-gold) !important;
+  font-style: normal !important;
+}
+
+.v3-body h3 {
+  letter-spacing: 0.1em;
+}
+
+/* Kicker / labels */
+.v3-body p.text-\[10px\].tracking-\[0\.4em\],
+.v3-body p.text-\[10px\].tracking-\[0\.35em\] {
+  color: var(--v3-gold) !important;
+  letter-spacing: 0.38em !important;
+  font-weight: 600 !important;
+}
+
+/* ── Marquee ─────────────────────────────────────────────── */
+.v3-body .modern-home > div.overflow-hidden.border-y {
+  background: var(--v3-section) !important;
+  border-color: var(--v3-border) !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.v3-body .marquee-track span.text-\[10px\] {
+  color: var(--v3-text-secondary) !important;
+  letter-spacing: 0.28em !important;
+}
+
+.v3-body .marquee-track .rounded-full {
+  background: var(--v3-accent) !important;
+}
+
+/* ── Карточки и сетка ──────────────────────────────────────── */
+.v3-body .reveal.rounded-2xl,
+.v3-body .rounded-2xl.t-transition,
+.v3-body .rounded-3xl {
+  border-radius: var(--v3-radius) !important;
+}
+
+.v3-body .reveal.rounded-2xl,
+.v3-body .card-glow.rounded-2xl {
+  background: var(--v3-card) !important;
+  border: 1px solid var(--v3-border) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.v3-body .card-glow:hover {
+  border-color: var(--v3-border-strong) !important;
+  box-shadow: var(--shadow-lg) !important;
+  transform: translateY(-3px);
+}
+
+/* ── USP bar ─────────────────────────────────────────────── */
+.v3-body section.border-y.px-6.py-16 {
+  background: var(--v3-section) !important;
+  border-color: var(--v3-border) !important;
+}
+
+.v3-body section.border-y .font-serif.text-lg {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── Каталог ───────────────────────────────────────────────── */
+.v3-body #catalog {
+  background: var(--v3-bg) !important;
+}
+
+.v3-body #catalog .rounded-2xl.p-1\.5 {
+  background: var(--v3-section) !important;
+  border: 1px solid var(--v3-border);
+  border-radius: var(--v3-radius) !important;
+}
+
+.v3-body #catalog button.rounded-xl {
+  border-radius: calc(var(--v3-radius) - 4px) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+}
+
+.v3-body #catalog .group.relative.rounded-2xl {
+  border-radius: var(--v3-radius) !important;
+  border: 1px solid rgba(212, 167, 106, 0.15);
+}
+
+.v3-body #catalog .font-serif.text-xl {
+  font-family: inherit !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.v3-body #catalog a.rounded-2xl {
+  border-radius: var(--v3-radius) !important;
+  background: var(--v3-accent) !important;
+  box-shadow: 0 12px 32px rgba(184, 115, 51, 0.25);
+  letter-spacing: 0.12em !important;
+  font-weight: 600 !important;
+}
+
+.v3-body #catalog a.rounded-2xl:hover {
+  background: var(--v3-accent-hover) !important;
+}
+
+/* ── Производство ──────────────────────────────────────────── */
+.v3-body #process {
+  background: var(--v3-section) !important;
+}
+
+.v3-body #process .font-serif.text-4xl {
+  font-size: 2rem !important;
+  font-weight: 600 !important;
+  color: var(--v3-gold) !important;
+  letter-spacing: 0.06em !important;
+}
+
+.v3-body #process .rounded-3xl {
+  border-radius: var(--v3-radius) !important;
+  border: 1px solid var(--v3-border);
+}
+
+.v3-body #process .grid .rounded-2xl {
+  background: var(--v3-card) !important;
+  border: 1px solid var(--v3-border) !important;
+}
+
+.v3-body #process .font-serif.text-3xl {
+  font-size: 1.75rem !important;
+  font-weight: 600 !important;
+  color: var(--v3-accent) !important;
+}
+
+/* ── Материалы ─────────────────────────────────────────────── */
+.v3-body #materials {
+  background: var(--v3-bg) !important;
+}
+
+.v3-body #materials .group.rounded-2xl {
+  border-radius: var(--v3-radius) !important;
+  border: 1px solid rgba(212, 167, 106, 0.12);
+}
+
+.v3-body #materials .font-serif.text-xl {
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* ── Проекты ───────────────────────────────────────────────── */
+.v3-body #projects {
+  background: var(--v3-section) !important;
+}
+
+/* ── Отзывы ────────────────────────────────────────────────── */
+.v3-body #trust {
+  background: var(--v3-bg) !important;
+}
+
+.v3-body #trust .font-serif.text-5xl {
+  font-size: 3rem !important;
+  color: var(--v3-accent) !important;
+  line-height: 1 !important;
+}
+
+.v3-body #trust .reveal.rounded-2xl {
+  background: var(--v3-card) !important;
+}
+
+/* ── Контакты ──────────────────────────────────────────────── */
+.v3-body #contact {
+  background: linear-gradient(
+    165deg,
+    #0f0d09 0%,
+    var(--v3-section) 45%,
+    var(--v3-bg) 100%
+  ) !important;
+}
+
+.v3-body #contact .font-display {
+  color: var(--v3-text) !important;
+}
+
+.v3-body #contact button.rounded-2xl,
+.v3-body #contact a.rounded-2xl {
+  border-radius: var(--v3-radius) !important;
+  background: var(--v3-accent) !important;
+  letter-spacing: 0.12em !important;
+  font-weight: 600 !important;
+}
+
+.v3-body #contact button.rounded-2xl:hover {
+  background: var(--v3-accent-hover) !important;
+}
+
+.v3-body #contact input,
+.v3-body #contact textarea {
+  border-radius: var(--v3-radius) !important;
+  background: rgba(26, 20, 16, 0.65) !important;
+  border-color: var(--v3-border) !important;
+}
+
+.v3-body #contact input:focus,
+.v3-body #contact textarea:focus {
+  border-color: var(--v3-accent) !important;
+}
+
+/* ── Кнопки в карточках ────────────────────────────────────── */
+.v3-body button.rounded-xl,
+.v3-body a.rounded-xl.py-3 {
+  border-radius: var(--v3-radius) !important;
+  background: var(--v3-accent) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+}
+
+.v3-body button.rounded-xl:hover,
+.v3-body a.rounded-xl:hover {
+  background: var(--v3-accent-hover) !important;
+}
+
+.v3-body form input.rounded-xl,
+.v3-body form textarea.rounded-xl {
+  background: var(--v3-bg) !important;
+  border-color: var(--v3-border) !important;
+  border-radius: var(--v3-radius) !important;
+}
+
+/* ── Футер FORESTOFF ───────────────────────────────────────── */
+.v3-body footer {
+  background: var(--v3-bg) !important;
+  border-color: var(--v3-border) !important;
+}
+
+.v3-body footer .font-serif.text-2xl {
+  font-size: 0 !important;
+  line-height: 1 !important;
+}
+
+.v3-body footer .font-serif.text-2xl::after {
+  content: 'FORESTOFF';
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--v3-text);
+}
+
+.v3-body footer .text-\[8px\].tracking-\[0\.28em\] {
+  font-size: 0 !important;
+}
+
+.v3-body footer .text-\[8px\].tracking-\[0\.28em\]::after {
+  content: 'Премиальная термодревесина';
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--v3-gold);
+}
+
+.v3-body footer .text-\[12px\]:first-of-type {
+  font-size: 0 !important;
+}
+
+.v3-body footer .flex.flex-col.sm\:flex-row > .text-\[12px\]::after {
+  content: '© 2025 FORESTOFF · Премиальная термодревесина';
+  font-size: 12px;
+  color: rgba(245, 240, 234, 0.35);
+}
+
+/* ── Секции: ритм отступов ─────────────────────────────────── */
+.v3-body section.px-6.py-20,
+.v3-body section.px-6.py-24,
+.v3-body section.py-24 {
+  padding-top: clamp(4rem, 8vw, 6rem) !important;
+  padding-bottom: clamp(4rem, 8vw, 6rem) !important;
+}
+
+@media (max-width: 768px) {
+  .v3-body .font-display.text-4xl,
+  .v3-body .font-display.md\:text-5xl {
+    font-size: 1.35rem !important;
+  }
+}
