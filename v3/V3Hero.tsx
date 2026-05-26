@@ -29,7 +29,7 @@ export default function V3Hero() {
         </p>
 
         <div className="v3-hero__actions v3-fade v3-fade-d4">
-          <a href="/catalog" className="v3-hero__cta">
+          <a href="#catalog" className="v3-hero__cta">
             Смотреть каталог
           </a>
         </div>
