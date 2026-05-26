@@ -189,11 +189,8 @@ export default function HomePageV2() {
 
       {/* ═══ NAV ═════════════════════════════════════════════ */}
       <nav className="v2-nav">
-        <a href="#home" className="v2-nav__logo">
-          <img src={assetUrl('/media/logo.png')} alt="Логотип" />
-          <span className="v2-nav__name">
-            Главный <span style={{ color: 'var(--v2-accent)' }}>по слэбам</span>
-          </span>
+        <a href="#home" className="v2-nav__logo nav-logo-link">
+          <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
         </a>
 
         <ul className="v2-nav__links">
@@ -212,7 +209,7 @@ export default function HomePageV2() {
           >
             <span className="v2-theme-thumb" />
           </button>
-          <a href="#contact" className="v2-btn" style={{ padding: '10px 22px', fontSize: 10 }}>Связаться</a>
+          <a href="#contact" className="v2-btn v2-btn--nav">Связаться</a>
           <button
             onClick={() => setMenuOpen(true)}
             style={{ background: 'none', border: 'none', color: 'var(--v2-muted)', cursor: 'pointer', display: 'none' }}

@@ -156,3 +156,35 @@ body:has(.modern-home) {
   font-family: inherit;
   cursor: pointer;
 }
+
+/* logo.png с большими полями — масштабируем видимую часть */
+.modern-home nav {
+  overflow: visible;
+}
+.modern-home nav > div {
+  overflow: visible;
+  align-items: center;
+}
+.modern-home .nav-logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: clamp(124px, 17vw, 173px);
+  height: 48px;
+  overflow: visible;
+}
+.modern-home .nav-logo {
+  display: block;
+  height: 72px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: left 46%;
+  transform: scale(2.61) translateY(1px);
+  transform-origin: left center;
+  /* по умолчанию тёмная тема — белый логотип */
+  filter: brightness(0) invert(1);
+}
+[data-theme='nature'] .modern-home .nav-logo {
+  filter: none;
+}

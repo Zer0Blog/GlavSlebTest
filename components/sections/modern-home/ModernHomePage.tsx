@@ -177,11 +177,8 @@ export default function ModernHomePage() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-3 text-decoration-none">
-            <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
-            <span className="font-display text-lg md:text-xl tracking-wide" style={{ color: 'var(--text-primary)' }}>
-              Главный <span style={{ color: 'var(--accent-gold)' }}>по слэбам</span>
-            </span>
+          <a href="#home" className="nav-logo-link text-decoration-none">
+            <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
           </a>
 
           {/* Desktop Links */}
