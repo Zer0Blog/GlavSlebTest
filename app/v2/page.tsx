@@ -3,7 +3,7 @@ import '../modern-home.css'
 import './home-v2.css'
 
 export const metadata = {
-  title: 'FORESTOFF — Главная V2',
+  title: 'Главная V2 — Главный по слэбам',
   description: 'Редизайн главной страницы в драматичной премиум-эстетике.',
 }
 

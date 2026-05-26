@@ -31,8 +31,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'FORESTOFF — Премиальная термодревесина',
-  description: 'Термодревесина премиум-качества. Производство в Сочи, доставка по всей России.',
+  title: 'Главный по слэбам — Производство из ценных пород дерева Сочи',
+  description: 'Более 1000 слэбов на складе. Дуб, кедр, платан, секвойя и 15+ пород. Производство в Сочи, доставка по всей России.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

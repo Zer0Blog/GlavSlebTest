@@ -19,6 +19,17 @@
   --v2-border:     rgba(245,240,234,0.07);
   --v2-border-s:   rgba(245,240,234,0.13);
   --v2-font:       var(--font-inter), 'Montserrat', system-ui, sans-serif;
+  /* Контакт — контраст к основному фону */
+  --v2-contact-bg:              #F5F0EA;
+  --v2-contact-text:            #2A2520;
+  --v2-contact-muted:           rgba(42, 37, 32, 0.62);
+  --v2-contact-dim:             rgba(42, 37, 32, 0.38);
+  --v2-contact-kicker:          rgba(139, 111, 78, 0.9);
+  --v2-contact-input-bg:        rgba(42, 37, 32, 0.04);
+  --v2-contact-input-border:    rgba(42, 37, 32, 0.12);
+  --v2-contact-input-text:      #2A2520;
+  --v2-contact-placeholder:     rgba(42, 37, 32, 0.38);
+  --v2-contact-focus-ring:      rgba(184, 115, 51, 0.22);
 
   font-family: var(--v2-font);
   background: var(--v2-bg);
@@ -40,6 +51,16 @@
   --v2-dim:        #A89E94;
   --v2-border:     rgba(42, 37, 32, 0.06);
   --v2-border-s:   rgba(42, 37, 32, 0.12);
+  --v2-contact-bg:              #1A1410;
+  --v2-contact-text:            #F5F0EA;
+  --v2-contact-muted:           rgba(245, 240, 234, 0.55);
+  --v2-contact-dim:             rgba(245, 240, 234, 0.32);
+  --v2-contact-kicker:          rgba(212, 167, 106, 0.75);
+  --v2-contact-input-bg:        rgba(255, 255, 255, 0.05);
+  --v2-contact-input-border:    rgba(255, 255, 255, 0.1);
+  --v2-contact-input-text:      #F5F0EA;
+  --v2-contact-placeholder:     rgba(255, 255, 255, 0.28);
+  --v2-contact-focus-ring:      rgba(199, 91, 57, 0.28);
 }
 
 body:has(.home-v2) {
@@ -1151,32 +1172,23 @@ main.site-main:has(.home-v2) {
   letter-spacing: 0.06em;
 }
 
-/* ── Контакт ─────────────────────────────────────────────── */
+/* ── Контакт (контрастный блок) ──────────────────────────── */
 .v2-contact {
   position: relative;
   padding: 120px 0;
   border-top: 1px solid var(--v2-border);
-  overflow: hidden;
-}
-.v2-contact__bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #0D0905 0%, #1A1208 60%, #0A0704 100%);
-}
-.v2-contact__bg img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.28;
+  background: var(--v2-contact-bg);
+  color: var(--v2-contact-text);
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 .v2-contact__layout {
-  position: relative;
-  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
+}
+.v2-contact-kicker {
+  color: var(--v2-contact-kicker) !important;
+  margin-bottom: 24px;
 }
 .v2-contact-h2 {
   font-family: var(--v2-font);
@@ -1184,14 +1196,14 @@ main.site-main:has(.home-v2) {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.03em;
-  line-height: 0.9;
-  color: #fff;
+  line-height: 1.08;
+  color: var(--v2-contact-text);
   margin-bottom: 32px;
 }
 .v2-contact-p {
   font-size: 14px;
   line-height: 1.75;
-  color: rgba(255,255,255,0.45);
+  color: var(--v2-contact-muted);
   max-width: 380px;
   margin-bottom: 48px;
 }
@@ -1204,13 +1216,14 @@ main.site-main:has(.home-v2) {
   font-weight: 600;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
+  color: var(--v2-contact-dim);
   margin-bottom: 6px;
 }
 .v2-contact-dd {
   font-size: 15px;
-  color: rgba(255,255,255,0.75);
+  color: var(--v2-contact-text);
   font-weight: 500;
+  opacity: 0.88;
 }
 .v2-contact-form {
   display: flex;
@@ -1218,27 +1231,37 @@ main.site-main:has(.home-v2) {
   gap: 10px;
   align-self: center;
 }
+.v2-contact-form-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--v2-contact-dim);
+  margin: 0 0 8px;
+}
 .v2-contact-input {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #fff;
+  background: var(--v2-contact-input-bg);
+  border: 1px solid var(--v2-contact-input-border);
+  color: var(--v2-contact-input-text);
   font-size: 13px;
   padding: 16px 20px;
   font-family: inherit;
   border-radius: var(--v2-radius-md);
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.5s ease;
   width: 100%;
 }
-.v2-contact-input::placeholder { color: rgba(255,255,255,0.2); }
+.v2-contact-input::placeholder {
+  color: var(--v2-contact-placeholder);
+}
 .v2-contact-input:focus {
   border-color: var(--v2-accent);
-  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.18);
+  box-shadow: 0 0 0 3px var(--v2-contact-focus-ring);
 }
 .v2-contact-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .v2-contact-note {
   font-size: 11px;
-  color: rgba(255,255,255,0.2);
+  color: var(--v2-contact-dim);
   margin-top: 4px;
 }
 

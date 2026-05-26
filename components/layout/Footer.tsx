@@ -33,8 +33,8 @@ export default function Footer() {
     <footer className="site-chrome-footer pt-10 pb-8 md:pt-12" style={{ background: 'var(--bg2)', borderTop: '0.5px solid var(--border)' }}>
       <div className="container-page flex flex-col gap-10 lg:flex-row lg:justify-between lg:items-start mb-10 md:mb-12">
         <div>
-          <p className="font-display text-xl md:text-2xl tracking-[0.12em] uppercase">
-            FORESTOFF
+          <p className="font-display text-xl md:text-2xl">
+            Главный <span style={{ color: 'var(--accent)' }}>по слэбам</span>
           </p>
           <p className="text-sm mt-2" style={{ color: 'var(--muted)' }}>Сочи, ул. Производственная, 12</p>
           <a href="tel:+78622000000" className="text-sm block mt-1 hover:underline" style={{ color: 'var(--muted)' }}>
@@ -61,7 +61,7 @@ export default function Footer() {
       <div
         className="container-page flex flex-col gap-2 sm:flex-row sm:justify-between pt-6 text-[12px]"
         style={{ borderTop: '0.5px solid var(--border)', color: 'var(--muted)' }}>
-        <span>© 2025 FORESTOFF</span>
+        <span>© 2025 Главный по слэбам</span>
         <span>Производство в Сочи · Доставка по России</span>
       </div>
     </footer>

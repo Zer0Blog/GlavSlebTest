@@ -230,7 +230,7 @@ export default function HomePageV2() {
       >
         <div className="v2-nav-inner mx-auto flex w-full max-w-7xl items-center justify-between px-6">
           <a href="#home" className="nav-logo-link text-decoration-none">
-            <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
+            <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="nav-logo" />
           </a>
 
           <ul className="hidden items-center gap-8 lg:flex">
@@ -295,7 +295,7 @@ export default function HomePageV2() {
       <section id="home" className="v2-hero">
         <img
           className="v2-hero__bg"
-          src={assetUrl('/media/hero-forestoff.png')}
+          src={assetUrl('/media/banner_dark.png')}
           alt=""
           fetchPriority="high"
         />
@@ -580,13 +580,10 @@ export default function HomePageV2() {
 
       {/* ═══ КОНТАКТ ═════════════════════════════════════════ */}
       <section id="contact" className="v2-contact">
-        <div className="v2-contact__bg">
-          <img src={assetUrl('/media/contact-bg.png')} alt="" />
-        </div>
         <div className="container-page v2-contact__layout">
           <div className="v2-reveal">
-            <p className="v2-section-label" style={{ color: 'rgba(212,167,106,0.7)', marginBottom: 24 }}>Приедьте и потрогайте</p>
-            <h2 className="v2-contact-h2">Найдите<br />свой слэб</h2>
+            <p className="v2-section-label v2-contact-kicker">Приедьте и потрогайте</p>
+            <h2 className="v2-contact-h2">Подберём<br />вам слэб</h2>
             <p className="v2-contact-p">
               Более 1&thinsp;200 слэбов в наличии. Шоурум в Сочи, ул. Краснофлотская, 11/16. Работаем по всей России. Бесплатная консультация.
             </p>
@@ -603,9 +600,7 @@ export default function HomePageV2() {
           </div>
 
           <form onSubmit={e => handleSubmit(e, 'contact')} className="v2-contact-form v2-reveal v2-reveal-d1">
-            <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 8 }}>
-              Оставить заявку
-            </p>
+            <p className="v2-contact-form-label">Оставить заявку</p>
             <div className="v2-contact-row">
               <input type="text" className="v2-contact-input" placeholder="Ваше имя" />
               <input type="tel"  className="v2-contact-input" placeholder="Телефон" />
@@ -629,7 +624,7 @@ export default function HomePageV2() {
         <div className="container-page">
           <div className="v2-footer__grid">
             <div>
-              <div className="v2-footer__brand">FORESTOFF</div>
+              <div className="v2-footer__brand">Главный по слэбам</div>
               <div className="v2-footer__tagline">Wood Company · Сочи</div>
               <p className="v2-footer__desc">
                 Эксклюзивная мебель из редких пород дерева. Полный цикл производства. Индивидуальные проекты любой сложности.
@@ -669,7 +664,7 @@ export default function HomePageV2() {
           </div>
 
           <div className="v2-footer__bottom">
-            <span className="v2-footer__copy">© 2025 FORESTOFF · Премиальная термодревесина</span>
+            <span className="v2-footer__copy">© 2025 Главный по слэбам · Премиальная термодревесина</span>
             <div className="v2-footer__socials">
               <a href="#" aria-label="Instagram"><IconIG /></a>
               <a href="#" aria-label="Telegram"><IconTG /></a>

@@ -178,7 +178,7 @@ export default function ModernHomePage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
           {/* Logo */}
           <a href="#home" className="nav-logo-link text-decoration-none">
-            <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
+            <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="nav-logo" />
           </a>
 
           {/* Desktop Links */}
@@ -240,40 +240,52 @@ export default function ModernHomePage() {
       </nav>
 
       {/* ═══════════════════════════════════════
-          HERO — палитра «ТЕРМО», баннер FORESTOFF
+          HERO
           ═══════════════════════════════════════ */}
-      <section id="home" className="mh-hero">
-        <img
-          className="mh-hero__bg"
-          src={assetUrl('/media/hero-forestoff.png')}
-          alt=""
-          fetchPriority="high"
-        />
-        <div className="mh-hero__overlay" aria-hidden />
-        <div className="mh-hero__frame">
-          <div className="mh-hero__content hero-fade">
-            <h1 className="mh-hero__h1 hero-fade-d1">
-              Термодревесина
-              <br />
-              премиум-качества
-            </h1>
-            <p className="mh-hero__sub hero-fade-d2">
-              Стабильность. Красота. Долговечность.
-              <br />
-              Термообработка для вашего проекта.
-            </p>
-            <div className="mh-hero__cta hero-fade-d3">
-              <a href="#catalog" className="mh-hero__btn">
-                Смотреть каталог
-              </a>
-              <a
-                href="#process"
-                className="group flex items-center gap-2 text-[12px] font-medium tracking-[0.08em] uppercase transition-colors duration-300"
-                style={{ color: 'rgba(245,240,234,0.65)' }}
-              >
-                О производстве
-                <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
+      <section
+        id="home"
+        className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-24 pb-16"
+        style={{ backgroundColor: 'var(--bg-primary)' }}
+      >
+        <div className="w-full max-w-[1400px]">
+          <div className="hero-fade relative w-full overflow-hidden rounded-3xl sm:rounded-[2rem]" style={{ aspectRatio: '21/9' }}>
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              poster={assetUrl('/media/hero-poster.png')}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+            >
+              <source src={assetUrl('/media/hero-web.mp4')} type="video/mp4" />
+            </video>
+            <div className="absolute bottom-0 left-0 right-0 h-2/3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }} />
+            <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12 md:p-16">
+              <p className="hero-fade hero-fade-d1 mb-4 text-[10px] font-medium tracking-[0.35em] uppercase sm:text-[11px]" style={{ color: 'var(--accent-gold)' }}>
+                Сочи · Полный цикл · Индивидуальное производство
+              </p>
+              <h1 className="hero-fade hero-fade-d2 font-display mb-6 text-3xl font-bold leading-tight sm:text-5xl md:text-6xl lg:text-7xl" style={{ color: '#F5F0EA' }}>
+                Термодревесина<br />
+                <em className="not-italic" style={{ color: 'var(--accent-gold)' }}>премиум-качества</em>
+              </h1>
+              <div className="hero-fade hero-fade-d3 flex flex-wrap items-center gap-4 sm:gap-6">
+                <a
+                  href="#catalog"
+                  className="rounded-2xl px-7 py-3.5 text-[13px] font-medium tracking-[0.08em] uppercase text-white transition-all duration-300 hover:opacity-90 sm:px-8 sm:py-4"
+                  style={{ backgroundColor: 'var(--accent)' }}
+                >
+                  Смотреть каталог
+                </a>
+                <a
+                  href="#process"
+                  className="group flex items-center gap-2 text-[12px] font-medium tracking-[0.08em] uppercase transition-colors duration-300"
+                  style={{ color: 'rgba(245,240,234,0.6)' }}
+                >
+                  О производстве
+                  <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -926,18 +938,19 @@ export default function ModernHomePage() {
       {/* ═══════════════════════════════════════
           FOOTER
           ═══════════════════════════════════════ */}
-      <footer className="border-t px-6 py-16 md:py-20" style={{ backgroundColor: '#1A1410', borderColor: 'rgba(255,255,255,0.06)' }}>
+      <footer className="border-t px-6 py-16 md:py-20" style={{ backgroundColor: '#141008', borderColor: 'rgba(255,255,255,0.06)' }}>
         <div className="mx-auto max-w-7xl">
           <div className="mb-14 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand */}
             <div>
-              <img
-                src={assetUrl('/media/logo.png')}
-                alt="FORESTOFF"
-                className="h-10 w-auto object-contain object-left brightness-0 invert"
-              />
+              <span className="font-serif text-2xl font-semibold tracking-[0.1em] uppercase text-white">
+                SEQUOIA
+              </span>
+              <span className="mt-1 block text-[8px] tracking-[0.28em] uppercase" style={{ color: 'var(--accent)' }}>
+                Wood Company
+              </span>
               <p className="mt-5 max-w-[260px] text-[13px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                Премиальная термодревесина. Полный цикл производства в Сочи. Индивидуальные проекты любой сложности.
+                Эксклюзивная мебель из редких пород дерева. Полный цикл производства. Индивидуальные проекты любой сложности.
               </p>
             </div>
 
@@ -1022,7 +1035,7 @@ export default function ModernHomePage() {
           {/* Bottom */}
           <div className="flex flex-col items-center justify-between gap-6 border-t pt-8 sm:flex-row" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
             <div className="text-[12px]" style={{ color: 'rgba(255,255,255,0.25)' }}>
-              © 2025 FORESTOFF · Премиальная термодревесина
+              © 2025 Живое дерево · Премиальная термодревесина
             </div>
             <div className="flex gap-5">
               <a

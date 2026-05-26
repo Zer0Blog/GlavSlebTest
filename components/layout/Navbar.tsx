@@ -34,8 +34,11 @@ export default function Navbar() {
           backdropFilter: 'blur(12px)',
           borderBottom: '0.5px solid var(--border)',
         }}>
-        <Link href="/" className="nav-logo-link shrink-0">
-          <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
+        <Link href="/" className="flex items-center gap-3 shrink-0">
+          <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
+          <span className="font-display text-lg md:text-xl tracking-wide" style={{ color: 'var(--text)' }}>
+            Главный <span style={{ color: 'var(--accent)' }}>по слэбам</span>
+          </span>
         </Link>
 
         <div className="hidden lg:flex items-center gap-7 xl:gap-9">
