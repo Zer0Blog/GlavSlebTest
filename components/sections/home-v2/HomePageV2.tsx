@@ -16,6 +16,7 @@ import {
   WOOD_SPECIES,
 } from '@/components/sections/modern-home/data'
 import { assetUrl } from '@/lib/base-path'
+import { CloseIcon } from '@/components/sections/modern-home/icons'
 
 /* ─── SVG иконки ─────────────────────────────────────────── */
 const IconShield = () => (
@@ -64,16 +65,6 @@ const IconChevronRight = () => (
     <polyline points="9 18 15 12 9 6" />
   </svg>
 )
-const IconClose = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-  </svg>
-)
-const IconMenu = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="16" y2="12" />
-  </svg>
-)
 const IconIG = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
     <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -110,6 +101,7 @@ function readSavedTheme(): Theme {
 
 export default function HomePageV2() {
   const [theme, setTheme] = useState<Theme>('thermo')
+  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [filter, setFilter]     = useState('all')
   const [formStatus, setFormStatus]       = useState<'idle' | 'sent'>('idle')
@@ -132,6 +124,14 @@ export default function HomePageV2() {
   const toggleTheme = useCallback(() => {
     setTheme(t => (t === 'thermo' ? 'nature' : 'thermo'))
   }, [])
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 80)
+    window.addEventListener('scroll', handler, { passive: true })
+    return () => window.removeEventListener('scroll', handler)
+  }, [])
+
+  const closeMenu = useCallback(() => setMenuOpen(false), [])
 
   /* Reveal on scroll */
   useEffect(() => {
@@ -163,100 +163,144 @@ export default function HomePageV2() {
   }, [])
 
   return (
-    <div className="home-v2">
+    <div className="home-v2 modern-home min-h-screen">
 
-      {/* ═══ MOBILE MENU ═════════════════════════════════════ */}
+      {/* Мобильное меню — как на главной / */}
       {menuOpen && (
-        <div className="v2-mobile-menu">
-          <button className="v2-mobile-close" onClick={() => setMenuOpen(false)}><IconClose /></button>
-          {NAV_LINKS.map(l => (
-            <a key={l.href} href={l.href} className="v2-mobile-link" onClick={() => setMenuOpen(false)}>{l.label}</a>
-          ))}
-          <div className="v2-theme-row" style={{ marginTop: 24 }}>
-            <span className="v2-theme-label">{theme === 'thermo' ? 'Тёмная' : 'Светлая'}</span>
-            <button
-              type="button"
-              className={`v2-theme-toggle${theme === 'nature' ? ' is-light' : ''}`}
-              onClick={toggleTheme}
-              aria-label="Переключить тему"
+        <div
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-8"
+          style={{ backgroundColor: 'var(--bg-primary)' }}
+        >
+          <button
+            type="button"
+            className="absolute top-6 right-6 p-2"
+            onClick={closeMenu}
+            style={{ color: 'var(--text-primary)' }}
+          >
+            <CloseIcon />
+          </button>
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={closeMenu}
+              className="font-display text-3xl font-medium tracking-wide transition-colors duration-300 hover:opacity-70"
+              style={{ color: 'var(--text-primary)' }}
             >
-              <span className="v2-theme-thumb" />
-            </button>
-          </div>
-          <a href="#contact" className="v2-btn" style={{ marginTop: 32 }} onClick={() => setMenuOpen(false)}>Связаться</a>
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="#contact"
+            onClick={closeMenu}
+            className="mt-4 rounded-2xl px-8 py-4 text-sm font-medium tracking-widest text-white uppercase transition-opacity hover:opacity-90"
+            style={{ backgroundColor: 'var(--accent)' }}
+          >
+            Связаться
+          </a>
         </div>
       )}
 
-      {/* ═══ NAV ═════════════════════════════════════════════ */}
-      <nav className="v2-nav">
-        <a href="#home" className="v2-nav__logo nav-logo-link">
-          <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
-        </a>
+      {/* Шапка — 1:1 как на http://localhost:3001/ */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+          scrolled ? 'py-3' : 'py-5'
+        }`}
+        style={{
+          backgroundColor: scrolled ? 'var(--bg-nav)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(20px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+          borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
+          boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
+        }}
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
+          <a href="#home" className="nav-logo-link text-decoration-none">
+            <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
+          </a>
 
-        <ul className="v2-nav__links">
-          {NAV_LINKS.map(l => <li key={l.href}><a href={l.href}>{l.label}</a></li>)}
-        </ul>
+          <ul className="hidden items-center gap-8 lg:flex">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-[13px] font-medium tracking-[0.06em] uppercase transition-colors duration-300"
+                  style={{ color: 'var(--text-secondary)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-        <div className="v2-nav__actions">
-          <span className="v2-theme-label v2-theme-label--desktop">
-            {theme === 'thermo' ? 'Тёмная' : 'Светлая'}
-          </span>
-          <button
-            type="button"
-            className={`v2-theme-toggle${theme === 'nature' ? ' is-light' : ''}`}
-            onClick={toggleTheme}
-            aria-label="Переключить тему"
-          >
-            <span className="v2-theme-thumb" />
-          </button>
-          <a href="#contact" className="v2-btn v2-btn--nav">Связаться</a>
-          <button
-            onClick={() => setMenuOpen(true)}
-            style={{ background: 'none', border: 'none', color: 'var(--v2-muted)', cursor: 'pointer', display: 'none' }}
-            className="v2-hamburger"
-            aria-label="Меню"
-          >
-            <IconMenu />
-          </button>
+          <div className="flex items-center gap-4">
+            <span className="hidden text-[10px] tracking-[0.1em] uppercase sm:block" style={{ color: 'var(--text-tertiary)' }}>
+              {theme === 'thermo' ? 'Тёмная' : 'Светлая'}
+            </span>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="relative h-6 w-11 rounded-full transition-colors duration-300"
+              style={{
+                background: 'var(--border-strong)',
+                border: '1px solid var(--border-strong)',
+              }}
+              aria-label="Переключить тему"
+            >
+              <span
+                className="absolute top-[3px] h-4 w-4 rounded-full transition-all duration-400"
+                style={{
+                  left: theme === 'nature' ? 'calc(100% - 19px)' : '3px',
+                  backgroundColor: 'var(--accent)',
+                }}
+              />
+            </button>
+            <a
+              href="#contact"
+              className="hidden rounded-xl px-5 py-2.5 text-[12px] font-medium tracking-[0.08em] uppercase text-white transition-all duration-300 hover:opacity-90 sm:block"
+              style={{ backgroundColor: 'var(--accent)' }}
+            >
+              Связаться
+            </a>
+            <button
+              type="button"
+              className="flex flex-col gap-[5px] lg:hidden"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Меню"
+            >
+              <span className="block h-[1.5px] w-6 rounded" style={{ backgroundColor: 'var(--text-primary)' }} />
+              <span className="block h-[1.5px] w-4 rounded" style={{ backgroundColor: 'var(--text-primary)' }} />
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* ═══ HERO ════════════════════════════════════════════ */}
-      <section id="home" className="v2-hero" style={{ minHeight: 'calc(100vh - 0px)' }}>
-        {/* Left — текст */}
-        <div className="v2-hero__left">
-          <p className="v2-label v2-anim v2-anim-d1" style={{ marginBottom: 28 }}>
-            Сочи · Производство полного цикла
-          </p>
-          <h1 className="v2-hero__h1 v2-anim v2-anim-d2">
-            Термо&shy;древесина<br />
-            <span style={{ color: 'var(--v2-accent)' }}>Премиум</span>
+      {/* ═══ HERO — полноэкранный баннер (макет) ═════════════════ */}
+      <section id="home" className="v2-hero">
+        <img
+          className="v2-hero__bg"
+          src={assetUrl('/media/banner_dark.png')}
+          alt=""
+          fetchPriority="high"
+        />
+        <div className="v2-hero__overlay" aria-hidden />
+        <div className="v2-hero__content">
+          <h1 className="v2-hero__h1 v2-anim v2-anim-d1">
+            Термодревесина
+            <br />
+            премиум-качества
           </h1>
-          <p className="v2-hero__sub v2-anim v2-anim-d3">
-            Более 1&thinsp;200 слэбов в наличии. Производство в Сочи — от валки леса до полировки. Доставка по всей России.
+          <p className="v2-hero__sub v2-anim v2-anim-d2">
+            Стабильность. Красота. Долговечность.
+            <br />
+            Термообработка для вашего проекта.
           </p>
-          <div className="v2-hero__cta v2-anim v2-anim-d4">
-            <a href="#catalog" className="v2-btn">Смотреть каталог</a>
-            <a href="#process" className="v2-btn-outline">О производстве</a>
-          </div>
-        </div>
-
-        {/* Right — фото */}
-        <div className="v2-hero__right">
-          <img src={assetUrl('/media/catalog-1.png')} alt="Слэб из грецкого ореха" />
-          <div className="v2-hero__overlay" />
-          {/* Stat bar */}
-          <div className="v2-hero__stat-bar">
-            {[
-              { num: '1 200+', label: 'Слэбов в наличии' },
-              { num: '25+',    label: 'Пород дерева' },
-              { num: '4',      label: 'Собственных цеха' },
-            ].map(s => (
-              <div className="v2-hero__stat" key={s.label}>
-                <div className="v2-hero__stat-num">{s.num}</div>
-                <div className="v2-hero__stat-label">{s.label}</div>
-              </div>
-            ))}
+          <div className="v2-hero__cta v2-anim v2-anim-d3">
+            <a href="#catalog" className="v2-btn v2-btn-hero">
+              Смотреть каталог
+            </a>
           </div>
         </div>
       </section>
