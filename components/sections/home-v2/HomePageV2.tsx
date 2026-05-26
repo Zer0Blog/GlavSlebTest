@@ -100,16 +100,12 @@ function readSavedTheme(): Theme {
 }
 
 export default function HomePageV2() {
-  const [theme, setTheme] = useState<Theme>('thermo')
+  const [theme, setTheme] = useState<Theme>(readSavedTheme)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [filter, setFilter]     = useState('all')
   const [formStatus, setFormStatus]       = useState<'idle' | 'sent'>('idle')
   const [consultStatus, setConsultStatus] = useState<'idle' | 'sent'>('idle')
-
-  useEffect(() => {
-    setTheme(readSavedTheme())
-  }, [])
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -561,7 +557,7 @@ export default function HomePageV2() {
           <div className="v2-test-grid">
             {TESTIMONIALS.map((t, i) => (
               <div className={`v2-test-card v2-reveal v2-reveal-d${i + 1}`} key={t.author}>
-                <div className="v2-test-quote">"</div>
+                <div className="v2-test-quote">&ldquo;</div>
                 <p className="v2-test-text">{t.text}</p>
                 <div className="v2-test-author">{t.author}</div>
                 <div className="v2-test-role">{t.role}</div>

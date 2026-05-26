@@ -1,0 +1,14 @@
+{
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell",
+      "args": [
+        "-NoExit",
+        "-Command",
+        "function npm { & \"$env:ProgramFiles\\nodejs\\npm.cmd\" @args }; function npx { & \"$env:ProgramFiles\\nodejs\\npx.cmd\" @args }"
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell"
+}

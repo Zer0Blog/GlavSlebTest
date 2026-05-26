@@ -17,11 +17,8 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname()
   const [modal, setModal] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [pathname])
+  const [menuAtPath, setMenuAtPath] = useState<string | null>(null)
+  const menuOpen = menuAtPath === pathname
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
@@ -65,7 +62,7 @@ export default function Navbar() {
           </button>
           <button
             type="button"
-            onClick={() => setMenuOpen(v => !v)}
+            onClick={() => setMenuAtPath(menuOpen ? null : pathname)}
             className="lg:hidden p-2 -mr-2 transition-colors"
             style={{ color: 'var(--text)' }}
             aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
@@ -91,7 +88,7 @@ export default function Navbar() {
             ))}
             <button
               type="button"
-              onClick={() => { setMenuOpen(false); setModal(true) }}
+              onClick={() => { setMenuAtPath(null); setModal(true) }}
               className="btn-primary w-full mt-6">
               Оставить заявку
             </button>
