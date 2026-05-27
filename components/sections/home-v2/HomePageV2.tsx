@@ -10,7 +10,6 @@ import {
   PROCESS_STATS,
   PROCESS_STEPS,
   TESTIMONIALS,
-  USP_ITEMS,
   WOOD_SPECIES,
 } from '@/components/sections/modern-home/data'
 import { assetUrl } from '@/lib/base-path'
@@ -33,46 +32,9 @@ const IconAward = () => (
     <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
   </svg>
 )
-const IconFactory = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-    <path d="M2 20V10l5-5v5l5-5v5l5-5v10H2z" />
-    <path d="M2 20h20" />
-    <rect x="17" y="11" width="5" height="9" />
-  </svg>
-)
-const IconGrid = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-    <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" />
-    <rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" />
-  </svg>
-)
-const IconPackage = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-    <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-    <polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" />
-  </svg>
-)
-const IconMap = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-    <line x1="8" y1="2" x2="8" y2="18" /><line x1="16" y1="6" x2="16" y2="22" />
-  </svg>
-)
 const IconChevronRight = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
     <polyline points="9 18 15 12 9 6" />
-  </svg>
-)
-const IconHammer = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-    <path d="M14 4l6 6M4 20l8.5-8.5M15 5l4 4" />
-    <path d="M5 19l3-3" />
-  </svg>
-)
-const IconLogs = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-    <ellipse cx="12" cy="5" rx="7" ry="2.5" />
-    <path d="M5 5v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V5M5 9v4c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V9" />
   </svg>
 )
 const IconIG = () => (
@@ -93,8 +55,6 @@ const IconWA = () => (
 )
 
 const ADV_ICONS = [<IconShield key="s" />, <IconLeaf key="l" />, <IconAward key="a" />]
-const USP_ICONS = [<IconFactory key="f" />, <IconGrid key="g" />, <IconPackage key="p" />, <IconMap key="m" />]
-const PROCESS_STAT_ICONS = [<IconLeaf key="t" />, <IconHammer key="h" />, <IconLogs key="l" />, <IconShield key="s" />]
 
 const CATALOG_CAT_LABELS: Record<string, string> = {
   river: 'Стол-река',
@@ -137,6 +97,7 @@ export default function HomePageV2() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [formStatus, setFormStatus]       = useState<'idle' | 'sent'>('idle')
   const [consultStatus, setConsultStatus] = useState<'idle' | 'sent'>('idle')
+  const [coopStatus, setCoopStatus] = useState<'idle' | 'sent'>('idle')
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -170,9 +131,9 @@ export default function HomePageV2() {
     return () => observer.disconnect()
   }, [])
 
-  const handleSubmit = useCallback((e: React.FormEvent, type: 'contact' | 'consult') => {
+  const handleSubmit = useCallback((e: React.FormEvent, type: 'contact' | 'consult' | 'coop') => {
     e.preventDefault()
-    const set = type === 'contact' ? setFormStatus : setConsultStatus
+    const set = type === 'contact' ? setFormStatus : type === 'consult' ? setConsultStatus : setCoopStatus
     set('sent'); setTimeout(() => set('idle'), 3000)
   }, [])
 
@@ -302,15 +263,15 @@ export default function HomePageV2() {
         <div className="v2-hero__overlay" aria-hidden />
         <div className="container-page v2-hero__frame">
           <div className="v2-hero__content">
-            <p className="v2-hero__eyebrow v2-anim v2-anim-d1">FORESTOFF · термодревесина</p>
+            <p className="v2-hero__eyebrow v2-anim v2-anim-d1">FORESTOFF · термо, сушёное, естественной влажности</p>
             <h1 className="v2-hero__h1 v2-anim v2-anim-d2">
-              <span className="v2-hero__title-line">Термодревесина</span>
-              <span className="v2-hero__title-line v2-hero__title-accent">премиум-качества</span>
+              <span className="v2-hero__title-line">Древесина</span>
+              <span className="v2-hero__title-line v2-hero__title-accent">под вашу задачу</span>
             </h1>
             <p className="v2-hero__sub v2-anim v2-anim-d3">
-              Стабильность. Красота. Долговечность.
+              Термо, сушёное и естественной влажности.
               <span className="v2-hero__lead-break" />
-              Термообработка для вашего проекта.
+              Подберём формат под проект, бюджет и сроки.
             </p>
             <div className="v2-hero__cta v2-anim v2-anim-d4">
               <a href="#catalog" className="v2-btn v2-btn-hero">
@@ -351,29 +312,36 @@ export default function HomePageV2() {
               </div>
 
               <div className="v2-intro-cell v2-intro-cell--adv">
-                <div className="v2-intro-adv">
-                  <div className="v2-intro-adv__main">
-                    <h3 className="v2-intro-heading">Преимущества</h3>
-                    <div className="v2-adv-list">
-                      {ADVANTAGES.map((adv, i) => (
-                        <div className="v2-adv-item" key={adv.title}>
-                          <div className="v2-adv-icon">{ADV_ICONS[i]}</div>
-                          <div>
-                            <div className="v2-adv-title">{adv.title}</div>
-                            <div className="v2-adv-desc">{adv.desc}</div>
-                          </div>
-                        </div>
-                      ))}
+                <h3 className="v2-intro-heading">Преимущества</h3>
+                <div className="v2-adv-list">
+                  {ADVANTAGES.map((adv, i) => (
+                    <div className="v2-adv-item" key={adv.title}>
+                      <div className="v2-adv-icon">{ADV_ICONS[i]}</div>
+                      <div>
+                        <div className="v2-adv-title">{adv.title}</div>
+                        <div className="v2-adv-desc">{adv.desc}</div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="v2-intro-adv__visual" aria-hidden>
-                    <img src={assetUrl('/media/catalog-4.png')} alt="" loading="lazy" />
-                  </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="v2-intro-cell v2-intro-cell--featured">
+                <div className="v2-intro-featured__media">
+                  <img src={assetUrl('/media/catalog-4.png')} alt="" loading="lazy" />
+                </div>
+                <div className="v2-intro-featured__body">
+                  <div className="v2-intro-featured__title">Термодоска ясень</div>
+                  <div className="v2-intro-featured__meta">20 × 120 × 2000 мм</div>
+                  <div className="v2-intro-featured__price">5 420 ₽ / м²</div>
+                  <a href="/catalog" className="v2-btn v2-btn-wide v2-btn-submit">
+                    Подробнее
+                  </a>
                 </div>
               </div>
 
               <div className="v2-intro-cell v2-intro-cell--form">
-                <h3 className="v2-intro-heading">Консультация</h3>
+                <h3 className="v2-intro-heading">Получите консультацию</h3>
                 <p className="v2-intro-lead">Подберём решение под ваш проект</p>
                 <form onSubmit={e => handleSubmit(e, 'consult')} className="v2-form">
                   <input type="text" className="v2-input" placeholder="Имя" />
@@ -389,18 +357,6 @@ export default function HomePageV2() {
                 </form>
               </div>
             </div>
-
-            <div className="v2-intro-usp">
-              {USP_ITEMS.map((item, i) => (
-                <div className="v2-intro-usp__item" key={item.label}>
-                  <div className="v2-intro-usp__icon">{USP_ICONS[i]}</div>
-                  <div>
-                    <div className="v2-intro-usp__label">{item.label}</div>
-                    <div className="v2-intro-usp__value">{item.value}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
         </div>
       </section>
 
@@ -413,7 +369,7 @@ export default function HomePageV2() {
               <h2 className="v2-catalog-title">
                 Столы из
                 <br />
-                живого дерева
+                <span className="v2-title-accent">живого дерева</span>
               </h2>
               <p className="v2-catalog-desc">
                 Эксклюзивные столы, слэбы и изделия из редких пород — подбор под интерьер, размеры и задачу проекта.
@@ -481,7 +437,7 @@ export default function HomePageV2() {
         <div className="container-page">
           <header className="v2-testimonials-head v2-reveal">
             <p className="v2-section-label">Отзывы</p>
-            <h2 className="v2-heading-sm">Что говорят<br />клиенты</h2>
+            <h2 className="v2-heading-sm">Что говорят<br /><span className="v2-title-accent">клиенты</span></h2>
           </header>
           <div className="v2-test-grid">
             {TESTIMONIALS.map((t, i) => (
@@ -501,42 +457,39 @@ export default function HomePageV2() {
         <div className="container-page">
           <header className="v2-process-head v2-reveal">
             <p className="v2-process-kicker">Производство</p>
-            <h2 className="v2-process-title">Производство полного цикла</h2>
+            <h2 className="v2-process-title">Собственное производство<br /><span className="v2-title-accent">полного цикла</span></h2>
             <p className="v2-process-lead">
               От валки леса до финальной полировки — каждый этап под нашим контролем.
             </p>
           </header>
 
           <div className="v2-process__layout">
-            <div className="v2-process-stats v2-reveal">
-              {PROCESS_STATS.map((stat, i) => (
-                <div
-                  className={`v2-stat-box v2-reveal v2-reveal-d${Math.min(i + 1, 4)}`}
-                  key={stat.label}
-                >
-                  <div className="v2-stat-icon" aria-hidden>
-                    {PROCESS_STAT_ICONS[i]}
-                  </div>
-                  <div className="v2-stat-body">
-                    <div className="v2-stat-num">{stat.num}</div>
-                    <div className="v2-stat-label">{stat.label}</div>
-                    {stat.desc ? <div className="v2-stat-desc">{stat.desc}</div> : null}
+            <div className="v2-process-steps v2-reveal v2-reveal-d1">
+              {PROCESS_STEPS.map((step, i) => (
+                <div className={`v2-step v2-reveal v2-reveal-d${Math.min(i + 1, 4)}`} key={step.num}>
+                  <span className="v2-step-num">{step.num}</span>
+                  <div>
+                    <div className="v2-step-title">{step.title}</div>
+                    <div className="v2-step-desc">{step.desc}</div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="v2-process-center v2-reveal v2-reveal-d1">
+            <div className="v2-process-right v2-reveal v2-reveal-d2">
               <div className="v2-process-visual">
                 <img src={assetUrl('/media/process.png')} alt="" className="v2-process-img" loading="lazy" />
               </div>
-              <div className="v2-process-steps v2-reveal v2-reveal-d2">
-                {PROCESS_STEPS.slice(0, 4).map((step, i) => (
-                  <div className={`v2-step v2-reveal v2-reveal-d${Math.min(i + 1, 4)}`} key={step.num}>
-                    <span className="v2-step-num">{step.num}</span>
+              <div className="v2-process-stats">
+                {PROCESS_STATS.map((stat, i) => (
+                  <div
+                    className={`v2-stat-box v2-reveal v2-reveal-d${Math.min(i + 1, 4)}`}
+                    key={stat.label}
+                  >
                     <div>
-                      <div className="v2-step-title">{step.title}</div>
-                      <div className="v2-step-desc">{step.desc}</div>
+                      <div className="v2-stat-num">{stat.num}</div>
+                      <div className="v2-stat-label">{stat.label}</div>
+                      {stat.desc ? <div className="v2-stat-desc">{stat.desc}</div> : null}
                     </div>
                   </div>
                 ))}
@@ -555,7 +508,7 @@ export default function HomePageV2() {
             </p>
             <header className="v2-materials-head">
               <p className="v2-section-label">Материалы</p>
-              <h2 className="v2-heading-sm">Редкие породы<br />со всего мира</h2>
+              <h2 className="v2-heading-sm">Редкие породы<br /><span className="v2-title-accent">со всего мира</span></h2>
             </header>
           </div>
         </div>
@@ -585,9 +538,10 @@ export default function HomePageV2() {
         <div className="container-page v2-contact__layout">
           <div className="v2-reveal">
             <p className="v2-section-label v2-contact-kicker">Приедьте и потрогайте</p>
-            <h2 className="v2-contact-h2">Подберём<br />вам слэб</h2>
+            <h2 className="v2-contact-h2">Найдите свой<br /><span>слэб</span></h2>
             <p className="v2-contact-p">
-              Более 1&thinsp;200 слэбов в наличии. Шоурум в Сочи, ул. Краснофлотская, 11/16. Работаем по всей России. Бесплатная консультация.
+              Работаем с тремя форматами: термо, сушёное и естественной влажности.
+              Поможем подобрать подходящий вариант под ваш проект.
             </p>
             <div className="v2-contact-details">
               <div>
@@ -601,23 +555,42 @@ export default function HomePageV2() {
             </div>
           </div>
 
-          <form onSubmit={e => handleSubmit(e, 'contact')} className="v2-contact-form v2-reveal v2-reveal-d1">
-            <p className="v2-contact-form-label">Оставить заявку</p>
-            <div className="v2-contact-row">
-              <input type="text" className="v2-contact-input" placeholder="Ваше имя" />
-              <input type="tel"  className="v2-contact-input" placeholder="Телефон" />
-            </div>
-            <input type="text" className="v2-contact-input" placeholder="Что вас интересует?" />
-            <textarea rows={4} className="v2-contact-input" placeholder="Расскажите о проекте..." style={{ resize: 'vertical' }} />
-            <button
-              type="submit"
-              className="v2-btn"
-              style={{ background: formStatus === 'sent' ? '#3D6B4F' : 'var(--v2-accent)', alignSelf: 'flex-start', padding: '16px 44px' }}
-            >
-              {formStatus === 'sent' ? 'Отправлено ✓' : 'Отправить заявку'}
-            </button>
-            <p className="v2-contact-note">Ответим в течение 2 часов в рабочее время</p>
-          </form>
+          <div className="v2-contact-forms v2-reveal v2-reveal-d1">
+            <form onSubmit={e => handleSubmit(e, 'contact')} className="v2-contact-form">
+              <p className="v2-contact-form-label">Оставить заявку</p>
+              <div className="v2-contact-row">
+                <input type="text" className="v2-contact-input" placeholder="Ваше имя" />
+                <input type="tel"  className="v2-contact-input" placeholder="Телефон" />
+              </div>
+              <input type="text" className="v2-contact-input" placeholder="Что вас интересует?" />
+              <textarea rows={4} className="v2-contact-input" placeholder="Расскажите о проекте..." style={{ resize: 'vertical' }} />
+              <button
+                type="submit"
+                className="v2-btn"
+                style={{ background: formStatus === 'sent' ? '#3D6B4F' : 'var(--v2-accent)', alignSelf: 'flex-start', padding: '16px 44px' }}
+              >
+                {formStatus === 'sent' ? 'Отправлено ✓' : 'Отправить заявку'}
+              </button>
+              <p className="v2-contact-note">Ответим в течение 2 часов в рабочее время</p>
+            </form>
+
+            <form onSubmit={e => handleSubmit(e, 'coop')} className="v2-contact-form v2-contact-form--secondary">
+              <p className="v2-contact-form-label">Предложить сотрудничество</p>
+              <div className="v2-contact-row">
+                <input type="text" className="v2-contact-input" placeholder="Компания / имя" />
+                <input type="tel" className="v2-contact-input" placeholder="Телефон / мессенджер" />
+              </div>
+              <input type="text" className="v2-contact-input" placeholder="Формат сотрудничества (опт, дизайн-проекты, поставки)" />
+              <textarea rows={4} className="v2-contact-input" placeholder="Опишите предложение..." style={{ resize: 'vertical' }} />
+              <button
+                type="submit"
+                className="v2-btn"
+                style={{ background: coopStatus === 'sent' ? '#3D6B4F' : 'var(--v2-accent)', alignSelf: 'flex-start', padding: '16px 44px' }}
+              >
+                {coopStatus === 'sent' ? 'Отправлено ✓' : 'Отправить предложение'}
+              </button>
+            </form>
+          </div>
         </div>
       </section>
 
@@ -672,7 +645,7 @@ export default function HomePageV2() {
           </div>
 
           <div className="v2-footer__bottom">
-            <span className="v2-footer__copy">© 2025 Главный по слэбам · Премиальная термодревесина</span>
+            <span className="v2-footer__copy">© 2025 Главный по слэбам · Термо, сушёное и естественной влажности</span>
             <div className="v2-footer__socials">
               <a href="#" aria-label="Instagram"><IconIG /></a>
               <a href="#" aria-label="Telegram"><IconTG /></a>
