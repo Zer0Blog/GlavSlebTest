@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import type { CSSProperties } from 'react'
 import {
   ADVANTAGES,
   CATALOG_ITEMS,
@@ -79,6 +80,7 @@ function catalogShortName(name: string) {
 
 /* ─── Компонент ─────────────────────────────────────────── */
 type Theme = 'thermo' | 'nature'
+type ContactFormMode = 'request' | 'coop'
 
 function readSavedTheme(): Theme {
   if (typeof window === 'undefined') return 'thermo'
@@ -98,6 +100,7 @@ export default function HomePageV2() {
   const [formStatus, setFormStatus]       = useState<'idle' | 'sent'>('idle')
   const [consultStatus, setConsultStatus] = useState<'idle' | 'sent'>('idle')
   const [coopStatus, setCoopStatus] = useState<'idle' | 'sent'>('idle')
+  const [contactFormMode, setContactFormMode] = useState<ContactFormMode>('request')
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -534,7 +537,11 @@ export default function HomePageV2() {
       </section>
 
       {/* ═══ КОНТАКТ ═════════════════════════════════════════ */}
-      <section id="contact" className="v2-contact">
+      <section
+        id="contact"
+        className="v2-contact"
+        style={{ '--v2-contact-bg-image': `url(${assetUrl('/media/contact-bg.png')})` } as CSSProperties}
+      >
         <div className="container-page v2-contact__layout">
           <div className="v2-reveal">
             <p className="v2-section-label v2-contact-kicker">Приедьте и потрогайте</p>
@@ -556,40 +563,63 @@ export default function HomePageV2() {
           </div>
 
           <div className="v2-contact-forms v2-reveal v2-reveal-d1">
-            <form onSubmit={e => handleSubmit(e, 'contact')} className="v2-contact-form">
-              <p className="v2-contact-form-label">Оставить заявку</p>
-              <div className="v2-contact-row">
-                <input type="text" className="v2-contact-input" placeholder="Ваше имя" />
-                <input type="tel"  className="v2-contact-input" placeholder="Телефон" />
-              </div>
-              <input type="text" className="v2-contact-input" placeholder="Что вас интересует?" />
-              <textarea rows={4} className="v2-contact-input" placeholder="Расскажите о проекте..." style={{ resize: 'vertical' }} />
+            <div className="v2-contact-switch" role="tablist" aria-label="Тип обращения">
               <button
-                type="submit"
-                className="v2-btn"
-                style={{ background: formStatus === 'sent' ? '#3D6B4F' : 'var(--v2-accent)', alignSelf: 'flex-start', padding: '16px 44px' }}
+                type="button"
+                role="tab"
+                aria-selected={contactFormMode === 'request'}
+                className={`v2-contact-switch__btn${contactFormMode === 'request' ? ' is-active' : ''}`}
+                onClick={() => setContactFormMode('request')}
               >
-                {formStatus === 'sent' ? 'Отправлено ✓' : 'Отправить заявку'}
+                Оставить заявку
               </button>
-              <p className="v2-contact-note">Ответим в течение 2 часов в рабочее время</p>
-            </form>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={contactFormMode === 'coop'}
+                className={`v2-contact-switch__btn${contactFormMode === 'coop' ? ' is-active' : ''}`}
+                onClick={() => setContactFormMode('coop')}
+              >
+                Сотрудничество
+              </button>
+            </div>
 
-            <form onSubmit={e => handleSubmit(e, 'coop')} className="v2-contact-form v2-contact-form--secondary">
-              <p className="v2-contact-form-label">Предложить сотрудничество</p>
-              <div className="v2-contact-row">
-                <input type="text" className="v2-contact-input" placeholder="Компания / имя" />
-                <input type="tel" className="v2-contact-input" placeholder="Телефон / мессенджер" />
-              </div>
-              <input type="text" className="v2-contact-input" placeholder="Формат сотрудничества (опт, дизайн-проекты, поставки)" />
-              <textarea rows={4} className="v2-contact-input" placeholder="Опишите предложение..." style={{ resize: 'vertical' }} />
-              <button
-                type="submit"
-                className="v2-btn"
-                style={{ background: coopStatus === 'sent' ? '#3D6B4F' : 'var(--v2-accent)', alignSelf: 'flex-start', padding: '16px 44px' }}
-              >
-                {coopStatus === 'sent' ? 'Отправлено ✓' : 'Отправить предложение'}
-              </button>
-            </form>
+            {contactFormMode === 'request' ? (
+              <form onSubmit={e => handleSubmit(e, 'contact')} className="v2-contact-form">
+                <p className="v2-contact-form-label">Оставить заявку</p>
+                <div className="v2-contact-row">
+                  <input type="text" className="v2-contact-input" placeholder="Ваше имя" />
+                  <input type="tel"  className="v2-contact-input" placeholder="Телефон" />
+                </div>
+                <input type="text" className="v2-contact-input" placeholder="Что вас интересует?" />
+                <textarea rows={4} className="v2-contact-input" placeholder="Расскажите о проекте..." style={{ resize: 'vertical' }} />
+                <button
+                  type="submit"
+                  className="v2-btn"
+                  style={{ background: formStatus === 'sent' ? '#3D6B4F' : 'var(--v2-accent)', alignSelf: 'flex-start', padding: '16px 44px' }}
+                >
+                  {formStatus === 'sent' ? 'Отправлено ✓' : 'Отправить заявку'}
+                </button>
+                <p className="v2-contact-note">Ответим в течение 2 часов в рабочее время</p>
+              </form>
+            ) : (
+              <form onSubmit={e => handleSubmit(e, 'coop')} className="v2-contact-form v2-contact-form--secondary">
+                <p className="v2-contact-form-label">Предложить сотрудничество</p>
+                <div className="v2-contact-row">
+                  <input type="text" className="v2-contact-input" placeholder="Компания / имя" />
+                  <input type="tel" className="v2-contact-input" placeholder="Телефон / мессенджер" />
+                </div>
+                <input type="text" className="v2-contact-input" placeholder="Формат сотрудничества (опт, дизайн-проекты, поставки)" />
+                <textarea rows={4} className="v2-contact-input" placeholder="Опишите предложение..." style={{ resize: 'vertical' }} />
+                <button
+                  type="submit"
+                  className="v2-btn"
+                  style={{ background: coopStatus === 'sent' ? '#3D6B4F' : 'var(--v2-accent)', alignSelf: 'flex-start', padding: '16px 44px' }}
+                >
+                  {coopStatus === 'sent' ? 'Отправлено ✓' : 'Отправить предложение'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>
