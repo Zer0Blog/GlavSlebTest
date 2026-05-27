@@ -1165,16 +1165,18 @@ main.site-main:has(.home-v2) {
 .v2-contact {
   position: relative;
   padding: 120px 0;
-  border-top: 1px solid var(--v2-border);
+  border-top: none;
   background: #120f0b var(--v2-contact-bg-image, url('/media/contact-bg.png')) center center / cover no-repeat;
+  background-attachment: local;
   color: #f5f0ea;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: color 0.5s ease;
 }
 .v2-contact::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(18, 15, 11, 0.78) 0%, rgba(18, 15, 11, 0.62) 45%, rgba(18, 15, 11, 0.8) 100%);
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
 }
 .v2-contact .container-page {
   position: relative;
@@ -1189,6 +1191,7 @@ main.site-main:has(.home-v2) {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-height: clamp(380px, 34vw, 460px);
 }
 .v2-contact-switch {
   display: inline-flex;
@@ -1456,6 +1459,7 @@ main.site-main:has(.home-v2) {
     min-height: 260px;
   }
   .v2-contact__layout { grid-template-columns: 1fr; gap: 60px; }
+  .v2-contact-forms { min-height: 0; }
   .v2-projects-grid { grid-template-columns: 1fr 1fr; }
   .v2-test-grid { grid-template-columns: 1fr; }
   .v2-catalog {

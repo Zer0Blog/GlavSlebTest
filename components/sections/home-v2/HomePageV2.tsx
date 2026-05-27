@@ -618,6 +618,7 @@ export default function HomePageV2() {
                 >
                   {coopStatus === 'sent' ? 'Отправлено ✓' : 'Отправить предложение'}
                 </button>
+                <p className="v2-contact-note">Ответим в течение 2 часов в рабочее время</p>
               </form>
             )}
           </div>

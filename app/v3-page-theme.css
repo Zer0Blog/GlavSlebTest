@@ -1,0 +1,156 @@
+.v3-page-theme {
+  --page-bg: #1a1410;
+  --page-section: #2c2218;
+  --page-card: #2a2017;
+  --page-text: #f5f0ea;
+  --page-muted: rgba(245, 240, 234, 0.72);
+  --page-dim: #9a8b7e;
+  --page-accent: #b87333;
+  --page-gold: #d4a76a;
+  --page-border: rgba(245, 240, 234, 0.1);
+  --page-shadow: 0 16px 42px rgba(0, 0, 0, 0.35);
+  color: var(--page-text);
+  background: var(--page-bg);
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.v3-page-theme h1,
+.v3-page-theme h2,
+.v3-page-theme h3,
+.v3-page-theme h4 {
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
+  font-style: normal;
+}
+
+.v3-page-theme .kicker-v3 {
+  margin: 0 0 14px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--page-gold);
+}
+
+.v3-page-theme .title-v3 {
+  margin: 0;
+  max-width: 20ch;
+  font-size: clamp(1.75rem, 4.2vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.v3-page-theme .title-v3 span {
+  display: block;
+  margin-top: 0.2em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--page-gold);
+}
+
+.v3-page-theme .lead-v3 {
+  color: var(--page-muted);
+  line-height: 1.75;
+  font-size: clamp(14px, 1.45vw, 17px);
+  font-weight: 400;
+}
+
+.v3-page-theme p,
+.v3-page-theme a,
+.v3-page-theme li,
+.v3-page-theme label,
+.v3-page-theme input,
+.v3-page-theme textarea,
+.v3-page-theme button {
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
+}
+
+.v3-page-theme .panel-v3 {
+  border: 1px solid var(--page-border);
+  border-radius: 14px;
+  background: var(--page-card);
+  box-shadow: var(--page-shadow);
+}
+
+.v3-page-theme .grid-v3 {
+  display: grid;
+  gap: 16px;
+}
+
+/* Typography parity with v3 main page for chrome */
+body:has(.v3-page-theme) .site-chrome-nav,
+body:has(.v3-page-theme) .site-chrome-footer {
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
+  color: var(--page-text);
+}
+
+body:has(.v3-page-theme) .site-chrome-nav .font-display,
+body:has(.v3-page-theme) .site-chrome-footer .font-display,
+body:has(.v3-page-theme) .site-chrome-footer .kicker {
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif !important;
+  font-style: normal !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+body:has(.v3-page-theme) .site-chrome-nav .font-display {
+  font-weight: 600;
+}
+
+body:has(.v3-page-theme) .site-chrome-nav {
+  background: rgba(26, 20, 16, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(245, 240, 234, 0.08) !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-nav a,
+body:has(.v3-page-theme) .site-chrome-footer a,
+body:has(.v3-page-theme) .site-chrome-footer p,
+body:has(.v3-page-theme) .site-chrome-footer span {
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+body:has(.v3-page-theme) .site-chrome-nav .text-\[13px\],
+body:has(.v3-page-theme) .site-chrome-footer .kicker {
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-nav .btn-primary {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  border-radius: 12px !important;
+  padding: 0.65rem 1.25rem !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer {
+  background: #1a1410 !important;
+  border-top: 1px solid rgba(245, 240, 234, 0.08) !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .kicker {
+  color: var(--page-gold) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer a,
+body:has(.v3-page-theme) .site-chrome-footer p,
+body:has(.v3-page-theme) .site-chrome-footer span {
+  color: rgba(245, 240, 234, 0.72) !important;
+}
+
+@media (min-width: 900px) {
+  .v3-page-theme .grid-v3-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .v3-page-theme .grid-v3-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

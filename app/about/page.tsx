@@ -1,129 +1,138 @@
 'use client'
+import '../v3-page-theme.css'
+
+const PRODUCTION_FACTS = [
+  { num: '4', label: 'цеха полного цикла' },
+  { num: '2500', label: 'кв. м производства' },
+  { num: '1200+', label: 'слэбов в наличии' },
+  { num: 'Siemens', label: 'пресс-вакуумная сушка' },
+]
+
+const PRODUCTION_STEPS = [
+  {
+    title: 'Собственная заготовка и распиловка',
+    desc: 'Контролируем цикл от валки дерева до распила на профессиональных ленточных пилорамах.',
+  },
+  {
+    title: 'Высокотехнологичная сушка',
+    desc: 'Используем пресс-вакуумную сушилку Siemens для стабильности и защиты от внутренних напряжений.',
+  },
+  {
+    title: 'Заливочная и столярный цех',
+    desc: 'Делаем столы-реки, полимерные объекты, выполняем точную калибровку и финишную обработку.',
+  },
+  {
+    title: 'Цех металлопроката',
+    desc: 'Производим собственные подстолья, опоры и каркасы для комплексных проектов под ключ.',
+  },
+]
 
 const TEAM = [
-  { name: 'Армен', role: 'Производство', desc: 'Руководит цехом с первого дня. Знает каждое дерево в Сочи по имени.' },
-  { name: 'Николай', role: 'Продажи и клиенты', desc: 'Помогает подобрать идеальный слэб под любой проект и бюджет.' },
-]
-
-const STEPS = [
-  { num: '01', title: 'Заготовка', desc: 'Получаем аварийные деревья от городских служб Сочи. Работаем только с легальными источниками.' },
-  { num: '02', title: 'Распил', desc: 'Профессиональное оборудование позволяет распустить бревно на слэбы любой толщины — от 3 до 15 см.' },
-  { num: '03', title: 'Сушка', desc: 'Камерная сушка 1–3 года. Влажность доводим до 8–10%. Торцы заливаем эпоксидом от трещин.' },
-  { num: '04', title: 'Обработка', desc: 'Шлифовка, выравнивание, нанесение масла или лака по желанию заказчика.' },
-  { num: '05', title: 'Отгрузка', desc: 'Бережная упаковка, доставка по всей России. Работаем с транспортными компаниями и карго.' },
-]
-
-const STATS = [
-  { num: '2013', label: 'год основания' },
-  { num: '1000+', label: 'слэбов на складе' },
-  { num: '15+', label: 'пород дерева' },
-  { num: '500+', label: 'выполненных заказов' },
+  {
+    name: 'Производственная команда',
+    role: 'Цеха, сушка, распиловка',
+    desc: 'Мастера полного цикла — от распила массивных бревен до финишной обработки и упаковки изделий.',
+  },
+  {
+    name: 'Проектная команда',
+    role: 'Клиенты и реализация',
+    desc: 'Подбирает материал под задачу и ведет проект: термо, сушёное и естественной влажности.',
+  },
 ]
 
 export default function AboutPage() {
   return (
-    <div>
-      <header className="relative container-page py-12 md:py-16 lg:py-20 overflow-hidden" style={{ background: 'var(--bg2)' }}>
-        <div className="absolute right-0 top-0 bottom-0 w-1/2 wood-3 opacity-20 md:opacity-30 pointer-events-none" />
-        <div className="relative z-10 max-w-2xl">
-          <p className="kicker mb-4 md:mb-5">О компании</p>
-          <h1 className="font-display font-medium leading-[1.05] mb-5 md:mb-6" style={{ fontSize: 'clamp(2rem,6vw,4rem)' }}>
-            Мы даём деревьям
+    <div className="v3-page-theme">
+      <header className="container-page py-14 md:py-20">
+        <div className="max-w-3xl">
+          <p className="kicker-v3">О нас</p>
+          <h1 className="title-v3">
+            Производство мебели
             <br />
-            <em className="italic" style={{ color: 'var(--gold)' }}>вторую жизнь</em>
+            <span>полного цикла</span>
           </h1>
-          <p className="text-sm md:text-base leading-[1.8] max-w-xl" style={{ color: 'var(--muted)' }}>
-            С 2013 года перерабатываем аварийные деревья с улиц Сочи. Вместо утилизации — уникальные слэбы, столы и
-            столешницы с историей.
+          <p className="lead-v3 mt-6 max-w-2xl">
+            FORESTOFF создаёт премиальные изделия из редких пород дерева: от собственной заготовки и распиловки
+            до готовой мебели и предметов интерьера под ключ.
           </p>
         </div>
       </header>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 border-b border-[var(--border)]">
-        {STATS.map((s, i) => (
-          <div
-            key={s.label}
-            className="px-4 sm:px-8 lg:px-12 py-8 md:py-10 text-center"
-            style={{ borderRight: i < STATS.length - 1 ? '0.5px solid var(--border)' : undefined }}>
-            <p className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2" style={{ color: 'var(--accent)' }}>
-              {s.num}
-            </p>
-            <p className="text-[10px] sm:text-[12px] tracking-[.1em] uppercase leading-snug" style={{ color: 'var(--muted)' }}>
-              {s.label}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      <section className="container-page py-12 md:py-20 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
-          <div className="order-2 lg:order-1">
-            <p className="kicker mb-3 md:mb-4">История</p>
-            <h2 className="font-display font-medium text-3xl md:text-4xl leading-[1.1] mb-6 md:mb-8">Как всё начиналось</h2>
-            <p className="text-[15px] leading-[1.8] mb-4 md:mb-5" style={{ color: 'var(--muted)' }}>
-              В 2013 году Армен увидел, как городские службы убирают огромный упавший платан в центре Сочи. Вместо того
-              чтобы отвезти его на свалку, он договорился забрать бревно себе.
-            </p>
-            <p className="text-[15px] leading-[1.8] mb-4 md:mb-5" style={{ color: 'var(--muted)' }}>
-              Так появился первый слэб. Потом второй. Потом люди начали спрашивать, можно ли купить. И понеслось.
-            </p>
-            <p className="text-[15px] leading-[1.8]" style={{ color: 'var(--muted)' }}>
-              Сегодня мы — производство полного цикла: от получения аварийного дерева до готового изделия с доставкой по
-              России.
-            </p>
-          </div>
-          <div className="relative order-1 lg:order-2">
-            <div className="h-[280px] sm:h-[400px] lg:h-[500px] wood-1" />
-            <div
-              className="absolute -bottom-4 -left-4 sm:-bottom-5 sm:-left-5 px-5 py-3 sm:px-6 sm:py-4"
-              style={{ background: 'var(--accent)', color: 'var(--bg)' }}>
-              <p className="font-display text-2xl sm:text-3xl font-bold">Сочи</p>
-              <p className="text-[11px] tracking-[.08em] uppercase mt-1">место производства</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12 md:py-16 lg:py-20" style={{ background: 'var(--bg2)' }}>
-        <div className="container-page">
-        <p className="kicker mb-3 md:mb-4">Производство</p>
-        <h2 className="font-display font-medium text-3xl md:text-4xl mb-10 md:mb-16">Как мы работаем</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-0.5">
-          {STEPS.map(s => (
-            <div key={s.num} className="p-6 md:p-8" style={{ background: 'var(--bg)', border: '0.5px solid var(--border)' }}>
-              <p className="font-display text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{ color: 'var(--border)' }}>
-                {s.num}
-              </p>
-              <h3 className="font-display text-lg md:text-xl mb-2 md:mb-3">{s.title}</h3>
-              <p className="text-[13px] leading-[1.7]" style={{ color: 'var(--muted)' }}>
-                {s.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-        </div>
-      </section>
-
-      <section className="container-page py-12 md:py-16 lg:py-20">
-        <p className="kicker mb-3 md:mb-4">Команда</p>
-        <h2 className="font-display font-medium text-3xl md:text-4xl mb-8 md:mb-14">Люди за слэбами</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-0.5 max-w-3xl">
-          {TEAM.map(m => (
-            <div key={m.name} className="p-8 md:p-10" style={{ background: 'var(--bg2)', border: '0.5px solid var(--border)' }}>
-              <div
-                className="w-14 h-14 md:w-16 md:h-16 mb-5 md:mb-6 flex items-center justify-center font-display text-2xl italic"
-                style={{ background: 'var(--surface)', border: '0.5px solid var(--border)', color: 'var(--accent)' }}>
-                {m.name[0]}
+      <section className="container-page pb-14 md:pb-20">
+        <div className="grid-v3 grid-v3-2">
+          {PRODUCTION_FACTS.map(item => (
+            <div key={item.label} className="panel-v3 p-6 md:p-8">
+              <div className="text-3xl md:text-4xl font-bold" style={{ color: 'var(--page-accent)' }}>
+                {item.num}
               </div>
-              <h3 className="font-display text-xl md:text-2xl mb-1">{m.name}</h3>
-              <p className="text-[12px] tracking-[.1em] uppercase mb-3 md:mb-4" style={{ color: 'var(--accent)' }}>
-                {m.role}
-              </p>
-              <p className="text-[14px] leading-[1.7]" style={{ color: 'var(--muted)' }}>
-                {m.desc}
-              </p>
+              <div className="mt-2 text-[11px] tracking-[.16em] uppercase" style={{ color: 'var(--page-muted)' }}>
+                {item.label}
+              </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="py-14 md:py-20" style={{ background: 'var(--page-section)' }}>
+        <div className="container-page">
+          <p className="kicker-v3">Производство</p>
+          <h2 className="title-v3">
+            Как мы работаем
+            <br />
+            <span>на каждом этапе</span>
+          </h2>
+          <div className="grid-v3 grid-v3-2 mt-10">
+            {PRODUCTION_STEPS.map((step, idx) => (
+              <article key={step.title} className="panel-v3 p-6 md:p-8">
+                <div className="text-[11px] tracking-[.16em] uppercase mb-4" style={{ color: 'var(--page-gold)' }}>
+                  Этап {String(idx + 1).padStart(2, '0')}
+                </div>
+                <h3 className="text-xl md:text-2xl font-semibold leading-tight">{step.title}</h3>
+                <p className="lead-v3 mt-4">{step.desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container-page py-14 md:py-20">
+        <div className="grid-v3 grid-v3-2">
+          <div className="panel-v3 p-6 md:p-8">
+            <p className="kicker-v3">Команда</p>
+            <h2 className="title-v3">
+              Люди
+              <br />
+              <span>за проектами</span>
+            </h2>
+            <div className="grid-v3 mt-8">
+              {TEAM.map(member => (
+                <article key={member.name} className="rounded-xl border p-5" style={{ borderColor: 'var(--page-border)' }}>
+                  <h3 className="text-lg font-semibold">{member.name}</h3>
+                  <p className="text-[11px] tracking-[.14em] uppercase mt-2" style={{ color: 'var(--page-gold)' }}>
+                    {member.role}
+                  </p>
+                  <p className="lead-v3 mt-4">{member.desc}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="panel-v3 p-6 md:p-8">
+            <p className="kicker-v3">Философия</p>
+            <h2 className="title-v3">
+              Материал,
+              <br />
+              <span>который живёт</span>
+            </h2>
+            <p className="lead-v3 mt-6">
+              Мы не просто производим мебель — мы раскрываем характер древесины. Используем редкие породы,
+              соблюдаем технологию сушки и создаём изделия, которые служат десятилетиями.
+            </p>
+            <p className="lead-v3 mt-4">
+              Для нас важно сохранить естественную красоту материала, поэтому каждый проект проектируем индивидуально:
+              по размерам, стилю и задачам пространства.
+            </p>
+          </div>
         </div>
       </section>
     </div>
