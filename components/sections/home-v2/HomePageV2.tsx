@@ -295,26 +295,28 @@ export default function HomePageV2() {
       <section id="home" className="v2-hero">
         <img
           className="v2-hero__bg"
-          src={assetUrl('/media/banner_dark.png')}
+          src={assetUrl('/media/hero-forestoff.png')}
           alt=""
           fetchPriority="high"
         />
         <div className="v2-hero__overlay" aria-hidden />
         <div className="container-page v2-hero__frame">
           <div className="v2-hero__content">
-          <h1 className="v2-hero__h1 v2-anim v2-anim-d1">
-            Премиум-качество
-            <br />
-            деревообработки
-          </h1>
-          <p className="v2-hero__sub v2-anim v2-anim-d2">
-            Термообработка для вашего проекта. Стабильность и долговечность.
-          </p>
-          <div className="v2-hero__cta v2-anim v2-anim-d3">
-            <a href="#catalog" className="v2-btn v2-btn-hero">
-              Смотреть каталог
-            </a>
-          </div>
+            <p className="v2-hero__eyebrow v2-anim v2-anim-d1">FORESTOFF · термодревесина</p>
+            <h1 className="v2-hero__h1 v2-anim v2-anim-d2">
+              <span className="v2-hero__title-line">Термодревесина</span>
+              <span className="v2-hero__title-line v2-hero__title-accent">премиум-качества</span>
+            </h1>
+            <p className="v2-hero__sub v2-anim v2-anim-d3">
+              Стабильность. Красота. Долговечность.
+              <span className="v2-hero__lead-break" />
+              Термообработка для вашего проекта.
+            </p>
+            <div className="v2-hero__cta v2-anim v2-anim-d4">
+              <a href="#catalog" className="v2-btn v2-btn-hero">
+                Смотреть каталог
+              </a>
+            </div>
           </div>
         </div>
       </section>
