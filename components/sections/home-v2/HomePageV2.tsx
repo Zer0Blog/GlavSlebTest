@@ -624,7 +624,13 @@ export default function HomePageV2() {
         <div className="container-page">
           <div className="v2-footer__grid">
             <div>
-              <div className="v2-footer__brand">Главный по слэбам</div>
+              <div className="v2-footer__brand">
+                <img
+                  src={assetUrl('/media/logo.png')}
+                  alt="Главный по слэбам"
+                  className="nav-logo"
+                />
+              </div>
               <div className="v2-footer__tagline">Wood Company · Сочи</div>
               <p className="v2-footer__desc">
                 Эксклюзивная мебель из редких пород дерева. Полный цикл производства. Индивидуальные проекты любой сложности.
