@@ -3,6 +3,11 @@
   aspect-ratio: 21 / 9;
 }
 
+.about-page .about-hero-content .kicker-v3,
+.contacts-page .contacts-hero-content .kicker-v3 {
+  font-size: 13px;
+}
+
 @media (max-width: 900px) {
   .about-page .about-hero-wrap,
   .contacts-page .contacts-hero-wrap {
