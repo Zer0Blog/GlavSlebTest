@@ -17,6 +17,7 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname()
   const useForestoffLogo = pathname === '/about' || pathname === '/contacts'
+  const useV2Chrome = useForestoffLogo
   const [modal, setModal] = useState(false)
   const [menuAtPath, setMenuAtPath] = useState<string | null>(null)
   const menuOpen = menuAtPath === pathname
@@ -29,53 +30,55 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="site-chrome-nav fixed top-0 left-0 right-0 z-50 flex items-center justify-between gap-4 container-page h-[var(--nav-h)]"
+        className={`site-chrome-nav ${useV2Chrome ? 'site-chrome-nav--v2' : ''} fixed top-0 left-0 right-0 z-50`}
         style={{
           background: 'rgba(14,12,10,.92)',
-          backdropFilter: 'blur(12px)',
-          borderBottom: '0.5px solid var(--border)',
+          backdropFilter: useV2Chrome ? 'blur(20px)' : 'blur(12px)',
+          borderBottom: useV2Chrome ? '1px solid var(--border)' : '0.5px solid var(--border)',
         }}>
-        {useForestoffLogo ? (
-          <Link href="/" className="nav-logo-link text-decoration-none">
-            <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
-          </Link>
-        ) : (
-          <Link href="/" className="flex items-center gap-3 shrink-0">
-            <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
-            <span className="font-display text-lg md:text-xl tracking-wide" style={{ color: 'var(--text)' }}>
-              Главный <span style={{ color: 'var(--accent)' }}>по слэбам</span>
-            </span>
-          </Link>
-        )}
-
-        <div className="hidden lg:flex items-center gap-7 xl:gap-9">
-          {links.map(l => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-[13px] tracking-widest uppercase transition-colors duration-200"
-              style={{ color: pathname === l.href ? 'var(--text)' : 'var(--muted)' }}>
-              {l.label}
+        <div className={`site-chrome-nav__inner ${useV2Chrome ? 'site-chrome-nav__inner--v2' : 'container-page'} flex items-center justify-between gap-4 h-[var(--nav-h)]`}>
+          {useForestoffLogo ? (
+            <Link href="/" className="nav-logo-link text-decoration-none">
+              <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
             </Link>
-          ))}
-        </div>
+          ) : (
+            <Link href="/" className="flex items-center gap-3 shrink-0">
+              <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
+              <span className="font-display text-lg md:text-xl tracking-wide" style={{ color: 'var(--text)' }}>
+                Главный <span style={{ color: 'var(--accent)' }}>по слэбам</span>
+              </span>
+            </Link>
+          )}
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          <button
-            type="button"
-            onClick={() => setModal(true)}
-            className="btn-primary text-[11px] sm:text-[12px] px-4 py-2 sm:px-6 sm:py-2.5">
-            Заявка
-          </button>
-          <button
-            type="button"
-            onClick={() => setMenuAtPath(menuOpen ? null : pathname)}
-            className="lg:hidden p-2 -mr-2 transition-colors"
-            style={{ color: 'var(--text)' }}
-            aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
-            aria-expanded={menuOpen}>
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className={`hidden lg:flex items-center ${useV2Chrome ? 'gap-8' : 'gap-7 xl:gap-9'}`}>
+            {links.map(l => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`uppercase transition-colors duration-200 ${useV2Chrome ? 'text-[13px] font-medium tracking-[0.06em]' : 'text-[13px] tracking-widest'}`}
+                style={{ color: pathname === l.href ? 'var(--text)' : 'var(--muted)' }}>
+                {l.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={() => setModal(true)}
+              className="btn-primary text-[11px] sm:text-[12px] px-4 py-2 sm:px-6 sm:py-2.5">
+              {useV2Chrome ? 'Связаться' : 'Заявка'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setMenuAtPath(menuOpen ? null : pathname)}
+              className="lg:hidden p-2 -mr-2 transition-colors"
+              style={{ color: 'var(--text)' }}
+              aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
+              aria-expanded={menuOpen}>
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </nav>
 

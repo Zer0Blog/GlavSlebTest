@@ -134,7 +134,7 @@ export default function ContactsPage() {
       </section>
 
       <section
-        className="v2-contact"
+        className="v2-contact v2-contact--standalone"
         style={{ '--v2-contact-bg-image': `url(${assetUrl('/media/contact-bg.png')})` } as CSSProperties}
       >
         <div className="container-page v2-contact__layout">

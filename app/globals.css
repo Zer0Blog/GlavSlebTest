@@ -50,6 +50,22 @@ body {
   transform-origin: left center;
   filter: brightness(0) invert(1);
 }
+.site-chrome-nav--v2 {
+  width: 100%;
+}
+.site-chrome-nav--v2 .site-chrome-nav__inner--v2 {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+@media (min-width: 1024px) {
+  .site-chrome-nav--v2 .site-chrome-nav__inner--v2 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
 .site-chrome-footer--v2 {
   background: var(--bg2);
   border-top: 1px solid var(--border);

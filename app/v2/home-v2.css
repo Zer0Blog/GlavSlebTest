@@ -38,6 +38,40 @@
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+/* Standalone v2 contact block (for /contacts page) */
+.v2-contact--standalone {
+  --v2-bg: #1A1410;
+  --v2-bg-alt: #2C2218;
+  --v2-card: #2A2017;
+  --v2-card-2: #33281D;
+  --v2-nav: #1A1410;
+  --v2-accent: #B87333;
+  --v2-gold: #D4A76A;
+  --v2-text: #F5F0EA;
+  --v2-muted: #9A8B7E;
+  --v2-dim: #7A6B5E;
+  --v2-border: rgba(245, 240, 234, 0.07);
+  --v2-border-s: rgba(245, 240, 234, 0.13);
+  --v2-font: var(--font-inter), 'Montserrat', system-ui, sans-serif;
+  --v2-radius-sm: 8px;
+  --v2-radius-md: 12px;
+  --v2-radius-lg: 16px;
+  --v2-radius-xl: 24px;
+  font-family: var(--v2-font);
+  letter-spacing: normal;
+}
+.v2-contact--standalone .v2-contact-form {
+  background: rgba(17, 13, 9, 0.45);
+  border-color: rgba(245, 240, 234, 0.12);
+}
+.v2-contact--standalone .v2-contact-form--secondary {
+  background: rgba(17, 13, 9, 0.35);
+}
+.v2-contact--standalone .v2-contact-input {
+  background: rgba(17, 13, 9, 0.68);
+  border-color: rgba(245, 240, 234, 0.12);
+}
+
 [data-theme="nature"] .home-v2 {
   --v2-bg:         #F7F4EF;
   --v2-bg-alt:     #EDE5D8;
