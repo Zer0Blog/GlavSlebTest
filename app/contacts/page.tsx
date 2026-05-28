@@ -20,6 +20,9 @@ const MESSENGERS = [
   { label: 'VK', href: '#' },
 ]
 
+const MAP_EMBED_SRC =
+  'https://yandex.ru/map-widget/v1/?text=%D0%A1%D0%BE%D1%87%D0%B8%2C%20%D1%83%D0%BB.%20%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D1%84%D0%BB%D0%BE%D1%82%D1%81%D0%BA%D0%B0%D1%8F%2C%2011%2F16&z=17'
+
 export default function ContactsPage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'sent'>('idle')
   const [coopStatus, setCoopStatus] = useState<'idle' | 'sent'>('idle')
@@ -36,17 +39,11 @@ export default function ContactsPage() {
     <div className="v3-page-theme contacts-page">
       <header className="container-page contacts-hero-wrap py-8 md:py-12">
         <div className="contacts-hero-media relative w-full overflow-hidden rounded-3xl sm:rounded-[2rem]">
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            poster={assetUrl('/media/hero-poster.png')}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          >
-            <source src={assetUrl('/media/hero-web.mp4')} type="video/mp4" />
-          </video>
+          <img
+            src={assetUrl('/media/banner_dark.png')}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover object-[70%_center]"
+          />
           <div className="absolute bottom-0 left-0 right-0 h-2/3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.72), transparent)' }} />
           <div className="contacts-hero-content absolute bottom-0 left-0 right-0 p-6 sm:p-10 md:p-14">
             <p className="kicker-v3">Контакты</p>
@@ -55,15 +52,26 @@ export default function ContactsPage() {
               <br />
               <span className="not-italic" style={{ color: 'var(--page-gold)' }}>с командой FORESTOFF</span>
             </h1>
+            <p className="contacts-hero-intro lead-v3 mt-4 sm:mt-5 max-w-2xl">
+              Адрес, карта и мессенджеры — выбирайте удобный способ связи.
+            </p>
           </div>
         </div>
-        <p className="contacts-hero-intro lead-v3 mt-6 max-w-2xl">Адрес, карта и мессенджеры — выбирайте удобный способ связи.</p>
       </header>
 
       <section className="contacts-section contacts-section--main container-page pb-14 md:pb-20">
         <div className="contacts-main-grid grid-v3 grid-v3-2">
-          <article className="contacts-card panel-v3 p-6 md:p-8">
-            <div className="grid-v3">
+          <article className="contacts-card contacts-card--info panel-v3 p-6 md:p-8">
+            <div className="contacts-card__showroom">
+              <h2 className="title-v3 contacts-card-showroom-title text-3xl md:text-4xl !leading-[1.15]">
+                Шоурум и производство
+                <br />
+                <span>в Сочи</span>
+              </h2>
+              <p className="lead-v3 mt-5">г. Сочи, ул. Краснофлотская, 11/16</p>
+            </div>
+
+            <div className="grid-v3 contacts-card__details">
             {CONTACTS.map(({ icon: Icon, label, value, sub, href }) => (
               <div key={label} className="flex gap-4 sm:gap-5">
                 <div
@@ -109,25 +117,18 @@ export default function ContactsPage() {
             </div>
           </article>
 
-          <article className="contacts-card panel-v3 p-6 md:p-8">
-            <p className="kicker-v3">Карта</p>
-            <h2 className="title-v3 text-2xl md:text-3xl !leading-[1.15]">
-              Шоурум и производство
-              <br />
-              <span>в Сочи</span>
-            </h2>
-            <p className="lead-v3 mt-5">г. Сочи, ул. Краснофлотская, 11/16</p>
-            <div className="mt-6 rounded-xl border p-6 text-center" style={{ borderColor: 'var(--page-border)', background: 'var(--page-section)' }}>
-              <MapPin size={34} className="mx-auto mb-3" style={{ color: 'var(--page-accent)' }} />
-              <p className="lead-v3">Открываем маршрут и отправляем геолокацию по запросу в мессенджер.</p>
-              <a
-                href="https://yandex.ru/maps"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-4 rounded-xl px-5 py-3 text-xs tracking-[.14em] uppercase"
-                style={{ background: 'var(--page-accent)', color: '#fff' }}>
-                Открыть карту
-              </a>
+          <article className="contacts-card contacts-card--map">
+            <div className="contacts-card__map-head">
+              <span className="kicker-v3 contacts-card__map-kicker">Карта</span>
+            </div>
+            <div className="contacts-card__map">
+              <iframe
+                title="FORESTOFF — Сочи, ул. Краснофлотская, 11/16"
+                src={MAP_EMBED_SRC}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </article>
         </div>
