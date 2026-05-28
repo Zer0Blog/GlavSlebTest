@@ -1,8 +1,10 @@
 'use client'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import type { CSSProperties } from 'react'
 import { MapPin, Phone, MessageCircle, Clock, Send } from 'lucide-react'
 import '../v3-page-theme.css'
 import '../about-contacts-v2-mobile.css'
+import '../v2/home-v2.css'
 import { assetUrl } from '@/lib/base-path'
 
 const CONTACTS = [
@@ -19,10 +21,16 @@ const MESSENGERS = [
 ]
 
 export default function ContactsPage() {
-  const [name, setName] = useState('')
-  const [contact, setContact] = useState('')
-  const [message, setMessage] = useState('')
-  const [sent, setSent] = useState(false)
+  const [formStatus, setFormStatus] = useState<'idle' | 'sent'>('idle')
+  const [coopStatus, setCoopStatus] = useState<'idle' | 'sent'>('idle')
+  const [contactFormMode, setContactFormMode] = useState<'request' | 'coop'>('request')
+
+  const handleSubmit = useCallback((e: React.FormEvent, type: 'contact' | 'coop') => {
+    e.preventDefault()
+    const set = type === 'contact' ? setFormStatus : setCoopStatus
+    set('sent')
+    setTimeout(() => set('idle'), 3000)
+  }, [])
 
   return (
     <div className="v3-page-theme contacts-page">
@@ -125,68 +133,90 @@ export default function ContactsPage() {
         </div>
       </section>
 
-      <section className="contacts-section contacts-section--form py-14 md:py-20" style={{ background: 'var(--page-section)' }}>
-        <div className="container-page max-w-3xl">
-          <p className="kicker-v3">Обратная связь</p>
-          <h2 className="title-v3">
-            Напишите нам
-            <br />
-            <span>по вашему проекту</span>
-          </h2>
-          <p className="lead-v3 mt-5 mb-8">Расскажите, что вас интересует: слэбы, столы или индивидуальное изготовление.</p>
-          {sent ? (
-            <div className="panel-v3 p-8 md:p-10 text-center">
-              <p className="font-display text-xl sm:text-2xl mb-3">Заявка отправлена!</p>
-              <p className="text-[14px]" style={{ color: 'var(--page-muted)' }}>
-                Мы ответим в течение часа в рабочее время.
-              </p>
+      <section
+        className="v2-contact"
+        style={{ '--v2-contact-bg-image': `url(${assetUrl('/media/contact-bg.png')})` } as CSSProperties}
+      >
+        <div className="container-page v2-contact__layout">
+          <div>
+            <p className="v2-section-label v2-contact-kicker">Приедьте и потрогайте</p>
+            <h2 className="v2-contact-h2">Найдите свой<br /><span>слэб</span></h2>
+            <p className="v2-contact-p">
+              Работаем с тремя форматами: термо, сушёное и естественной влажности.
+              Поможем подобрать подходящий вариант под ваш проект.
+            </p>
+            <div className="v2-contact-details">
+              <div>
+                <div className="v2-contact-dt">Телефон</div>
+                <div className="v2-contact-dd">+7 (800) *** ** **</div>
+              </div>
+              <div>
+                <div className="v2-contact-dt">Адрес</div>
+                <div className="v2-contact-dd">Сочи, Краснофлотская 11/16</div>
+              </div>
             </div>
-          ) : (
-            <form className="contacts-form-card panel-v3 p-6 md:p-8" onSubmit={(e) => { e.preventDefault(); setSent(true) }}>
-              <label className="block text-[11px] tracking-[.08em] uppercase mb-2" style={{ color: 'var(--page-muted)' }}>
-                Имя
-              </label>
-              <input
-                type="text"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                placeholder="Ваше имя"
-                className="w-full px-4 py-3.5 text-sm mb-4 rounded-xl border bg-transparent"
-                style={{ borderColor: 'var(--page-border)' }}
-              />
+          </div>
 
-              <label className="block text-[11px] tracking-[.08em] uppercase mb-2" style={{ color: 'var(--page-muted)' }}>
-                Телефон или Telegram
-              </label>
-              <input
-                type="text"
-                value={contact}
-                onChange={e => setContact(e.target.value)}
-                placeholder="+7 или @username"
-                className="w-full px-4 py-3.5 text-sm mb-4 rounded-xl border bg-transparent"
-                style={{ borderColor: 'var(--page-border)' }}
-              />
-
-              <label className="block text-[11px] tracking-[.08em] uppercase mb-2" style={{ color: 'var(--page-muted)' }}>
-                Сообщение
-              </label>
-              <textarea
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-                rows={5}
-                placeholder="Интересует конкретный слэб? Нужен стол под заказ? Расскажите..."
-                className="w-full px-4 py-3.5 text-sm mb-4 resize-y rounded-xl border bg-transparent"
-                style={{ borderColor: 'var(--page-border)' }}
-              />
-
-              <button type="submit" className="w-full rounded-xl py-3.5 text-xs tracking-[.14em] uppercase font-semibold" style={{ background: 'var(--page-accent)', color: '#fff' }}>
-                Отправить сообщение
+          <div className="v2-contact-forms">
+            <div className="v2-contact-switch" role="tablist" aria-label="Тип обращения">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={contactFormMode === 'request'}
+                className={`v2-contact-switch__btn${contactFormMode === 'request' ? ' is-active' : ''}`}
+                onClick={() => setContactFormMode('request')}
+              >
+                Оставить заявку
               </button>
-              <p className="text-center text-[12px] mt-3" style={{ color: 'var(--page-muted)' }}>
-                Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
-              </p>
-            </form>
-          )}
+              <button
+                type="button"
+                role="tab"
+                aria-selected={contactFormMode === 'coop'}
+                className={`v2-contact-switch__btn${contactFormMode === 'coop' ? ' is-active' : ''}`}
+                onClick={() => setContactFormMode('coop')}
+              >
+                Сотрудничество
+              </button>
+            </div>
+
+            {contactFormMode === 'request' ? (
+              <form onSubmit={e => handleSubmit(e, 'contact')} className="v2-contact-form">
+                <p className="v2-contact-form-label">Оставить заявку</p>
+                <div className="v2-contact-row">
+                  <input type="text" className="v2-contact-input" placeholder="Ваше имя" />
+                  <input type="tel" className="v2-contact-input" placeholder="Телефон" />
+                </div>
+                <input type="text" className="v2-contact-input" placeholder="Что вас интересует?" />
+                <textarea rows={4} className="v2-contact-input" placeholder="Расскажите о проекте..." style={{ resize: 'vertical' }} />
+                <button
+                  type="submit"
+                  className="v2-btn"
+                  style={{ background: formStatus === 'sent' ? '#3D6B4F' : 'var(--v2-accent)', alignSelf: 'flex-start', padding: '16px 44px' }}
+                >
+                  {formStatus === 'sent' ? 'Отправлено ✓' : 'Отправить заявку'}
+                </button>
+                <p className="v2-contact-note">Ответим в течение 2 часов в рабочее время</p>
+              </form>
+            ) : (
+              <form onSubmit={e => handleSubmit(e, 'coop')} className="v2-contact-form v2-contact-form--secondary">
+                <p className="v2-contact-form-label">Предложить сотрудничество</p>
+                <div className="v2-contact-row">
+                  <input type="text" className="v2-contact-input" placeholder="Компания / имя" />
+                  <input type="tel" className="v2-contact-input" placeholder="Телефон / мессенджер" />
+                </div>
+                <input type="text" className="v2-contact-input" placeholder="Формат сотрудничества (опт, дизайн-проекты, поставки)" />
+                <textarea rows={4} className="v2-contact-input" placeholder="Опишите предложение..." style={{ resize: 'vertical' }} />
+                <button
+                  type="submit"
+                  className="v2-btn"
+                  style={{ background: coopStatus === 'sent' ? '#3D6B4F' : 'var(--v2-accent)', alignSelf: 'flex-start', padding: '16px 44px' }}
+                >
+                  {coopStatus === 'sent' ? 'Отправлено ✓' : 'Отправить предложение'}
+                </button>
+                <p className="v2-contact-note">Ответим в течение 2 часов в рабочее время</p>
+              </form>
+            )}
+          </div>
         </div>
       </section>
     </div>

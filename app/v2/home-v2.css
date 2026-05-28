@@ -228,7 +228,7 @@ main.site-main:has(.home-v2) {
 }
 .v2-hero__eyebrow {
   margin: 0 0 clamp(1rem, 2.5vh, 1.5rem);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.38em;
   text-transform: uppercase;
