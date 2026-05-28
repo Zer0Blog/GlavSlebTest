@@ -1,5 +1,7 @@
 'use client'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { assetUrl } from '@/lib/base-path'
 
 const cols = [
   {
@@ -29,6 +31,69 @@ const cols = [
 ]
 
 export default function Footer() {
+  const pathname = usePathname()
+  const useForestoffLogo = pathname === '/about' || pathname === '/contacts'
+
+  if (useForestoffLogo) {
+    return (
+      <footer className="site-chrome-footer site-chrome-footer--v2">
+        <div className="container-page">
+          <div className="v2-footer__grid">
+            <div>
+              <div className="v2-footer__brand">
+                <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
+              </div>
+              <div className="v2-footer__tagline">Wood Company · Сочи</div>
+              <p className="v2-footer__desc">
+                Эксклюзивная мебель из редких пород дерева. Полный цикл производства. Индивидуальные проекты любой сложности.
+              </p>
+            </div>
+            <div>
+              <div className="v2-footer__col-title">Каталог</div>
+              <ul className="v2-footer__links">
+                {['Террасная доска', 'Фасадная доска', 'Планкен', 'Слэбы'].map(item => (
+                  <li key={item}><a href="#">{item}</a></li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div className="v2-footer__col-title">Компания</div>
+              <ul className="v2-footer__links">
+                {['О компании', 'Технология', 'Проекты', 'Контакты'].map(item => (
+                  <li key={item}><a href="#">{item}</a></li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div className="v2-footer__col-title">Контакты</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {[
+                  { label: 'Шоурум', val: 'г. Сочи, ул. Краснофлотская, 11/16' },
+                  { label: 'Телефон', val: '+7 (800) *** ** **' },
+                  { label: 'Email', val: 'info@sequoia-wood.ru' },
+                ].map(c => (
+                  <div key={c.label}>
+                    <div className="v2-footer__contact-label">{c.label}</div>
+                    <div className="v2-footer__contact-val">{c.val}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="v2-footer__bottom">
+            <span className="v2-footer__copy">© 2025 Главный по слэбам · Термо, сушёное и естественной влажности</span>
+            <div className="v2-footer__socials">
+              <a href="#" aria-label="Instagram">Instagram</a>
+              <a href="#" aria-label="Telegram">Telegram</a>
+              <a href="#" aria-label="WhatsApp">WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    )
+  }
+
   return (
     <footer className="site-chrome-footer pt-10 pb-8 md:pt-12" style={{ background: 'var(--bg2)', borderTop: '0.5px solid var(--border)' }}>
       <div className="container-page flex flex-col gap-10 lg:flex-row lg:justify-between lg:items-start mb-10 md:mb-12">

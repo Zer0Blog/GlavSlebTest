@@ -1,5 +1,7 @@
 'use client'
 import '../v3-page-theme.css'
+import '../about-contacts-v2-mobile.css'
+import { assetUrl } from '@/lib/base-path'
 
 const PRODUCTION_FACTS = [
   { num: '4', label: 'цеха полного цикла' },
@@ -42,23 +44,39 @@ const TEAM = [
 
 export default function AboutPage() {
   return (
-    <div className="v3-page-theme">
-      <header className="container-page py-14 md:py-20">
-        <div className="max-w-3xl">
-          <p className="kicker-v3">О нас</p>
-          <h1 className="title-v3">
-            Производство мебели
-            <br />
-            <span>полного цикла</span>
-          </h1>
-          <p className="lead-v3 mt-6 max-w-2xl">
+    <div className="v3-page-theme about-page">
+      <header className="container-page about-hero-wrap py-8 md:py-12">
+        <div className="about-hero-media relative w-full overflow-hidden rounded-3xl sm:rounded-[2rem]">
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            poster={assetUrl('/media/hero-poster.png')}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          >
+            <source src={assetUrl('/media/hero-web.mp4')} type="video/mp4" />
+          </video>
+          <div className="absolute bottom-0 left-0 right-0 h-2/3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75), transparent)' }} />
+          <div className="about-hero-content absolute bottom-0 left-0 right-0 p-6 sm:p-10 md:p-14">
+            <p className="kicker-v3">О нас</p>
+            <h1 className="about-hero-title font-display mb-0 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.95]" style={{ color: '#F5F0EA' }}>
+              Производство мебели
+              <br />
+              <span className="not-italic" style={{ color: 'var(--page-gold)' }}>полного цикла</span>
+            </h1>
+          </div>
+        </div>
+        <div className="about-hero-intro max-w-3xl mt-8 md:mt-10">
+          <p className="lead-v3">
             FORESTOFF создаёт премиальные изделия из редких пород дерева: от собственной заготовки и распиловки
             до готовой мебели и предметов интерьера под ключ.
           </p>
         </div>
       </header>
 
-      <section className="container-page pb-14 md:pb-20">
+      <section className="about-section about-section--facts container-page pb-14 md:pb-20">
         <div className="grid-v3 grid-v3-2">
           {PRODUCTION_FACTS.map(item => (
             <div key={item.label} className="panel-v3 p-6 md:p-8">
@@ -73,7 +91,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20" style={{ background: 'var(--page-section)' }}>
+      <section className="about-section about-section--process py-14 md:py-20" style={{ background: 'var(--page-section)' }}>
         <div className="container-page">
           <p className="kicker-v3">Производство</p>
           <h2 className="title-v3">
@@ -95,7 +113,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="container-page py-14 md:py-20">
+      <section className="about-section about-section--team container-page py-14 md:py-20">
         <div className="grid-v3 grid-v3-2">
           <div className="panel-v3 p-6 md:p-8">
             <p className="kicker-v3">Команда</p>

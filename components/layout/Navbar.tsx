@@ -16,6 +16,7 @@ const links = [
 
 export default function Navbar() {
   const pathname = usePathname()
+  const useForestoffLogo = pathname === '/about' || pathname === '/contacts'
   const [modal, setModal] = useState(false)
   const [menuAtPath, setMenuAtPath] = useState<string | null>(null)
   const menuOpen = menuAtPath === pathname
@@ -34,12 +35,18 @@ export default function Navbar() {
           backdropFilter: 'blur(12px)',
           borderBottom: '0.5px solid var(--border)',
         }}>
-        <Link href="/" className="flex items-center gap-3 shrink-0">
-          <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
-          <span className="font-display text-lg md:text-xl tracking-wide" style={{ color: 'var(--text)' }}>
-            Главный <span style={{ color: 'var(--accent)' }}>по слэбам</span>
-          </span>
-        </Link>
+        {useForestoffLogo ? (
+          <Link href="/" className="nav-logo-link text-decoration-none">
+            <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
+          </Link>
+        ) : (
+          <Link href="/" className="flex items-center gap-3 shrink-0">
+            <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
+            <span className="font-display text-lg md:text-xl tracking-wide" style={{ color: 'var(--text)' }}>
+              Главный <span style={{ color: 'var(--accent)' }}>по слэбам</span>
+            </span>
+          </Link>
+        )}
 
         <div className="hidden lg:flex items-center gap-7 xl:gap-9">
           {links.map(l => (

@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import { MapPin, Phone, MessageCircle, Clock, Send } from 'lucide-react'
 import '../v3-page-theme.css'
+import '../about-contacts-v2-mobile.css'
+import { assetUrl } from '@/lib/base-path'
 
 const CONTACTS = [
   { icon: MapPin, label: 'Адрес', value: 'Сочи, ул. Краснофлотская, 11/16', sub: 'Производство и шоурум' },
@@ -23,20 +25,36 @@ export default function ContactsPage() {
   const [sent, setSent] = useState(false)
 
   return (
-    <div className="v3-page-theme">
-      <header className="container-page py-14 md:py-20">
-        <p className="kicker-v3">Контакты</p>
-        <h1 className="title-v3">
-          Свяжитесь
-          <br />
-          <span>с командой FORESTOFF</span>
-        </h1>
-        <p className="lead-v3 mt-6 max-w-2xl">Адрес, карта и мессенджеры — выбирайте удобный способ связи.</p>
+    <div className="v3-page-theme contacts-page">
+      <header className="container-page contacts-hero-wrap py-8 md:py-12">
+        <div className="contacts-hero-media relative w-full overflow-hidden rounded-3xl sm:rounded-[2rem]">
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            poster={assetUrl('/media/hero-poster.png')}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          >
+            <source src={assetUrl('/media/hero-web.mp4')} type="video/mp4" />
+          </video>
+          <div className="absolute bottom-0 left-0 right-0 h-2/3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.72), transparent)' }} />
+          <div className="contacts-hero-content absolute bottom-0 left-0 right-0 p-6 sm:p-10 md:p-14">
+            <p className="kicker-v3">Контакты</p>
+            <h1 className="contacts-hero-title font-display mb-0 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.95]" style={{ color: '#F5F0EA' }}>
+              Свяжитесь
+              <br />
+              <span className="not-italic" style={{ color: 'var(--page-gold)' }}>с командой FORESTOFF</span>
+            </h1>
+          </div>
+        </div>
+        <p className="contacts-hero-intro lead-v3 mt-6 max-w-2xl">Адрес, карта и мессенджеры — выбирайте удобный способ связи.</p>
       </header>
 
-      <section className="container-page pb-14 md:pb-20">
-        <div className="grid-v3 grid-v3-2">
-          <article className="panel-v3 p-6 md:p-8">
+      <section className="contacts-section contacts-section--main container-page pb-14 md:pb-20">
+        <div className="contacts-main-grid grid-v3 grid-v3-2">
+          <article className="contacts-card panel-v3 p-6 md:p-8">
             <div className="grid-v3">
             {CONTACTS.map(({ icon: Icon, label, value, sub, href }) => (
               <div key={label} className="flex gap-4 sm:gap-5">
@@ -83,7 +101,7 @@ export default function ContactsPage() {
             </div>
           </article>
 
-          <article className="panel-v3 p-6 md:p-8">
+          <article className="contacts-card panel-v3 p-6 md:p-8">
             <p className="kicker-v3">Карта</p>
             <h2 className="title-v3 text-2xl md:text-3xl !leading-[1.15]">
               Шоурум и производство
@@ -107,7 +125,7 @@ export default function ContactsPage() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20" style={{ background: 'var(--page-section)' }}>
+      <section className="contacts-section contacts-section--form py-14 md:py-20" style={{ background: 'var(--page-section)' }}>
         <div className="container-page max-w-3xl">
           <p className="kicker-v3">Обратная связь</p>
           <h2 className="title-v3">
@@ -124,7 +142,7 @@ export default function ContactsPage() {
               </p>
             </div>
           ) : (
-            <form className="panel-v3 p-6 md:p-8" onSubmit={(e) => { e.preventDefault(); setSent(true) }}>
+            <form className="contacts-form-card panel-v3 p-6 md:p-8" onSubmit={(e) => { e.preventDefault(); setSent(true) }}>
               <label className="block text-[11px] tracking-[.08em] uppercase mb-2" style={{ color: 'var(--page-muted)' }}>
                 Имя
               </label>
