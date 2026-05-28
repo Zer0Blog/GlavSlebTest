@@ -1,6 +1,7 @@
 'use client'
-import '../v3-page-theme.css'
-import '../about-contacts-v2-mobile.css'
+
+import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { assetUrl } from '@/lib/base-path'
 
 const PRODUCTION_FACTS = [
@@ -33,125 +34,163 @@ const TEAM = [
   {
     name: 'Производственная команда',
     role: 'Цеха, сушка, распиловка',
-    desc: 'Мастера полного цикла — от распила массивных бревен до финишной обработки и упаковки изделий.',
+    desc: 'Мастера полного цикла - от распила массивных бревен до финишной обработки и упаковки изделий.',
   },
   {
     name: 'Проектная команда',
     role: 'Клиенты и реализация',
-    desc: 'Подбирает материал под задачу и ведет проект: термо, сушёное и естественной влажности.',
+    desc: 'Подбирает материал под задачу и ведет проект: термо, сушеное и естественной влажности.',
   },
 ]
 
 export default function AboutPage() {
   return (
-    <div className="v3-page-theme about-page">
-      <header className="container-page about-hero-wrap py-8 md:py-12">
-        <div className="about-hero-media relative w-full overflow-hidden rounded-3xl sm:rounded-[2rem]">
+    <div className="bg-[#17120D] text-[#F5F0EA] -mt-[var(--nav-h)]">
+      <section className="relative min-h-screen overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          animate={{ scale: [1, 1.04, 1] }}
+          transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+        >
           <video
-            className="absolute inset-0 h-full w-full object-cover"
-            poster={assetUrl('/media/hero-poster.png')}
+            className="h-full w-full object-cover"
             autoPlay
             muted
             loop
             playsInline
             preload="auto"
           >
-            <source src={assetUrl('/media/hero-web.mp4')} type="video/mp4" />
+            <source src={assetUrl('/media/about-hero.mp4')} type="video/mp4" />
           </video>
-          <div className="absolute bottom-0 left-0 right-0 h-2/3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75), transparent)' }} />
-          <div className="about-hero-content absolute bottom-0 left-0 right-0 p-6 sm:p-10 md:p-14">
-            <p className="kicker-v3">О нас</p>
-            <h1 className="about-hero-title font-display mb-0 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.95]" style={{ color: '#F5F0EA' }}>
-              Производство мебели
-              <br />
-              <span className="not-italic" style={{ color: 'var(--page-gold)' }}>полного цикла</span>
-            </h1>
-          </div>
-        </div>
-        <div className="about-hero-intro max-w-3xl mt-8 md:mt-10">
-          <p className="lead-v3">
-            FORESTOFF создаёт премиальные изделия из редких пород дерева: от собственной заготовки и распиловки
-            до готовой мебели и предметов интерьера под ключ.
-          </p>
-        </div>
-      </header>
+        </motion.div>
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#17120D] via-[#17120D]/50 to-transparent" />
 
-      <section className="about-section about-section--facts container-page pb-14 md:pb-20">
-        <div className="grid-v3 grid-v3-2">
-          {PRODUCTION_FACTS.map(item => (
-            <div key={item.label} className="panel-v3 p-6 md:p-8">
-              <div className="text-3xl md:text-4xl font-bold" style={{ color: 'var(--page-accent)' }}>
-                {item.num}
-              </div>
-              <div className="mt-2 text-[11px] tracking-[.16em] uppercase" style={{ color: 'var(--page-muted)' }}>
-                {item.label}
-              </div>
-            </div>
+        <div className="relative mx-auto flex min-h-screen w-full max-w-[1440px] flex-col justify-end px-6 pb-16 pt-24 sm:px-10 md:px-14 md:pb-20 lg:px-16">
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="text-xs uppercase tracking-[0.25em] text-[#D4A76A]"
+          >
+            FORESTOFF
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 34 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.1, ease: 'easeOut' }}
+            className="mt-4 max-w-5xl text-4xl font-semibold uppercase leading-[0.95] tracking-[0.03em] sm:text-5xl md:text-6xl lg:text-7xl"
+          >
+            Производство мебели
+            <br />
+            полного цикла
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+            className="mt-6 max-w-2xl text-base text-[#E8DED3] md:text-lg"
+          >
+            От собственной заготовки до готовой мебели под ключ. Работаем с редкими породами дерева и ведем каждый
+            проект с инженерной точностью.
+          </motion.p>
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-[1440px] px-6 py-16 sm:px-10 md:px-14 md:py-20 lg:px-16">
+        <h2 className="text-xs uppercase tracking-[0.2em] text-[#B7915E]">Производство в цифрах</h2>
+        <div className="mt-8 grid gap-8 border-y border-[#3A2E22] py-8 sm:grid-cols-2 lg:grid-cols-4">
+          {PRODUCTION_FACTS.map((item) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.55, ease: 'easeOut' }}
+            >
+              <p className="text-3xl font-semibold text-[#D4A76A] md:text-4xl">{item.num}</p>
+              <p className="mt-2 text-xs uppercase tracking-[0.16em] text-[#988271]">{item.label}</p>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      <section className="about-section about-section--process py-14 md:py-20" style={{ background: 'var(--page-section)' }}>
-        <div className="container-page">
-          <p className="kicker-v3">Производство</p>
-          <h2 className="title-v3">
-            Как мы работаем
-            <br />
-            <span>на каждом этапе</span>
-          </h2>
-          <div className="grid-v3 grid-v3-2 mt-10">
+      <section className="border-y border-[#2E241B] bg-[#201810]">
+        <div className="mx-auto w-full max-w-[1440px] px-6 py-16 sm:px-10 md:px-14 md:py-20 lg:px-16">
+          <h2 className="text-xs uppercase tracking-[0.2em] text-[#B7915E]">Как мы работаем</h2>
+          <p className="mt-4 max-w-3xl text-2xl leading-tight sm:text-3xl md:text-4xl">
+            Каждый этап построен как единая технологическая цепочка без аутсорса.
+          </p>
+
+          <ol className="mt-10 space-y-10">
             {PRODUCTION_STEPS.map((step, idx) => (
-              <article key={step.title} className="panel-v3 p-6 md:p-8">
-                <div className="text-[11px] tracking-[.16em] uppercase mb-4" style={{ color: 'var(--page-gold)' }}>
-                  Этап {String(idx + 1).padStart(2, '0')}
+              <motion.li
+                key={step.title}
+                initial={{ opacity: 0, y: 26 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ duration: 0.55, ease: 'easeOut' }}
+                className="grid gap-4 border-l border-[#6D553B] pl-6 md:grid-cols-[140px_1fr] md:gap-8"
+              >
+                <p className="text-xs uppercase tracking-[0.18em] text-[#D4A76A]">Этап {String(idx + 1).padStart(2, '0')}</p>
+                <div>
+                  <h3 className="text-2xl leading-tight">{step.title}</h3>
+                  <p className="mt-3 max-w-3xl text-[#C8B7A7]">{step.desc}</p>
                 </div>
-                <h3 className="text-xl md:text-2xl font-semibold leading-tight">{step.title}</h3>
-                <p className="lead-v3 mt-4">{step.desc}</p>
-              </article>
+              </motion.li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      <section className="about-section about-section--team container-page py-14 md:py-20">
-        <div className="grid-v3 grid-v3-2">
-          <div className="panel-v3 p-6 md:p-8">
-            <p className="kicker-v3">Команда</p>
-            <h2 className="title-v3">
-              Люди
-              <br />
-              <span>за проектами</span>
-            </h2>
-            <div className="grid-v3 mt-8">
-              {TEAM.map(member => (
-                <article key={member.name} className="rounded-xl border p-5" style={{ borderColor: 'var(--page-border)' }}>
-                  <h3 className="text-lg font-semibold">{member.name}</h3>
-                  <p className="text-[11px] tracking-[.14em] uppercase mt-2" style={{ color: 'var(--page-gold)' }}>
-                    {member.role}
-                  </p>
-                  <p className="lead-v3 mt-4">{member.desc}</p>
-                </article>
-              ))}
-            </div>
+      <section className="mx-auto grid w-full max-w-[1440px] gap-14 px-6 py-16 sm:px-10 md:grid-cols-2 md:px-14 md:py-20 lg:px-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.55, ease: 'easeOut' }}
+        >
+          <h2 className="text-xs uppercase tracking-[0.2em] text-[#B7915E]">Команда</h2>
+          <p className="mt-4 text-3xl leading-tight md:text-4xl">Люди, которые ведут проект от сырья до монтажа</p>
+
+          <div className="mt-10 space-y-8">
+            {TEAM.map((member) => (
+              <article key={member.name} className="border-t border-[#3A2E22] pt-5">
+                <h3 className="text-xl">{member.name}</h3>
+                <p className="mt-2 text-xs uppercase tracking-[0.16em] text-[#D4A76A]">{member.role}</p>
+                <p className="mt-3 text-[#C8B7A7]">{member.desc}</p>
+              </article>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.55, delay: 0.1, ease: 'easeOut' }}
+          className="flex flex-col justify-between border-t border-[#3A2E22] pt-6 md:border-l md:border-t-0 md:pl-10 md:pt-0"
+        >
+          <div>
+            <h2 className="text-xs uppercase tracking-[0.2em] text-[#B7915E]">Философия</h2>
+            <p className="mt-4 text-3xl leading-tight md:text-4xl">Материал, который живет десятилетиями</p>
+            <p className="mt-6 text-[#C8B7A7]">
+              Мы не копируем формы. Мы раскрываем характер древесины через точную сушку, деликатную обработку и
+              индивидуальную проектировку под реальное пространство.
+            </p>
+            <p className="mt-4 text-[#C8B7A7]">
+              Поэтому в наших изделиях остаются и структура волокон, и инженерная стабильность, и ощущение ручной
+              работы на каждом касании.
+            </p>
           </div>
 
-          <div className="panel-v3 p-6 md:p-8">
-            <p className="kicker-v3">Философия</p>
-            <h2 className="title-v3">
-              Материал,
-              <br />
-              <span>который живёт</span>
-            </h2>
-            <p className="lead-v3 mt-6">
-              Мы не просто производим мебель — мы раскрываем характер древесины. Используем редкие породы,
-              соблюдаем технологию сушки и создаём изделия, которые служат десятилетиями.
-            </p>
-            <p className="lead-v3 mt-4">
-              Для нас важно сохранить естественную красоту материала, поэтому каждый проект проектируем индивидуально:
-              по размерам, стилю и задачам пространства.
-            </p>
-          </div>
-        </div>
+          <Link
+            href="/contacts"
+            className="mt-10 inline-block w-fit border-b border-[#6D553B] pb-2 text-sm uppercase tracking-[0.14em] text-[#D4A76A] transition-colors hover:text-[#F5F0EA]"
+          >
+            Обсудить проект
+          </Link>
+        </motion.div>
       </section>
     </div>
   )
