@@ -1410,6 +1410,39 @@ main.site-main:has(.home-v2) {
   text-decoration: none;
 }
 .v2-footer__socials a:hover { color: var(--v2-text); }
+.v2-footer__messengers {
+  margin-top: 24px;
+}
+.v2-footer__messenger-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.v2-footer__messenger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--v2-border);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(245, 240, 234, 0.78);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.v2-footer__messenger-btn:hover {
+  border-color: rgba(212, 167, 106, 0.35);
+  color: var(--v2-text);
+}
+.v2-footer__socials--icons {
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.v2-footer__messenger-btn--compact {
+  padding: 8px 14px;
+}
 
 /* ── Reveal ──────────────────────────────────────────────── */
 .v2-reveal {

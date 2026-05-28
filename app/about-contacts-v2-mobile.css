@@ -77,6 +77,61 @@
   filter: saturate(0.92) brightness(0.88);
 }
 
+.contacts-page .contacts-faq__title {
+  max-width: none;
+  margin-top: 0.75rem;
+  margin-bottom: 2rem;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+.contacts-page .contacts-faq__list {
+  max-width: 48rem;
+}
+
+.contacts-page .contacts-faq__item {
+  border-bottom: 1px solid rgba(245, 240, 234, 0.1);
+}
+
+.contacts-page .contacts-faq__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+}
+
+.contacts-page .contacts-faq__question {
+  font-size: 0.95rem;
+  color: var(--page-text);
+  font-weight: 500;
+}
+
+.contacts-page .contacts-faq__chevron {
+  flex-shrink: 0;
+  color: var(--page-accent);
+  transition: transform 0.25s ease;
+}
+
+.contacts-page .contacts-faq__answer-wrap {
+  overflow: hidden;
+}
+
+.contacts-page .contacts-faq__answer {
+  margin: 0;
+  padding-bottom: 1rem;
+  font-size: 0.88rem;
+  color: var(--page-muted);
+  line-height: 1.75;
+}
+
 @media (max-width: 900px) {
   .about-page .about-hero-wrap,
   .contacts-page .contacts-hero-wrap {

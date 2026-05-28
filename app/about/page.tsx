@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { assetUrl } from '@/lib/base-path'
+import '../v3-page-theme.css'
+import '../v2/home-v2.css'
 
 const PRODUCTION_FACTS = [
   { num: '4', label: 'цеха полного цикла' },
@@ -45,7 +47,7 @@ const TEAM = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#17120D] text-[#F5F0EA] -mt-[var(--nav-h)]">
+    <div className="about-page bg-[#17120D] text-[#F5F0EA] -mt-[var(--nav-h)]">
       <section className="relative min-h-screen overflow-hidden">
         <motion.div
           className="absolute inset-0"

@@ -1,7 +1,14 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { MessageCircle, Send, Camera } from 'lucide-react'
 import { assetUrl } from '@/lib/base-path'
+
+const FOOTER_MESSENGERS = [
+  { label: 'WhatsApp', href: 'https://wa.me/78000000000', icon: MessageCircle, color: '#25D366' },
+  { label: 'Telegram', href: 'https://t.me/glavsleb', icon: Send, color: '#2AABEE' },
+  { label: 'Instagram', href: '#', icon: Camera, color: '#E1306C' },
+]
 
 const cols = [
   {
@@ -66,27 +73,61 @@ export default function Footer() {
             </div>
             <div>
               <div className="v2-footer__col-title">Контакты</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div className="v2-footer__contacts-list">
                 {[
                   { label: 'Шоурум', val: 'г. Сочи, ул. Краснофлотская, 11/16' },
                   { label: 'Телефон', val: '+7 (800) *** ** **' },
                   { label: 'Email', val: 'info@sequoia-wood.ru' },
                 ].map(c => (
-                  <div key={c.label}>
+                  <div key={c.label} className="v2-footer__contact-item">
                     <div className="v2-footer__contact-label">{c.label}</div>
                     <div className="v2-footer__contact-val">{c.val}</div>
                   </div>
                 ))}
+              </div>
+              <div className="v2-footer__messengers">
+                <div className="v2-footer__col-title">Мессенджеры</div>
+                <div className="v2-footer__messenger-btns">
+                  {FOOTER_MESSENGERS.map(m => {
+                    const Icon = m.icon
+                    return (
+                      <a
+                        key={m.label}
+                        href={m.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="v2-footer__messenger-btn"
+                        aria-label={m.label}
+                      >
+                        <Icon size={13} style={{ color: m.color }} />
+                        {m.label}
+                      </a>
+                    )
+                  })}
+                </div>
               </div>
             </div>
           </div>
 
           <div className="v2-footer__bottom">
             <span className="v2-footer__copy">© 2025 Главный по слэбам · Термо, сушёное и естественной влажности</span>
-            <div className="v2-footer__socials">
-              <a href="#" aria-label="Instagram">Instagram</a>
-              <a href="#" aria-label="Telegram">Telegram</a>
-              <a href="#" aria-label="WhatsApp">WhatsApp</a>
+            <div className="v2-footer__socials v2-footer__socials--icons">
+              {FOOTER_MESSENGERS.map(m => {
+                const Icon = m.icon
+                return (
+                  <a
+                    key={m.label}
+                    href={m.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="v2-footer__messenger-btn v2-footer__messenger-btn--compact"
+                    aria-label={m.label}
+                  >
+                    <Icon size={14} style={{ color: m.color }} />
+                    {m.label}
+                  </a>
+                )
+              })}
             </div>
           </div>
         </div>

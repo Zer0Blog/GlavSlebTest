@@ -82,45 +82,59 @@
 
 /* Typography parity with v3 main page for chrome */
 body:has(.v3-page-theme) .site-chrome-nav,
-body:has(.v3-page-theme) .site-chrome-footer {
+body:has(.about-page) .site-chrome-nav,
+body:has(.v3-page-theme) .site-chrome-footer,
+body:has(.about-page) .site-chrome-footer {
   font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
-  color: var(--page-text);
+  color: #f5f0ea;
 }
 
 body:has(.v3-page-theme) .site-chrome-nav .font-display,
+body:has(.about-page) .site-chrome-nav .font-display,
 body:has(.v3-page-theme) .site-chrome-footer .font-display,
-body:has(.v3-page-theme) .site-chrome-footer .kicker {
+body:has(.about-page) .site-chrome-footer .font-display,
+body:has(.v3-page-theme) .site-chrome-footer .kicker,
+body:has(.about-page) .site-chrome-footer .kicker {
   font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif !important;
   font-style: normal !important;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
-body:has(.v3-page-theme) .site-chrome-nav .font-display {
+body:has(.v3-page-theme) .site-chrome-nav .font-display,
+body:has(.about-page) .site-chrome-nav .font-display {
   font-weight: 600;
 }
 
-body:has(.v3-page-theme) .site-chrome-nav {
+body:has(.v3-page-theme) .site-chrome-nav,
+body:has(.about-page) .site-chrome-nav {
   background: rgba(26, 20, 16, 0.9) !important;
   backdrop-filter: blur(16px) !important;
   border-bottom: 1px solid rgba(245, 240, 234, 0.08) !important;
 }
 
 body:has(.v3-page-theme) .site-chrome-nav a,
+body:has(.about-page) .site-chrome-nav a,
 body:has(.v3-page-theme) .site-chrome-footer a,
+body:has(.about-page) .site-chrome-footer a,
 body:has(.v3-page-theme) .site-chrome-footer p,
-body:has(.v3-page-theme) .site-chrome-footer span {
+body:has(.about-page) .site-chrome-footer p,
+body:has(.v3-page-theme) .site-chrome-footer span,
+body:has(.about-page) .site-chrome-footer span {
   font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
   letter-spacing: 0.02em;
 }
 
 body:has(.v3-page-theme) .site-chrome-nav .text-\[13px\],
-body:has(.v3-page-theme) .site-chrome-footer .kicker {
+body:has(.about-page) .site-chrome-nav .text-\[13px\],
+body:has(.v3-page-theme) .site-chrome-footer .kicker,
+body:has(.about-page) .site-chrome-footer .kicker {
   font-size: 11px !important;
   letter-spacing: 0.14em !important;
 }
 
-body:has(.v3-page-theme) .site-chrome-nav .btn-primary {
+body:has(.v3-page-theme) .site-chrome-nav .btn-primary,
+body:has(.about-page) .site-chrome-nav .btn-primary {
   font-size: 12px !important;
   font-weight: 600 !important;
   letter-spacing: 0.08em !important;
@@ -129,21 +143,122 @@ body:has(.v3-page-theme) .site-chrome-nav .btn-primary {
   padding: 0.65rem 1.25rem !important;
 }
 
-body:has(.v3-page-theme) .site-chrome-footer {
+body:has(.v3-page-theme) .site-chrome-footer,
+body:has(.about-page) .site-chrome-footer {
   background: #1a1410 !important;
   border-top: 1px solid rgba(245, 240, 234, 0.08) !important;
 }
 
-body:has(.v3-page-theme) .site-chrome-footer .kicker {
-  color: var(--page-gold) !important;
+body:has(.v3-page-theme) .site-chrome-footer .kicker,
+body:has(.about-page) .site-chrome-footer .kicker {
+  color: #d4a76a !important;
   font-weight: 600 !important;
   letter-spacing: 0.18em !important;
 }
 
 body:has(.v3-page-theme) .site-chrome-footer a,
+body:has(.about-page) .site-chrome-footer a,
 body:has(.v3-page-theme) .site-chrome-footer p,
-body:has(.v3-page-theme) .site-chrome-footer span {
+body:has(.about-page) .site-chrome-footer p,
+body:has(.v3-page-theme) .site-chrome-footer span,
+body:has(.about-page) .site-chrome-footer span {
   color: rgba(245, 240, 234, 0.72) !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__col-title,
+body:has(.about-page) .site-chrome-footer .v2-footer__col-title {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  color: #9a8b7e !important;
+  margin-bottom: 20px !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__contact-label,
+body:has(.about-page) .site-chrome-footer .v2-footer__contact-label {
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: #9a8b7e !important;
+  margin-bottom: 4px !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__contact-val,
+body:has(.about-page) .site-chrome-footer .v2-footer__contact-val {
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+  color: rgba(245, 240, 234, 0.45) !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__contacts-list,
+body:has(.about-page) .site-chrome-footer .v2-footer__contacts-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__contact-item,
+body:has(.about-page) .site-chrome-footer .v2-footer__contact-item {
+  display: flex;
+  flex-direction: column;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__messengers,
+body:has(.about-page) .site-chrome-footer .v2-footer__messengers {
+  margin-top: 24px !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__messengers > .v2-footer__col-title,
+body:has(.about-page) .site-chrome-footer .v2-footer__messengers > .v2-footer__col-title {
+  margin-bottom: 12px !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__links a,
+body:has(.about-page) .site-chrome-footer .v2-footer__links a {
+  font-size: 13px !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__messenger-btns,
+body:has(.about-page) .site-chrome-footer .v2-footer__messenger-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__messenger-btn,
+body:has(.about-page) .site-chrome-footer .v2-footer__messenger-btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid rgba(245, 240, 234, 0.07) !important;
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(245, 240, 234, 0.78) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__messenger-btn:hover,
+body:has(.about-page) .site-chrome-footer .v2-footer__messenger-btn:hover {
+  border-color: rgba(212, 167, 106, 0.35) !important;
+  color: #f5f0ea !important;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__socials--icons,
+body:has(.about-page) .site-chrome-footer .v2-footer__socials--icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+body:has(.v3-page-theme) .site-chrome-footer .v2-footer__messenger-btn--compact,
+body:has(.about-page) .site-chrome-footer .v2-footer__messenger-btn--compact {
+  padding: 8px 14px;
 }
 
 @media (min-width: 900px) {
