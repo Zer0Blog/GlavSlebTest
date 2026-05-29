@@ -5,12 +5,21 @@ type Props = {
   title: ReactNode
   description?: string
   variant?: 'default' | 'gradient'
+  compactMobile?: boolean
 }
 
-export default function PageHeader({ kicker, title, description, variant = 'default' }: Props) {
+export default function PageHeader({
+  kicker,
+  title,
+  description,
+  variant = 'default',
+  compactMobile = false,
+}: Props) {
   return (
     <header
-      className="container-page py-10 md:py-14 lg:py-16 border-b border-[var(--border)]"
+      className={`container-page ${
+        compactMobile ? 'py-7 md:py-14 lg:py-16' : 'py-10 md:py-14 lg:py-16'
+      } border-b border-[var(--border)]`}
       style={
         variant === 'gradient'
           ? {
