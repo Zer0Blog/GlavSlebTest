@@ -12,14 +12,14 @@ import '../content-pages-v2.css'
 const VIEWPORT = { once: true, amount: 0.2 } as const
 
 const WORKS = [
-  { id: 1, title: 'Обеденный стол', species: 'Дуб черешчатый', size: '200×90 см', woodClass: 'wood-3', category: 'Столы' },
-  { id: 2, title: 'Барная стойка', species: 'Секвойя', size: '320×60 см', woodClass: 'wood-1', category: 'Барные' },
-  { id: 3, title: 'Столешница', species: 'Платан', size: '180×80 см', woodClass: 'wood-2', category: 'Столешницы' },
-  { id: 4, title: 'Журнальный стол', species: 'Кедр', size: '120×70 см', woodClass: 'wood-1', category: 'Столы' },
-  { id: 5, title: 'Кухонная столешница', species: 'Ясень', size: '240×65 см', woodClass: 'wood-3', category: 'Столешницы' },
-  { id: 6, title: 'Консоль', species: 'Орех', size: '160×40 см', woodClass: 'wood-2', category: 'Другое' },
-  { id: 7, title: 'Столешница-эпоксид', species: 'Дуб + эпоксид', size: '200×90 см', woodClass: 'wood-3', category: 'Столешницы' },
-  { id: 8, title: 'Стол-река', species: 'Платан', size: '280×100 см', woodClass: 'wood-1', category: 'Столы' },
+  { id: 1, title: 'Обеденный стол', species: 'Дуб черешчатый', size: '200×90 см', image: '/media/products/23.jpg', category: 'Столы' },
+  { id: 2, title: 'Барная стойка', species: 'Секвойя', size: '320×60 см', image: '/media/products/P1211603.JPG', category: 'Барные' },
+  { id: 3, title: 'Столешница', species: 'Платан', size: '180×80 см', image: '/media/products/P1233486.JPG', category: 'Столешницы' },
+  { id: 4, title: 'Журнальный стол', species: 'Кедр', size: '120×70 см', image: '/media/products/P1233543.JPG', category: 'Столы' },
+  { id: 5, title: 'Кухонная столешница', species: 'Ясень', size: '240×65 см', image: '/media/products/P1233573.JPG', category: 'Столешницы' },
+  { id: 6, title: 'Консоль', species: 'Орех', size: '160×40 см', image: '/media/products/P1233578.JPG', category: 'Другое' },
+  { id: 7, title: 'Столешница-эпоксид', species: 'Дуб + эпоксид', size: '200×90 см', image: '/media/products/P1233619.JPG', category: 'Столешницы' },
+  { id: 8, title: 'Стол-река', species: 'Платан', size: '280×100 см', image: '/media/products/P1299519.jpg', category: 'Столы' },
 ]
 
 const CATS = ['Все', 'Столы', 'Столешницы', 'Барные', 'Другое']
@@ -37,12 +37,17 @@ export default function WorksPage() {
             animate={{ scale: [1, 1.04, 1] }}
             transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <img
-              src={assetUrl('/media/works-hero.png')}
-              alt=""
+            <video
               className="h-full w-full object-cover"
               style={{ objectPosition: 'center center' }}
-            />
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+            >
+              <source src={assetUrl('/media/hero-web.mp4')} type="video/mp4" />
+            </video>
           </motion.div>
           <div className="absolute inset-0 bg-black/45" />
           <div className="contacts-hero-gradient absolute inset-0" />
@@ -120,7 +125,12 @@ export default function WorksPage() {
                   borderRadius: 'var(--v2-radius-md, 12px)',
                 }}
               >
-                <div className={`h-full w-full transition-transform duration-700 group-hover:scale-[1.04] ${w.woodClass}`} />
+                <img
+                  src={assetUrl(w.image)}
+                  alt={w.title}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
                 <div
                   className="absolute inset-0 opacity-70 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100"
                   style={{ background: 'linear-gradient(to top, rgba(14,12,10,.9) 0%, transparent 50%)' }}
@@ -147,21 +157,38 @@ export default function WorksPage() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT}
             transition={{ duration: 0.65, ease: 'easeOut' }}
-            className="content-v2-panel about-section--alt mt-12 border p-8 text-center md:mt-16 md:p-12"
-            style={{ borderColor: 'var(--v2-border-s, var(--border))' }}
+            className="works-order-cta mt-12 md:mt-16"
           >
-            <h2 className="about-kicker about-kicker--section">Под заказ</h2>
-            <p className="content-v2-section-lead mt-4">Хотите изделие под заказ?</p>
-            <p className="about-body mx-auto mt-4 max-w-lg text-[15px] leading-relaxed md:text-base">
-              Сделаем стол, столешницу или любое другое изделие из понравившегося слэба. Под ваши размеры и задачу.
-            </p>
-            <Link href="/contacts" className="btn-primary mt-8 inline-flex">
-              Обсудить проект
-            </Link>
+            <div className="works-order-cta__inner">
+              <div className="works-order-cta__head">
+                <h2 className="works-order-cta__title">
+                  Хотите изделие
+                  <br />
+                  <span>под заказ?</span>
+                </h2>
+              </div>
+              <div className="works-order-cta__body">
+                <p className="works-order-cta__text">
+                  Сделаем стол, столешницу или любое другое изделие из понравившегося слэба. Под ваши размеры и задачу.
+                </p>
+                <Link href="/contacts" className="works-order-cta__btn v2-btn group">
+                  Обсудить проект
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path
+                      d="M1 7h12M8 2l5 5-5 5"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            </div>
           </motion.div>
         </section>
       </div>
