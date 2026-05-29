@@ -40,23 +40,6 @@
 
 /* Standalone v2 contact block (for /contacts page) */
 .v2-contact--standalone {
-  --v2-bg: #1A1410;
-  --v2-bg-alt: #2C2218;
-  --v2-card: #2A2017;
-  --v2-card-2: #33281D;
-  --v2-nav: #1A1410;
-  --v2-accent: #B87333;
-  --v2-gold: #D4A76A;
-  --v2-text: #F5F0EA;
-  --v2-muted: #9A8B7E;
-  --v2-dim: #7A6B5E;
-  --v2-border: rgba(245, 240, 234, 0.07);
-  --v2-border-s: rgba(245, 240, 234, 0.13);
-  --v2-font: var(--font-inter), 'Montserrat', system-ui, sans-serif;
-  --v2-radius-sm: 8px;
-  --v2-radius-md: 12px;
-  --v2-radius-lg: 16px;
-  --v2-radius-xl: 24px;
   font-family: var(--v2-font);
   letter-spacing: normal;
 }
@@ -114,6 +97,115 @@ main.site-main:has(.home-v2) {
   padding: 0 !important;
   max-width: none !important;
   min-height: 100vh !important;
+}
+
+/* Страницы about / contacts — те же токены, что и на /v2 */
+.home-v2 .v3-page-theme {
+  --page-bg: var(--v2-bg);
+  --page-section: var(--v2-bg-alt);
+  --page-card: var(--v2-card);
+  --page-text: var(--v2-text);
+  --page-muted: color-mix(in srgb, var(--v2-text) 72%, transparent);
+  --page-dim: var(--v2-dim);
+  --page-accent: var(--v2-accent);
+  --page-gold: var(--v2-gold);
+  --page-border: var(--v2-border-s);
+  --page-shadow: 0 16px 42px color-mix(in srgb, var(--v2-text) 8%, transparent);
+  background: var(--page-bg);
+  color: var(--page-text);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.home-v2 .about-page {
+  background: var(--v2-bg);
+  color: var(--v2-text);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.home-v2 .about-page .about-kicker {
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--v2-gold);
+}
+
+.home-v2 .about-page .about-kicker--section {
+  letter-spacing: 0.2em;
+  color: var(--v2-accent);
+}
+
+.home-v2 .about-page .about-lead {
+  color: color-mix(in srgb, var(--v2-text) 82%, transparent);
+}
+
+.home-v2 .about-page .about-stat-num {
+  font-size: clamp(1.875rem, 4vw, 2.25rem);
+  font-weight: 600;
+  color: var(--v2-gold);
+}
+
+.home-v2 .about-page .about-stat-label {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--v2-muted);
+}
+
+.home-v2 .about-page .about-border-y {
+  border-color: var(--v2-border-s);
+}
+
+.home-v2 .about-page .about-section--alt {
+  background: var(--v2-bg-alt);
+  border-color: var(--v2-border);
+}
+
+.home-v2 .about-page .about-body {
+  color: color-mix(in srgb, var(--v2-muted) 70%, var(--v2-text));
+}
+
+.home-v2 .about-page .about-border-l {
+  border-color: color-mix(in srgb, var(--v2-gold) 45%, var(--v2-border-s));
+}
+
+.home-v2 .about-page .about-border-t {
+  border-color: var(--v2-border-s);
+}
+
+.home-v2 .about-page .about-step-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--v2-gold);
+}
+
+.home-v2 .about-page .about-link {
+  color: var(--v2-gold);
+  border-color: color-mix(in srgb, var(--v2-gold) 45%, var(--v2-border-s));
+  transition: color 0.3s ease;
+}
+
+.home-v2 .about-page .about-link:hover {
+  color: var(--v2-text);
+}
+
+.home-v2 .about-page .about-hero-gradient {
+  background: linear-gradient(
+    to top,
+    var(--v2-bg),
+    color-mix(in srgb, var(--v2-bg) 50%, transparent),
+    transparent
+  );
+}
+
+.home-v2 .contacts-page .contacts-hero-title {
+  color: #f5f0ea;
+}
+
+[data-theme="nature"] .home-v2 .contacts-page .contacts-card__map iframe {
+  filter: saturate(0.95) brightness(0.98);
 }
 
 /* Скругления в стиле hero / навигации (как на /) */
@@ -1354,6 +1446,25 @@ main.site-main:has(.home-v2) {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--v2-text);
+  display: flex;
+  align-items: center;
+  width: clamp(124px, 40vw, 173px);
+  height: 48px;
+  overflow: visible;
+}
+.home-v2 .v2-footer__brand .nav-logo {
+  display: block;
+  height: 72px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: left 46%;
+  transform: scale(2.61) translateY(1px);
+  transform-origin: left center;
+  filter: brightness(0) invert(1);
+}
+[data-theme="nature"] .home-v2 .v2-footer__brand .nav-logo {
+  filter: none;
 }
 .v2-footer__tagline {
   font-size: 9px;
@@ -1395,6 +1506,11 @@ main.site-main:has(.home-v2) {
   margin-bottom: 4px;
 }
 .v2-footer__contact-val { font-size: 12px; color: rgba(245,240,234,0.45); }
+.v2-footer__contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 .v2-footer__bottom {
   display: flex;
   align-items: center;
@@ -1472,7 +1588,14 @@ main.site-main:has(.home-v2) {
   .v2-intro-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .v2-footer__grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .v2-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .v2-footer__grid > div:first-child,
+  .v2-footer__grid > div:last-child {
+    grid-column: 1 / -1;
+  }
 }
 
 
@@ -1539,7 +1662,32 @@ main.site-main:has(.home-v2) {
   }
   .v2-contact { padding-top: 88px; }
   .v2-footer { padding: 60px 0 32px; }
-  .v2-footer__grid { grid-template-columns: 1fr; gap: 32px; }
+  .v2-footer__col--nav {
+    display: none;
+  }
+  .v2-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .v2-footer__desc {
+    max-width: none;
+  }
+  .v2-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .v2-footer__contacts-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 24px;
+  }
+  .v2-footer__contact-item {
+    min-width: 0;
+  }
+  .v2-footer__contact-val {
+    word-break: break-word;
+  }
   .v2-section-header { flex-direction: column; align-items: flex-start; }
 }
 
@@ -1567,4 +1715,27 @@ main.site-main:has(.home-v2) {
   .v2-projects-grid { grid-template-columns: 1fr; }
   .v2-contact-row { grid-template-columns: 1fr; }
   .v2-contact-details { flex-direction: column; gap: 20px; }
+  .v2-footer {
+    padding: 48px 0 28px;
+  }
+  .v2-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+  .v2-footer__col-title {
+    margin-bottom: 14px;
+  }
+  .v2-footer__links {
+    gap: 10px;
+  }
+  .v2-footer__contacts-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 16px;
+  }
+  .v2-footer__copy {
+    line-height: 1.55;
+    max-width: 100%;
+  }
 }

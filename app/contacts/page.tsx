@@ -5,8 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, Phone, MessageCircle, Clock, Send, ChevronRight } from 'lucide-react'
 import '../v3-page-theme.css'
 import '../about-contacts-v2-mobile.css'
+import '../modern-home.css'
 import '../v2/home-v2.css'
 import { assetUrl } from '@/lib/base-path'
+import V2PageShell from '@/components/sections/home-v2/V2PageShell'
 
 const VIEWPORT = { once: true, amount: 0.35 } as const
 
@@ -42,8 +44,12 @@ const MESSENGERS = [
   { label: 'VK', href: '#' },
 ]
 
+const MAP_LON = 39.988429
+const MAP_LAT = 43.497706
+const MAP_ZOOM = 17
+
 const MAP_EMBED_SRC =
-  'https://yandex.ru/map-widget/v1/?text=%D0%A1%D0%BE%D1%87%D0%B8%2C%20%D1%83%D0%BB.%20%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D1%84%D0%BB%D0%BE%D1%82%D1%81%D0%BA%D0%B0%D1%8F%2C%2011%2F16&z=17'
+  `https://yandex.ru/map-widget/v1/?ll=${MAP_LON}%2C${MAP_LAT}&z=${MAP_ZOOM}&pt=${MAP_LON}%2C${MAP_LAT}%2Cpm2rdm`
 
 export default function ContactsPage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'sent'>('idle')
@@ -59,7 +65,8 @@ export default function ContactsPage() {
   }, [])
 
   return (
-    <div className="v3-page-theme contacts-page">
+    <V2PageShell variant="standalone">
+    <div className="v3-page-theme contacts-page pt-20 md:pt-24">
       <header className="container-page contacts-hero-wrap py-8 md:py-12">
         <div className="contacts-hero-media relative w-full overflow-hidden rounded-3xl sm:rounded-[2rem]">
           <img
@@ -79,7 +86,6 @@ export default function ContactsPage() {
             </motion.p>
             <motion.h1
               className="contacts-hero-title font-display mb-0 text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.95]"
-              style={{ color: '#F5F0EA' }}
               initial={{ opacity: 0, y: 34 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.1, ease: 'easeOut' }}
@@ -184,9 +190,6 @@ export default function ContactsPage() {
             viewport={VIEWPORT}
             transition={{ duration: 0.65, delay: 0.1, ease: 'easeOut' }}
           >
-            <div className="contacts-card__map-head">
-              <span className="kicker-v3 contacts-card__map-kicker">Карта</span>
-            </div>
             <div className="contacts-card__map">
               <iframe
                 title="FORESTOFF — Сочи, ул. Краснофлотская, 11/16"
@@ -359,5 +362,6 @@ export default function ContactsPage() {
         </div>
       </section>
     </div>
+    </V2PageShell>
   )
 }

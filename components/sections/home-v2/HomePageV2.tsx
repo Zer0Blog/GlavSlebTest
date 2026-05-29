@@ -7,14 +7,13 @@ import {
   CATALOG_ITEMS,
   CATEGORIES,
   MATERIALS,
-  NAV_LINKS,
   PROCESS_STATS,
   PROCESS_STEPS,
   TESTIMONIALS,
   WOOD_SPECIES,
 } from '@/components/sections/modern-home/data'
 import { assetUrl } from '@/lib/base-path'
-import { CloseIcon } from '@/components/sections/modern-home/icons'
+import V2PageShell from '@/components/sections/home-v2/V2PageShell'
 
 /* ─── SVG иконки ─────────────────────────────────────────── */
 const IconShield = () => (
@@ -38,23 +37,6 @@ const IconChevronRight = () => (
     <polyline points="9 18 15 12 9 6" />
   </svg>
 )
-const IconIG = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-    <rect x="2" y="2" width="20" height="20" rx="5" />
-    <circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-  </svg>
-)
-const IconTG = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-    <path d="M21 5L2 12.5l7 1M21 5l-5 16-7-7.5M21 5L9 13.5m0 0V19l3.5-3" />
-  </svg>
-)
-const IconWA = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-    <path d="M21 11.5A9 9 0 003.07 17L2 22l5.25-1.38A9 9 0 1021 11.5z" />
-  </svg>
-)
-
 const ADV_ICONS = [<IconShield key="s" />, <IconLeaf key="l" />, <IconAward key="a" />]
 
 const CATALOG_CAT_LABELS: Record<string, string> = {
@@ -71,58 +53,19 @@ const CATALOG_BENTO_SLOT: Record<number, string> = {
   6: 'v2-catalog-card--b3',
 }
 
-const V2_NAV_LINKS = NAV_LINKS.filter(link => link.href !== '#projects')
-
 function catalogShortName(name: string) {
   const match = name.match(/«([^»]+)»/)
   return match ? match[1] : name
 }
 
 /* ─── Компонент ─────────────────────────────────────────── */
-type Theme = 'thermo' | 'nature'
 type ContactFormMode = 'request' | 'coop'
 
-function readSavedTheme(): Theme {
-  if (typeof window === 'undefined') return 'thermo'
-  try {
-    const saved = localStorage.getItem('sq-theme')
-    if (saved === 'thermo' || saved === 'nature') return saved
-  } catch {
-    /* ignore */
-  }
-  return 'thermo'
-}
-
 export default function HomePageV2() {
-  const [theme, setTheme] = useState<Theme>(readSavedTheme)
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
   const [formStatus, setFormStatus]       = useState<'idle' | 'sent'>('idle')
   const [consultStatus, setConsultStatus] = useState<'idle' | 'sent'>('idle')
   const [coopStatus, setCoopStatus] = useState<'idle' | 'sent'>('idle')
   const [contactFormMode, setContactFormMode] = useState<ContactFormMode>('request')
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-    try {
-      localStorage.setItem('sq-theme', theme)
-    } catch {
-      /* ignore */
-    }
-    return () => document.documentElement.removeAttribute('data-theme')
-  }, [theme])
-
-  const toggleTheme = useCallback(() => {
-    setTheme(t => (t === 'thermo' ? 'nature' : 'thermo'))
-  }, [])
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 80)
-    window.addEventListener('scroll', handler, { passive: true })
-    return () => window.removeEventListener('scroll', handler)
-  }, [])
-
-  const closeMenu = useCallback(() => setMenuOpen(false), [])
 
   /* Reveal on scroll */
   useEffect(() => {
@@ -141,119 +84,7 @@ export default function HomePageV2() {
   }, [])
 
   return (
-    <div className="home-v2 modern-home min-h-screen">
-
-      {/* Мобильное меню — как на главной / */}
-      {menuOpen && (
-        <div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-8"
-          style={{ backgroundColor: 'var(--bg-primary)' }}
-        >
-          <button
-            type="button"
-            className="absolute top-6 right-6 p-2"
-            onClick={closeMenu}
-            style={{ color: 'var(--text-primary)' }}
-          >
-            <CloseIcon />
-          </button>
-          {V2_NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={closeMenu}
-              className="text-3xl font-bold uppercase tracking-wide transition-colors duration-300 hover:opacity-70"
-              style={{ color: 'var(--text-primary)' }}
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href="#contact"
-            onClick={closeMenu}
-            className="mt-4 rounded-2xl px-8 py-4 text-sm font-medium tracking-widest text-white uppercase transition-opacity hover:opacity-90"
-            style={{ backgroundColor: 'var(--accent)' }}
-          >
-            Связаться
-          </a>
-        </div>
-      )}
-
-      {/* Шапка — 1:1 как на http://localhost:3001/ */}
-      <nav
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-          scrolled ? 'py-3' : 'py-5'
-        }`}
-        style={{
-          backgroundColor: scrolled ? 'var(--bg-nav)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-          boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
-        }}
-      >
-        <div className="v2-nav-inner mx-auto flex w-full max-w-7xl items-center justify-between px-6">
-          <a href="#home" className="nav-logo-link text-decoration-none">
-            <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="nav-logo" />
-          </a>
-
-          <ul className="hidden items-center gap-8 lg:flex">
-            {V2_NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="text-[13px] font-medium tracking-[0.06em] uppercase transition-colors duration-300"
-                  style={{ color: 'var(--text-secondary)' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="flex items-center gap-4">
-            <span className="hidden text-[10px] tracking-[0.1em] uppercase sm:block" style={{ color: 'var(--text-tertiary)' }}>
-              {theme === 'thermo' ? 'Тёмная' : 'Светлая'}
-            </span>
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="relative h-6 w-11 rounded-full transition-colors duration-300"
-              style={{
-                background: 'var(--border-strong)',
-                border: '1px solid var(--border-strong)',
-              }}
-              aria-label="Переключить тему"
-            >
-              <span
-                className="absolute top-[3px] h-4 w-4 rounded-full transition-all duration-400"
-                style={{
-                  left: theme === 'nature' ? 'calc(100% - 19px)' : '3px',
-                  backgroundColor: 'var(--accent)',
-                }}
-              />
-            </button>
-            <a
-              href="#contact"
-              className="hidden rounded-xl px-5 py-2.5 text-[12px] font-medium tracking-[0.08em] uppercase text-white transition-all duration-300 hover:opacity-90 sm:block"
-              style={{ backgroundColor: 'var(--accent)' }}
-            >
-              Связаться
-            </a>
-            <button
-              type="button"
-              className="flex flex-col gap-[5px] lg:hidden"
-              onClick={() => setMenuOpen(true)}
-              aria-label="Меню"
-            >
-              <span className="block h-[1.5px] w-6 rounded" style={{ backgroundColor: 'var(--text-primary)' }} />
-              <span className="block h-[1.5px] w-4 rounded" style={{ backgroundColor: 'var(--text-primary)' }} />
-            </button>
-          </div>
-        </div>
-      </nav>
+    <V2PageShell variant="home">
 
       {/* ═══ HERO — полноэкранный баннер (макет) ═════════════════ */}
       <section id="home" className="v2-hero">
@@ -625,66 +456,6 @@ export default function HomePageV2() {
         </div>
       </section>
 
-      {/* ═══ FOOTER ══════════════════════════════════════════ */}
-      <footer className="v2-footer">
-        <div className="container-page">
-          <div className="v2-footer__grid">
-            <div>
-              <div className="v2-footer__brand">
-                <img
-                  src={assetUrl('/media/logo.png')}
-                  alt="Главный по слэбам"
-                  className="nav-logo"
-                />
-              </div>
-              <div className="v2-footer__tagline">Wood Company · Сочи</div>
-              <p className="v2-footer__desc">
-                Эксклюзивная мебель из редких пород дерева. Полный цикл производства. Индивидуальные проекты любой сложности.
-              </p>
-            </div>
-            <div>
-              <div className="v2-footer__col-title">Каталог</div>
-              <ul className="v2-footer__links">
-                {['Террасная доска', 'Фасадная доска', 'Планкен', 'Слэбы'].map(item => (
-                  <li key={item}><a href="#">{item}</a></li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <div className="v2-footer__col-title">Компания</div>
-              <ul className="v2-footer__links">
-                {['О компании', 'Технология', 'Проекты', 'Контакты'].map(item => (
-                  <li key={item}><a href="#">{item}</a></li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <div className="v2-footer__col-title">Контакты</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                {[
-                  { label: 'Шоурум', val: 'г. Сочи, ул. Краснофлотская, 11/16' },
-                  { label: 'Телефон', val: '+7 (800) *** ** **' },
-                  { label: 'Email', val: 'info@sequoia-wood.ru' },
-                ].map(c => (
-                  <div key={c.label}>
-                    <div className="v2-footer__contact-label">{c.label}</div>
-                    <div className="v2-footer__contact-val">{c.val}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="v2-footer__bottom">
-            <span className="v2-footer__copy">© 2025 Главный по слэбам · Термо, сушёное и естественной влажности</span>
-            <div className="v2-footer__socials">
-              <a href="#" aria-label="Instagram"><IconIG /></a>
-              <a href="#" aria-label="Telegram"><IconTG /></a>
-              <a href="#" aria-label="WhatsApp"><IconWA /></a>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </V2PageShell>
   )
 }
