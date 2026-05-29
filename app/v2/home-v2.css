@@ -212,7 +212,8 @@ main.site-main:has(.home-v2) {
 }
 
 .home-v2 .contacts-page .contacts-hero-gradient,
-.home-v2 .works-v2-page .contacts-hero-gradient {
+.home-v2 .works-v2-page .contacts-hero-gradient,
+.home-v2 .catalog-v2-page .contacts-hero-gradient {
   background: linear-gradient(
     to top,
     #1a1410 0%,
@@ -222,27 +223,32 @@ main.site-main:has(.home-v2) {
 }
 
 .home-v2 .contacts-page .contacts-hero,
-.home-v2 .works-v2-page .contacts-hero {
+.home-v2 .works-v2-page .contacts-hero,
+.home-v2 .catalog-v2-page .contacts-hero {
   margin-top: 0;
 }
 
 .home-v2 .contacts-page .contacts-hero-kicker,
-.home-v2 .works-v2-page .contacts-hero-kicker {
+.home-v2 .works-v2-page .contacts-hero-kicker,
+.home-v2 .catalog-v2-page .contacts-hero-kicker {
   color: var(--v2-gold);
 }
 
 .home-v2 .contacts-page .contacts-hero-h1,
-.home-v2 .works-v2-page .contacts-hero-h1 {
+.home-v2 .works-v2-page .contacts-hero-h1,
+.home-v2 .catalog-v2-page .contacts-hero-h1 {
   color: #f5f0ea;
 }
 
 .home-v2 .contacts-page .contacts-hero-h1-accent,
-.home-v2 .works-v2-page .contacts-hero-h1-accent {
+.home-v2 .works-v2-page .contacts-hero-h1-accent,
+.home-v2 .catalog-v2-page .contacts-hero-h1-accent {
   color: var(--v2-gold);
 }
 
 .home-v2 .contacts-page .contacts-hero-lead,
-.home-v2 .works-v2-page .contacts-hero-lead {
+.home-v2 .works-v2-page .contacts-hero-lead,
+.home-v2 .catalog-v2-page .contacts-hero-lead {
   color: rgba(245, 240, 234, 0.72);
 }
 

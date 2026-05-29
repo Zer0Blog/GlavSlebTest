@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import { assetUrl } from '@/lib/base-path'
 
 interface SlabCardProps {
   id: string
@@ -7,6 +8,7 @@ interface SlabCardProps {
   size: string
   price: string
   woodClass?: string
+  image?: string
   featured?: boolean
 }
 
@@ -16,6 +18,7 @@ export default function SlabCard({
   size,
   price,
   woodClass = 'wood-1',
+  image,
   featured = false,
 }: SlabCardProps) {
   return (
@@ -26,10 +29,20 @@ export default function SlabCard({
         aspectRatio: featured ? undefined : '3/4',
         background: 'var(--bg2)',
       }}>
-      <div
-        className={`w-full h-full min-h-[inherit] transition-transform duration-700 ease-out group-hover:scale-[1.04] ${woodClass}`}
-        style={{ minHeight: featured ? '100%' : undefined }}
-      />
+      {image ? (
+        <img
+          src={assetUrl(image)}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <div
+          className={`h-full min-h-[inherit] w-full transition-transform duration-700 ease-out group-hover:scale-[1.04] ${woodClass}`}
+          style={{ minHeight: featured ? '100%' : undefined }}
+        />
+      )}
 
       <div
         className="absolute inset-0 opacity-60 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300"

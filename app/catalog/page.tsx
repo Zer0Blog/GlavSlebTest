@@ -1,16 +1,25 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { SlidersHorizontal, X } from 'lucide-react'
 import SlabCard from '@/components/ui/SlabCard'
-import ContentV2Hero from '@/components/ui/ContentV2Hero'
 import V2PageShell from '@/components/sections/home-v2/V2PageShell'
+import { assetUrl } from '@/lib/base-path'
 import '../modern-home.css'
 import '../v2/home-v2.css'
 import '../content-pages-v2.css'
 
 const VIEWPORT = { once: true, amount: 0.2 } as const
+
+const CATALOG_IMAGES = [
+  '/media/catalog-1.png',
+  '/media/catalog-2.png',
+  '/media/catalog-3.jpg',
+  '/media/catalog-4.png',
+  '/media/catalog-5.png',
+  '/media/catalog-6.png',
+] as const
 
 const ALL_SLABS = [
   { id: '1247', species: 'Дуб', size: '240×96×8 см', price: '85 000 ₽', woodClass: 'wood-3' },
@@ -32,18 +41,13 @@ const THICKNESS = ['Любая', 'До 5 см', '5–8 см', 'Более 8 см
 const STOCK = ['Все', 'На складе', 'Под заказ']
 const SORT = ['По умолчанию', 'Сначала дешевле', 'Сначала дороже', 'По размеру']
 
-type FilterBtnProps = { label: string; active: boolean; onClick: () => void }
-function FilterBtn({ label, active, onClick }: FilterBtnProps) {
+type FilterOptionProps = { label: string; active: boolean; onClick: () => void }
+function FilterOption({ label, active, onClick }: FilterOptionProps) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="content-v2-filter-btn w-full text-left text-[12px] tracking-[.08em] uppercase px-4 py-2.5 transition-all duration-200"
-      style={{
-        background: active ? 'rgba(196,131,42,.06)' : 'transparent',
-        border: `1px solid ${active ? 'var(--accent)' : 'var(--border)'}`,
-        color: active ? 'var(--accent)' : 'var(--muted)',
-      }}
+      className={`catalog-v2-filters__option${active ? ' is-active' : ''}`}
     >
       {label}
     </button>
@@ -66,39 +70,42 @@ function FiltersPanel({
   setStock: (v: string) => void
 }) {
   return (
-    <>
-      <div className="mb-6 md:mb-7">
-        <p className="about-step-label mb-3">Порода</p>
-        <div className="flex flex-col gap-1.5">
+    <div className="catalog-v2-filters">
+      <div className="catalog-v2-filters__group">
+        <p className="catalog-v2-filters__label">Порода</p>
+        <div className="catalog-v2-filters__list">
           {BREEDS.map((b) => (
-            <FilterBtn key={b} label={b} active={breed === b} onClick={() => setBreed(b)} />
+            <FilterOption key={b} label={b} active={breed === b} onClick={() => setBreed(b)} />
           ))}
         </div>
       </div>
-      <div className="about-border-t mb-6 md:mb-7 border-t pt-6">
-        <p className="about-step-label mb-3">Наличие</p>
-        <div className="flex flex-col gap-1.5">
+
+      <div className="catalog-v2-filters__group">
+        <p className="catalog-v2-filters__label">Наличие</p>
+        <div className="catalog-v2-filters__list">
           {STOCK.map((s) => (
-            <FilterBtn key={s} label={s} active={stock === s} onClick={() => setStock(s)} />
+            <FilterOption key={s} label={s} active={stock === s} onClick={() => setStock(s)} />
           ))}
         </div>
       </div>
-      <div className="about-border-t mb-6 md:mb-7 border-t pt-6">
-        <p className="about-step-label mb-3">Толщина</p>
-        <div className="flex flex-col gap-1.5">
+
+      <div className="catalog-v2-filters__group">
+        <p className="catalog-v2-filters__label">Толщина</p>
+        <div className="catalog-v2-filters__list">
           {THICKNESS.map((t) => (
-            <FilterBtn key={t} label={t} active={thickness === t} onClick={() => setThickness(t)} />
+            <FilterOption key={t} label={t} active={thickness === t} onClick={() => setThickness(t)} />
           ))}
         </div>
       </div>
-      <div className="about-border-t border-t pt-6">
-        <p className="about-step-label mb-3">Длина, см</p>
-        <div className="grid grid-cols-2 gap-2">
-          <input type="number" placeholder="от" className="px-3 py-2.5 text-[13px]" />
-          <input type="number" placeholder="до" className="px-3 py-2.5 text-[13px]" />
+
+      <div className="catalog-v2-filters__group catalog-v2-filters__group--last">
+        <p className="catalog-v2-filters__label">Длина, см</p>
+        <div className="catalog-v2-filters__range">
+          <input type="number" placeholder="от" className="catalog-v2-filters__input" />
+          <input type="number" placeholder="до" className="catalog-v2-filters__input" />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -110,73 +117,127 @@ export default function CatalogPage() {
   const [filtersOpen, setFiltersOpen] = useState(false)
 
   const filtered = ALL_SLABS.filter((s) => breed === 'Все породы' || s.species === breed)
+  const hasActiveFilters = breed !== 'Все породы' || thickness !== 'Любая' || stock !== 'Все'
+
+  useEffect(() => {
+    if (!filtersOpen) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [filtersOpen])
 
   return (
     <V2PageShell variant="standalone">
       <div className="about-page catalog-v2-page">
-        <ContentV2Hero
-          kicker="Каталог"
-          title={
-            <>
+        <section className="contacts-hero relative min-h-[78vh] overflow-hidden md:min-h-[82vh]">
+          <motion.div
+            className="absolute inset-0"
+            animate={{ scale: [1, 1.04, 1] }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <img
+              src={assetUrl('/media/banner_dark.png')}
+              alt=""
+              className="h-full w-full object-cover"
+              style={{ objectPosition: '70% center' }}
+            />
+          </motion.div>
+          <div className="absolute inset-0 bg-black/45" aria-hidden />
+          <div className="contacts-hero-gradient absolute inset-0" aria-hidden />
+
+          <div className="relative mx-auto flex min-h-[78vh] w-full max-w-[1440px] flex-col justify-end px-6 pb-14 pt-0 sm:px-10 md:min-h-[82vh] md:px-14 md:pb-16 lg:px-16">
+            <motion.p
+              className="contacts-hero-kicker mb-4 text-[11px] font-semibold uppercase tracking-[0.36em]"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              Каталог
+            </motion.p>
+            <motion.h1
+              className="contacts-hero-h1 mt-0 max-w-5xl font-semibold uppercase leading-[0.95] tracking-[0.04em]"
+              style={{ fontSize: 'clamp(2rem, 5.5vw, 4.2rem)' }}
+              initial={{ opacity: 0, y: 34 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: 'easeOut' }}
+            >
               Все слэбы
               <br />
-              <span className="content-v2-hero-accent">в наличии</span>
-            </>
-          }
-          lead="1 047 слэбов на складе в Сочи · Обновляется еженедельно"
-        />
+              <span className="contacts-hero-h1-accent font-medium" style={{ letterSpacing: '0.06em' }}>
+                в наличии
+              </span>
+            </motion.h1>
+            <motion.p
+              className="contacts-hero-lead mt-6 max-w-2xl font-light"
+              style={{ fontSize: 'clamp(14px, 1.45vw, 17px)', lineHeight: 1.75 }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+            >
+              1 047 слэбов на складе в Сочи
+            </motion.p>
+          </div>
+        </section>
 
-        <motion.div
+        <motion.section
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-          className="flex flex-col lg:flex-row"
+          className="catalog-v2-body mx-auto w-full max-w-[1440px] px-6 pb-12 sm:px-10 md:px-14 md:pb-16 lg:px-16"
         >
-          <aside
-            className="content-v2-sidebar about-section--alt hidden w-[260px] flex-shrink-0 px-6 py-8 xl:w-[280px] xl:px-7 lg:block"
-          >
-            <p className="about-kicker about-kicker--section mb-6 md:mb-7">Фильтры</p>
-            <FiltersPanel
-              breed={breed}
-              setBreed={setBreed}
-              thickness={thickness}
-              setThickness={setThickness}
-              stock={stock}
-              setStock={setStock}
-            />
-          </aside>
+          <div className="catalog-v2-body__layout flex flex-col lg:flex-row lg:gap-10 xl:gap-12">
+            <aside className="catalog-v2-sidebar hidden flex-shrink-0 lg:block lg:w-[220px] xl:w-[240px]">
+              <FiltersPanel
+                breed={breed}
+                setBreed={setBreed}
+                thickness={thickness}
+                setThickness={setThickness}
+                stock={stock}
+                setStock={setStock}
+              />
+            </aside>
 
-          <div className="container-page flex-1 py-8 md:py-10 lg:max-w-none lg:px-8 xl:px-10">
-            <div className="mb-5 flex flex-wrap items-center justify-between gap-4 md:mb-6">
-              <p className="about-body text-[13px]">Показано {filtered.length} из 1047</p>
-              <div className="flex w-full items-center gap-3 sm:w-auto">
-                <button
-                  type="button"
-                  onClick={() => setFiltersOpen(true)}
-                  className="content-v2-filter-btn flex flex-1 items-center justify-center gap-2 px-4 py-2.5 text-[12px] tracking-[.08em] uppercase sm:flex-none lg:hidden"
-                  style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
-                >
-                  <SlidersHorizontal size={16} />
-                  Фильтры
-                </button>
-                <select
-                  value={sort}
-                  onChange={(e) => setSort(e.target.value)}
-                  className="min-w-[160px] flex-1 cursor-pointer px-3 py-2.5 text-[13px] sm:flex-none"
-                  style={{
-                    background: 'var(--surface)',
-                    border: '1px solid var(--border)',
-                    color: 'var(--text)',
-                  }}
-                >
-                  {SORT.map((s) => (
-                    <option key={s}>{s}</option>
-                  ))}
-                </select>
+            <div className="catalog-v2-main min-w-0 flex-1 py-6 md:py-8 lg:py-10">
+              <div className="catalog-v2-toolbar">
+                <p className="catalog-v2-toolbar__count" aria-live="polite">
+                  <span className="catalog-v2-toolbar__count-num">{filtered.length}</span>
+                  <span className="catalog-v2-toolbar__count-sep">/</span>
+                  <span className="catalog-v2-toolbar__count-total">{'1\u00a0047'}</span>
+                  <span className="catalog-v2-toolbar__count-unit">слэбов</span>
+                </p>
+
+                <div className="catalog-v2-toolbar__controls">
+                  <button
+                    type="button"
+                    className="catalog-v2-filters-open lg:hidden"
+                    onClick={() => setFiltersOpen(true)}
+                    aria-expanded={filtersOpen}
+                  >
+                    <SlidersHorizontal size={15} strokeWidth={1.75} aria-hidden />
+                    <span>Фильтры</span>
+                    {hasActiveFilters ? <span className="catalog-v2-filters-open__dot" aria-hidden /> : null}
+                  </button>
+
+                  <label className="catalog-v2-sort" htmlFor="catalog-sort">
+                    <span className="catalog-v2-sort__label">Сортировка</span>
+                    <select
+                      id="catalog-sort"
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value)}
+                      className="catalog-v2-sort__select"
+                      aria-label="Порядок сортировки слэбов"
+                    >
+                      {SORT.map((s) => (
+                        <option key={s}>{s}</option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
               </div>
-            </div>
 
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+              <div className="grid min-w-0 grid-cols-2 gap-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
               {filtered.map((s, i) => (
                 <motion.div
                   key={s.id}
@@ -187,42 +248,70 @@ export default function CatalogPage() {
                   className="overflow-hidden"
                   style={{ borderRadius: 'var(--v2-radius-md, 12px)' }}
                 >
-                  <SlabCard {...s} />
+                  <SlabCard {...s} image={CATALOG_IMAGES[i % CATALOG_IMAGES.length]} />
                 </motion.div>
               ))}
-            </div>
+              </div>
 
-            <div className="mt-10 text-center md:mt-12">
-              <button type="button" className="about-link inline-block border-b pb-2 text-sm uppercase tracking-[0.14em]">
-                Загрузить ещё 24 слэба
-              </button>
-            </div>
-          </div>
-        </motion.div>
-
-        {filtersOpen ? (
-          <div className="fixed inset-0 z-[150] lg:hidden" style={{ background: 'rgba(0,0,0,.75)' }}>
-            <div className="content-v2-drawer about-section--alt absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto p-6">
-              <div className="mb-6 flex items-center justify-between">
-                <p className="about-kicker about-kicker--section">Фильтры</p>
-                <button type="button" onClick={() => setFiltersOpen(false)} aria-label="Закрыть фильтры">
-                  <X size={22} style={{ color: 'var(--text)' }} />
+              <div className="mt-10 text-center md:mt-12">
+                <button type="button" className="about-link inline-block border-b pb-2 text-sm uppercase tracking-[0.14em]">
+                  Загрузить ещё 24 слэба
                 </button>
               </div>
-              <FiltersPanel
-                breed={breed}
-                setBreed={setBreed}
-                thickness={thickness}
-                setThickness={setThickness}
-                stock={stock}
-                setStock={setStock}
-              />
-              <button type="button" onClick={() => setFiltersOpen(false)} className="btn-primary mt-6 w-full">
-                Показать {filtered.length} слэбов
-              </button>
             </div>
           </div>
-        ) : null}
+        </motion.section>
+
+        <AnimatePresence>
+          {filtersOpen ? (
+            <div className="catalog-v2-filters-sheet lg:hidden" role="dialog" aria-modal="true" aria-label="Фильтры каталога">
+              <motion.button
+                type="button"
+                className="catalog-v2-filters-sheet__backdrop"
+                aria-label="Закрыть фильтры"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                onClick={() => setFiltersOpen(false)}
+              />
+              <motion.div
+                className="catalog-v2-drawer"
+                initial={{ y: '100%' }}
+                animate={{ y: 0 }}
+                exit={{ y: '100%' }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="catalog-v2-drawer__head">
+                  <p className="catalog-v2-drawer__title">Фильтры</p>
+                  <button
+                    type="button"
+                    className="catalog-v2-drawer__close"
+                    onClick={() => setFiltersOpen(false)}
+                    aria-label="Закрыть"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+                <FiltersPanel
+                  breed={breed}
+                  setBreed={setBreed}
+                  thickness={thickness}
+                  setThickness={setThickness}
+                  stock={stock}
+                  setStock={setStock}
+                />
+                <button
+                  type="button"
+                  onClick={() => setFiltersOpen(false)}
+                  className="catalog-v2-drawer__apply v2-btn w-full"
+                >
+                  Показать {filtered.length} слэбов
+                </button>
+              </motion.div>
+            </div>
+          ) : null}
+        </AnimatePresence>
       </div>
     </V2PageShell>
   )
