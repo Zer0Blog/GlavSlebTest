@@ -4,12 +4,16 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import ContentV2Hero from '@/components/ui/ContentV2Hero'
 import V2PageShell from '@/components/sections/home-v2/V2PageShell'
+import { assetUrl } from '@/lib/base-path'
 import '../modern-home.css'
 import '../v2/home-v2.css'
 import '../content-pages-v2.css'
 import './breeds.css'
 
 const VIEWPORT = { once: true, amount: 0.25 } as const
+
+/** Временно один файл на все карточки; позже — своё фото на породу */
+const BREED_CARD_MEDIA = '/media/material-8.png'
 
 const BREEDS = [
   {
@@ -223,9 +227,17 @@ export default function BreedsPage() {
                     transition={{ duration: 0.65, delay: 0.1, ease: 'easeOut' }}
                     className={`breeds-wood-visual relative overflow-hidden ${i % 2 === 1 ? 'lg:order-1' : ''}`}
                   >
-                    <div className={`breeds-wood-visual__inner ${b.woodClass} h-64 w-full sm:h-80 md:h-96 lg:h-[440px]`} />
+                    <div className="breeds-wood-visual__inner h-64 w-full sm:h-80 md:h-96 lg:h-[440px]">
+                      <img
+                        src={assetUrl(BREED_CARD_MEDIA)}
+                        alt={b.name}
+                        className="breeds-wood-visual__img"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
                     <div
-                      className="absolute bottom-0 left-0 right-0 p-5 md:p-6"
+                      className="breeds-wood-visual__overlay absolute bottom-0 left-0 right-0 p-5 md:p-6"
                       style={{
                         background:
                           'linear-gradient(to top, rgba(26,20,16,0.92) 0%, rgba(26,20,16,0.6) 60%, transparent 100%)',
@@ -243,8 +255,6 @@ export default function BreedsPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="breeds-corner-accent absolute right-4 top-4 h-8 w-8 pointer-events-none" />
-                    <div className="breeds-corner-accent absolute bottom-4 left-4 h-8 w-8 pointer-events-none" />
                   </motion.div>
                 </div>
               </div>

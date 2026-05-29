@@ -1,4 +1,4 @@
-/* Породы — текстуры дерева и быстрая навигация */
+/* Породы — быстрая навигация и карточки с фото */
 
 .breeds-quicknav-item {
   text-decoration: none;
@@ -18,52 +18,24 @@
   background: var(--accent);
 }
 
-.breeds-page .wood-1 {
-  background:
-    repeating-linear-gradient(92deg, transparent, transparent 2px, rgba(255, 255, 255, 0.015) 2px, rgba(255, 255, 255, 0.015) 4px),
-    repeating-linear-gradient(175deg, transparent, transparent 8px, rgba(0, 0, 0, 0.08) 8px, rgba(0, 0, 0, 0.08) 9px),
-    linear-gradient(160deg, #a07850 0%, #8b6540 25%, #c49a6c 45%, #7a5535 65%, #9c7248 80%, #b08050 100%);
+.breeds-wood-visual__inner {
   position: relative;
-}
-.breeds-page .wood-1::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom right, rgba(26, 20, 16, 0.25) 0%, transparent 50%, rgba(26, 20, 16, 0.3) 100%);
-  pointer-events: none;
-  border-radius: inherit;
+  width: 100%;
+  overflow: hidden;
 }
 
-.breeds-page .wood-2 {
-  background:
-    repeating-linear-gradient(88deg, transparent, transparent 3px, rgba(255, 255, 255, 0.02) 3px, rgba(255, 255, 255, 0.02) 5px),
-    repeating-linear-gradient(178deg, transparent, transparent 10px, rgba(0, 0, 0, 0.06) 10px, rgba(0, 0, 0, 0.06) 11px),
-    linear-gradient(150deg, #c49a6c 0%, #d4a87a 20%, #a87848 40%, #c8a272 60%, #b88858 80%, #d4a86c 100%);
-  position: relative;
-}
-.breeds-page .wood-2::after {
-  content: '';
+.breeds-wood-visual__img {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, rgba(26, 20, 16, 0.2) 0%, transparent 55%, rgba(26, 20, 16, 0.25) 100%);
-  pointer-events: none;
-  border-radius: inherit;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-.breeds-page .wood-3 {
-  background:
-    repeating-linear-gradient(91deg, transparent, transparent 2px, rgba(255, 255, 255, 0.018) 2px, rgba(255, 255, 255, 0.018) 3px),
-    repeating-linear-gradient(176deg, transparent, transparent 6px, rgba(0, 0, 0, 0.1) 6px, rgba(0, 0, 0, 0.1) 7px),
-    linear-gradient(155deg, #6b4828 0%, #8b6240 20%, #5c3a20 40%, #7a5030 60%, #6a4020 80%, #8b5c38 100%);
-  position: relative;
-}
-.breeds-page .wood-3::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom right, rgba(26, 20, 16, 0.3) 0%, transparent 50%, rgba(26, 20, 16, 0.35) 100%);
-  pointer-events: none;
-  border-radius: inherit;
+.breeds-wood-visual__overlay {
+  z-index: 1;
 }
 
 .breeds-cta-btn {

@@ -72,10 +72,6 @@
   border-radius: inherit;
 }
 
-.about-page.breeds-page .breeds-corner-accent {
-  display: none;
-}
-
 .about-page.catalog-v2-page aside.content-v2-sidebar {
   border-right: 1px solid var(--v2-border-s, var(--border));
 }
