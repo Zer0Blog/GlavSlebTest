@@ -81,6 +81,7 @@ function NavLink({
 export default function V2Nav({ variant = 'home', theme, onToggleTheme }: V2NavProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const solidNav = scrolled || theme === 'nature'
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 80)
@@ -129,15 +130,15 @@ export default function V2Nav({ variant = 'home', theme, onToggleTheme }: V2NavP
       )}
 
       <nav
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-          scrolled ? 'py-3' : 'py-5'
-        }`}
+        className={`v2-nav fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+          solidNav ? 'v2-nav--solid' : ''
+        } ${scrolled ? 'py-3' : 'py-5'}`}
         style={{
-          backgroundColor: scrolled ? 'var(--bg-nav)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-          boxShadow: scrolled ? 'var(--shadow-sm)' : 'none',
+          backgroundColor: solidNav ? 'var(--bg-nav)' : 'transparent',
+          backdropFilter: solidNav ? 'blur(20px)' : 'none',
+          WebkitBackdropFilter: solidNav ? 'blur(20px)' : 'none',
+          borderBottom: solidNav ? '1px solid var(--border)' : '1px solid transparent',
+          boxShadow: solidNav ? 'var(--shadow-sm)' : 'none',
         }}
       >
         <div className="v2-nav-inner mx-auto flex w-full max-w-7xl items-center justify-between px-6">

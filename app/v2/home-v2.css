@@ -204,7 +204,115 @@ main.site-main:has(.home-v2) {
   color: #f5f0ea;
 }
 
-[data-theme="nature"] .home-v2 .contacts-page .contacts-card__map iframe {
+.home-v2 .contacts-page {
+  background: var(--v2-bg);
+  color: var(--v2-text);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.home-v2 .contacts-page .contacts-hero-gradient {
+  background: linear-gradient(
+    to top,
+    #1a1410 0%,
+    rgba(26, 20, 16, 0.65) 36%,
+    transparent 100%
+  );
+}
+
+.home-v2 .contacts-page .contacts-hero-kicker {
+  color: var(--v2-gold);
+}
+
+.home-v2 .contacts-page .contacts-hero-h1 {
+  color: #f5f0ea;
+}
+
+.home-v2 .contacts-page .contacts-hero-h1-accent {
+  color: var(--v2-gold);
+}
+
+.home-v2 .contacts-page .contacts-hero-lead {
+  color: rgba(245, 240, 234, 0.72);
+}
+
+.home-v2 .contacts-page .contacts-kicker {
+  color: var(--v2-accent);
+}
+
+.home-v2 .contacts-page .contacts-kicker--gold {
+  color: var(--v2-gold);
+}
+
+.home-v2 .contacts-page .contacts-heading {
+  color: var(--v2-text);
+}
+
+.home-v2 .contacts-page .contacts-heading-accent {
+  color: var(--v2-gold);
+}
+
+.home-v2 .contacts-page .contacts-card {
+  background: var(--v2-card-2);
+  border: 1px solid var(--v2-border-s);
+}
+
+.home-v2 .contacts-page .contacts-map-card {
+  background: var(--v2-card);
+  border: 1px solid var(--v2-border-s);
+}
+
+.home-v2 .contacts-page .contacts-icon-box {
+  border: 1px solid var(--v2-border-s);
+  color: var(--v2-accent);
+}
+
+.home-v2 .contacts-page .contacts-label {
+  color: var(--v2-dim);
+}
+
+.home-v2 .contacts-page .contacts-value {
+  color: var(--v2-text);
+}
+
+.home-v2 .contacts-page .contacts-messenger-btn {
+  border: 1px solid var(--v2-border-s);
+  color: color-mix(in srgb, var(--v2-text) 78%, transparent);
+  background: color-mix(in srgb, var(--v2-text) 4%, transparent);
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.home-v2 .contacts-page .contacts-messenger-btn:hover {
+  border-color: color-mix(in srgb, var(--v2-gold) 45%, var(--v2-border-s));
+  color: var(--v2-text);
+  background: color-mix(in srgb, var(--v2-text) 6%, transparent);
+}
+
+.home-v2 .contacts-page .contacts-messenger-icon {
+  flex-shrink: 0;
+  color: var(--v2-accent);
+}
+
+.home-v2 .contacts-page .contacts-faq-section {
+  border-top: 1px solid var(--v2-border);
+}
+
+.home-v2 .contacts-page .contacts-faq-item {
+  border-bottom: 1px solid var(--v2-border);
+}
+
+.home-v2 .contacts-page .contacts-faq-question {
+  color: var(--v2-text);
+}
+
+.home-v2 .contacts-page .contacts-faq-answer {
+  color: var(--v2-muted);
+}
+
+.home-v2 .contacts-page .contacts-map-card iframe {
+  filter: saturate(0.92) brightness(0.88);
+}
+
+[data-theme="nature"] .home-v2 .contacts-page .contacts-map-card iframe {
   filter: saturate(0.95) brightness(0.98);
 }
 
@@ -214,6 +322,21 @@ main.site-main:has(.home-v2) {
   --v2-radius-md: 12px;
   --v2-radius-lg: 16px;
   --v2-radius-xl: 24px;
+}
+
+.home-v2 .v2-nav--solid {
+  background: var(--v2-nav) !important;
+  border-bottom-color: var(--v2-border-s) !important;
+  box-shadow: 0 2px 16px color-mix(in srgb, var(--v2-text) 6%, transparent) !important;
+}
+
+[data-theme="nature"] .home-v2 .v2-nav--solid .nav-logo {
+  filter: none;
+}
+
+[data-theme="nature"] .home-v2 .v2-nav--solid a,
+[data-theme="nature"] .home-v2 .v2-nav--solid button {
+  color: inherit;
 }
 
 /* ── Типографика (единый sans-serif) ─────────────────────── */
@@ -1521,7 +1644,7 @@ main.site-main:has(.home-v2) {
 .v2-footer__copy { font-size: 11px; color: var(--v2-dim); }
 .v2-footer__socials { display: flex; gap: 24px; }
 .v2-footer__socials a {
-  color: var(--v2-dim);
+  color: var(--v2-accent);
   transition: color 0.2s;
   text-decoration: none;
 }

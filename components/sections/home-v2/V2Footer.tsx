@@ -1,5 +1,11 @@
 import { assetUrl } from '@/lib/base-path'
-import { IconIG, IconTG, IconWA } from './V2Icons'
+import { IconTelegramBrand, IconVKBrand, IconWhatsAppBrand } from './V2Icons'
+
+const FOOTER_SOCIALS = [
+  { label: 'Telegram', href: 'https://t.me/glavsleb', icon: IconTelegramBrand },
+  { label: 'WhatsApp', href: 'https://wa.me/78000000000', icon: IconWhatsAppBrand },
+  { label: 'VK', href: '#', icon: IconVKBrand },
+]
 
 export default function V2Footer() {
   return (
@@ -55,9 +61,17 @@ export default function V2Footer() {
         <div className="v2-footer__bottom">
           <span className="v2-footer__copy">© 2025 Главный по слэбам · Термо, сушёное и естественной влажности</span>
           <div className="v2-footer__socials">
-            <a href="#" aria-label="Instagram"><IconIG /></a>
-            <a href="#" aria-label="Telegram"><IconTG /></a>
-            <a href="#" aria-label="WhatsApp"><IconWA /></a>
+            {FOOTER_SOCIALS.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+              >
+                <Icon size={18} />
+              </a>
+            ))}
           </div>
         </div>
       </div>
