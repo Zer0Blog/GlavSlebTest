@@ -70,7 +70,7 @@ export default function ContactsPage() {
     <div className="v3-page-theme contacts-page">
 
       {/* ── HERO — полноэкранный, как /about ── */}
-      <section className="relative min-h-screen overflow-hidden">
+      <section className="contacts-hero relative min-h-[78vh] overflow-hidden md:min-h-[82vh]">
         <motion.div
           className="absolute inset-0"
           animate={{ scale: [1, 1.04, 1] }}
@@ -86,7 +86,7 @@ export default function ContactsPage() {
         <div className="absolute inset-0 bg-black/45" />
         <div className="contacts-hero-gradient absolute inset-0" />
 
-        <div className="relative mx-auto flex min-h-screen w-full max-w-[1440px] flex-col justify-end px-6 pb-16 pt-24 sm:px-10 md:px-14 md:pb-20 lg:px-16">
+        <div className="relative mx-auto flex min-h-[78vh] w-full max-w-[1440px] flex-col justify-end px-6 pb-14 pt-0 sm:px-10 md:min-h-[82vh] md:px-14 md:pb-16 lg:px-16">
           <motion.p
             className="contacts-hero-kicker mb-4 text-[11px] font-semibold uppercase tracking-[0.36em]"
             initial={{ opacity: 0, y: 24 }}
@@ -121,26 +121,23 @@ export default function ContactsPage() {
       </section>
 
       {/* ── ШОУРУМ И ПРОИЗВОДСТВО ── */}
-      <section className="mx-auto w-full max-w-[1440px] px-6 py-16 sm:px-10 md:px-14 md:py-24 lg:px-16">
-        <div className="grid gap-6 md:grid-cols-2 md:gap-8" style={{ alignItems: 'stretch' }}>
+      <section className="contacts-showroom-section mx-auto w-full max-w-[1440px] px-6 pt-6 pb-12 sm:px-10 sm:pt-8 sm:pb-14 md:px-14 md:pt-10 md:pb-20 lg:px-16">
+        <div className="contacts-showroom-grid grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-8">
 
           {/* Информационная карточка */}
           <motion.article
-            className="contacts-card flex flex-col rounded-[var(--v2-radius-xl)] p-7 md:p-10"
+            className="contacts-card contacts-card--info flex flex-col rounded-[var(--v2-radius-xl)] p-5 sm:p-7 md:p-10"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT}
             transition={{ duration: 0.65, ease: 'easeOut' }}
           >
             {/* Заголовок шоурума */}
-            <div className="mb-8 flex-1">
+            <div className="contacts-card__showroom mb-6 md:mb-8">
               <p className="contacts-kicker mb-3 text-[10px] font-semibold uppercase tracking-[0.36em]">
                 Локация
               </p>
-              <h2
-                className="contacts-heading font-semibold uppercase leading-[1.05] tracking-[0.06em]"
-                style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)' }}
-              >
+              <h2 className="contacts-heading contacts-card-showroom-title font-semibold uppercase leading-[1.05] tracking-[0.06em]">
                 Шоурум и производство
                 <br />
                 <span className="contacts-heading-accent font-medium" style={{ letterSpacing: '0.08em' }}>
@@ -150,11 +147,11 @@ export default function ContactsPage() {
             </div>
 
             {/* Контактные данные */}
-            <div className="mb-8 grid gap-5 sm:grid-cols-2">
+            <div className="contacts-card__details mb-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mb-8 lg:grid-cols-1 xl:grid-cols-2 xl:gap-5">
               {CONTACTS.map(({ icon: Icon, label, value, sub, href }, i) => (
                 <motion.div
                   key={label}
-                  className="flex gap-4"
+                  className="contacts-detail-item flex min-w-0 gap-4"
                   initial={{ opacity: 0, x: -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={VIEWPORT}
@@ -191,6 +188,7 @@ export default function ContactsPage() {
 
             {/* Мессенджеры */}
             <motion.div
+              className="contacts-card__messengers"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT}
@@ -199,7 +197,7 @@ export default function ContactsPage() {
               <p className="contacts-kicker contacts-kicker--gold mb-3 text-[10px] font-semibold uppercase tracking-[0.36em]">
                 Мессенджеры
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="contacts-messenger-list flex flex-col gap-3 min-[641px]:flex-row min-[641px]:flex-wrap">
                 {MESSENGERS.map(({ label, href, icon: Icon }) => (
                   <a
                     key={label}
@@ -219,13 +217,12 @@ export default function ContactsPage() {
           {/* Карта */}
           <motion.article
             className="contacts-map-card overflow-hidden rounded-[var(--v2-radius-xl)]"
-            style={{ minHeight: '400px' }}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT}
             transition={{ duration: 0.65, delay: 0.1, ease: 'easeOut' }}
           >
-            <div className="relative h-full w-full" style={{ minHeight: '400px' }}>
+            <div className="contacts-map-card__inner relative h-full w-full">
               <iframe
                 title="FORESTOFF — Сочи, ул. Краснофлотская, 11/16"
                 src={MAP_EMBED_SRC}

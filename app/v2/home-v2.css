@@ -219,6 +219,10 @@ main.site-main:has(.home-v2) {
   );
 }
 
+.home-v2 .contacts-page .contacts-hero {
+  margin-top: 0;
+}
+
 .home-v2 .contacts-page .contacts-hero-kicker {
   color: var(--v2-gold);
 }
@@ -306,6 +310,75 @@ main.site-main:has(.home-v2) {
 
 .home-v2 .contacts-page .contacts-faq-answer {
   color: var(--v2-muted);
+}
+
+.home-v2 .contacts-page .contacts-showroom-grid {
+  align-items: stretch;
+}
+
+.home-v2 .contacts-page .contacts-card--info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.home-v2 .contacts-page .contacts-map-card {
+  min-width: 0;
+}
+
+.home-v2 .contacts-page .contacts-card-showroom-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.home-v2 .contacts-page .contacts-detail-item > div:last-child {
+  min-width: 0;
+}
+
+.home-v2 .contacts-page .contacts-map-card__inner {
+  min-height: clamp(260px, 50vw, 360px);
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .home-v2 .contacts-page .contacts-card__details {
+    gap: 1.5rem 2rem;
+  }
+
+  .home-v2 .contacts-page .contacts-map-card__inner {
+    min-height: clamp(280px, 42vw, 380px);
+  }
+
+  .home-v2 .contacts-page .contacts-messenger-btn {
+    width: auto;
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .home-v2 .contacts-page .contacts-card__details {
+    gap: 1.25rem;
+  }
+
+  .home-v2 .contacts-page .contacts-detail-item {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--v2-border);
+  }
+
+  .home-v2 .contacts-page .contacts-detail-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-v2 .contacts-page .contacts-map-card__inner {
+    min-height: clamp(320px, 100%, 520px);
+    height: 100%;
+  }
+
+  .home-v2 .contacts-page .contacts-map-card {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .home-v2 .contacts-page .contacts-map-card iframe {
@@ -1812,6 +1885,23 @@ main.site-main:has(.home-v2) {
     word-break: break-word;
   }
   .v2-section-header { flex-direction: column; align-items: flex-start; }
+
+  .home-v2 .contacts-page .contacts-showroom-section {
+    padding-top: 2rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .home-v2 .contacts-page .contacts-showroom-grid {
+    gap: 2rem;
+  }
+
+  .home-v2 .contacts-page .contacts-card-showroom-title {
+    font-size: clamp(1.35rem, 5vw, 1.9rem);
+  }
+
+  .home-v2 .contacts-page .contacts-map-card__inner {
+    min-height: clamp(260px, 45vw, 340px);
+  }
 }
 
 @media (max-width: 640px) {
@@ -1860,5 +1950,47 @@ main.site-main:has(.home-v2) {
   .v2-footer__copy {
     line-height: 1.55;
     max-width: 100%;
+  }
+
+  .home-v2 .contacts-page .contacts-showroom-section {
+    padding-top: 1.75rem;
+    padding-bottom: 3rem;
+  }
+
+  .home-v2 .contacts-page .contacts-card--info {
+    padding: 1.25rem;
+  }
+
+  .home-v2 .contacts-page .contacts-card__details {
+    gap: 1.25rem;
+  }
+
+  .home-v2 .contacts-page .contacts-messenger-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .home-v2 .contacts-page .contacts-detail-item {
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--v2-border);
+  }
+
+  .home-v2 .contacts-page .contacts-detail-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .home-v2 .contacts-page .contacts-card-showroom-title {
+    font-size: clamp(1.25rem, 7vw, 1.75rem);
+    letter-spacing: 0.04em;
+  }
+
+  .home-v2 .contacts-page .contacts-map-card__inner {
+    min-height: clamp(220px, 68vw, 280px);
+  }
+
+  .home-v2 .contacts-page .contacts-map-card,
+  .home-v2 .contacts-page .contacts-card--info {
+    border-radius: var(--v2-radius-lg);
   }
 }
