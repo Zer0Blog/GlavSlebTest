@@ -37,8 +37,8 @@ export default function SlabCard({
       />
 
       <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 translate-y-0 md:translate-y-2 opacity-100 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-300">
-        <p className="kicker !text-[10px] sm:!text-[11px] !tracking-[.12em] mb-1 sm:mb-1.5">{species}</p>
-        <p className="font-display text-lg sm:text-xl mb-1">Слэб #{id}</p>
+        <p className="slab-card-kicker kicker !text-[10px] sm:!text-[11px] !tracking-[.12em] mb-1 sm:mb-1.5">{species}</p>
+        <p className="slab-card-title font-display text-lg sm:text-xl mb-1">Слэб #{id}</p>
         <p className="text-[12px] sm:text-[13px]" style={{ color: 'var(--muted)' }}>
           {size}
         </p>

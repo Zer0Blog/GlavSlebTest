@@ -15,8 +15,9 @@ type V2NavLink = {
 }
 
 const V2_NAV_LINKS: V2NavLink[] = [
-  { label: 'Каталог', href: '/v2#catalog', homeHref: '#catalog' },
-  { label: 'Материалы', href: '/v2#materials', homeHref: '#materials' },
+  { label: 'Каталог', href: '/catalog', homeHref: '#catalog' },
+  { label: 'Материалы', href: '/breeds', homeHref: '/breeds' },
+  { label: 'Работы', href: '/works', homeHref: '/works' },
   { label: 'Производство', href: '/v2#process', homeHref: '#process' },
   { label: 'О нас', href: '/about', homeHref: '/about' },
   { label: 'Контакты', href: '/contacts', homeHref: '/contacts' },
@@ -141,17 +142,17 @@ export default function V2Nav({ variant = 'home', theme, onToggleTheme }: V2NavP
           boxShadow: solidNav ? 'var(--shadow-sm)' : 'none',
         }}
       >
-        <div className="v2-nav-inner mx-auto flex w-full max-w-7xl items-center justify-between px-6">
-          <NavLink href={homeHref} className="nav-logo-link text-decoration-none">
+        <div className="v2-nav-inner mx-auto grid w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-6">
+          <NavLink href={homeHref} className="nav-logo-link justify-self-start text-decoration-none">
             <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="nav-logo" />
           </NavLink>
 
-          <ul className="hidden items-center gap-8 lg:flex">
+          <ul className="v2-nav-links hidden items-center justify-center gap-5 xl:gap-7 lg:flex">
             {V2_NAV_LINKS.map((link) => (
               <li key={link.label}>
                 <NavLink
                   href={navHref(link, variant)}
-                  className="text-[13px] font-medium tracking-[0.06em] uppercase transition-colors duration-300"
+                  className="whitespace-nowrap text-[13px] font-medium tracking-[0.06em] uppercase transition-colors duration-300"
                   style={{ color: 'var(--text-secondary)' }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
                   onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
@@ -162,7 +163,7 @@ export default function V2Nav({ variant = 'home', theme, onToggleTheme }: V2NavP
             ))}
           </ul>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-end gap-4 justify-self-end">
             <span className="hidden text-[10px] tracking-[0.1em] uppercase sm:block" style={{ color: 'var(--text-tertiary)' }}>
               {theme === 'thermo' ? 'Тёмная' : 'Светлая'}
             </span>

@@ -8,7 +8,7 @@ import { assetUrl } from '@/lib/base-path'
 
 const links = [
   { href: '/catalog', label: 'Каталог' },
-  { href: '/breeds', label: 'Породы' },
+  { href: '/breeds', label: 'Материалы' },
   { href: '/works', label: 'Работы' },
   { href: '/about', label: 'О нас' },
   { href: '/contacts', label: 'Контакты' },
@@ -36,33 +36,38 @@ export default function Navbar() {
           backdropFilter: useV2Chrome ? 'blur(20px)' : 'blur(12px)',
           borderBottom: useV2Chrome ? '1px solid var(--border)' : '0.5px solid var(--border)',
         }}>
-        <div className={`site-chrome-nav__inner ${useV2Chrome ? 'site-chrome-nav__inner--v2' : 'container-page'} flex items-center justify-between gap-4 h-[var(--nav-h)]`}>
+        <div
+          className={`site-chrome-nav__inner ${useV2Chrome ? 'site-chrome-nav__inner--v2' : 'container-page'} grid h-[var(--nav-h)] grid-cols-[1fr_auto_1fr] items-center gap-4`}
+        >
           {useForestoffLogo ? (
-            <Link href="/" className="nav-logo-link text-decoration-none">
+            <Link href="/" className="nav-logo-link justify-self-start text-decoration-none">
               <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
             </Link>
           ) : (
-            <Link href="/" className="flex items-center gap-3 shrink-0">
+            <Link href="/" className="flex shrink-0 items-center gap-3 justify-self-start">
               <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
-              <span className="font-display text-lg md:text-xl tracking-wide" style={{ color: 'var(--text)' }}>
+              <span className="font-display text-lg tracking-wide md:text-xl" style={{ color: 'var(--text)' }}>
                 Главный <span style={{ color: 'var(--accent)' }}>по слэбам</span>
               </span>
             </Link>
           )}
 
-          <div className={`hidden lg:flex items-center ${useV2Chrome ? 'gap-8' : 'gap-7 xl:gap-9'}`}>
-            {links.map(l => (
+          <div
+            className={`hidden items-center justify-center lg:flex ${useV2Chrome ? 'gap-5 xl:gap-7' : 'gap-7 xl:gap-9'}`}
+          >
+            {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`uppercase transition-colors duration-200 ${useV2Chrome ? 'text-[13px] font-medium tracking-[0.06em]' : 'text-[13px] tracking-widest'}`}
-                style={{ color: pathname === l.href ? 'var(--text)' : 'var(--muted)' }}>
+                className={`whitespace-nowrap uppercase transition-colors duration-200 ${useV2Chrome ? 'text-[13px] font-medium tracking-[0.06em]' : 'text-[13px] tracking-widest'}`}
+                style={{ color: pathname === l.href ? 'var(--text)' : 'var(--muted)' }}
+              >
                 {l.label}
               </Link>
             ))}
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center justify-end gap-2 justify-self-end sm:gap-3">
             <button
               type="button"
               onClick={() => setModal(true)}

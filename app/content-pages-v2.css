@@ -1,0 +1,117 @@
+/* Каталог, работы, породы — типографика и формы как на /about */
+
+.content-v2-hero-accent {
+  color: var(--v2-gold, var(--gold));
+}
+
+.about-page.catalog-v2-page,
+.about-page.works-v2-page,
+.about-page.breeds-page {
+  font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
+}
+
+.about-page.catalog-v2-page .font-display,
+.about-page.works-v2-page .font-display,
+.about-page.breeds-page .font-display {
+  font-family: inherit;
+  font-style: normal;
+}
+
+.about-page.catalog-v2-page .slab-card-kicker {
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--v2-gold, var(--gold));
+}
+
+.about-page.catalog-v2-page .slab-card-title {
+  font-family: inherit;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  font-style: normal;
+}
+
+.about-page.catalog-v2-page em,
+.about-page.works-v2-page em,
+.about-page.breeds-page em {
+  font-style: normal;
+}
+
+/* Скругления — как на v2 / about */
+.about-page.catalog-v2-page .content-v2-chip,
+.about-page.works-v2-page .content-v2-chip,
+.about-page.breeds-page .content-v2-chip,
+.about-page.catalog-v2-page .content-v2-filter-btn,
+.about-page.works-v2-page .content-v2-filter-btn,
+.about-page.breeds-page .content-v2-filter-btn,
+.about-page.catalog-v2-page select,
+.about-page.catalog-v2-page input[type='number'],
+.about-page.breeds-page .breeds-cta-btn,
+.about-page.catalog-v2-page .btn-primary,
+.about-page.works-v2-page .btn-primary,
+.about-page.breeds-page .content-v2-panel,
+.about-page.works-v2-page .content-v2-panel {
+  border-radius: var(--v2-radius-md, 12px);
+}
+
+.about-page.catalog-v2-page .btn-primary,
+.about-page.works-v2-page .btn-primary,
+.about-page.breeds-page .breeds-cta-btn {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.about-page.breeds-page .breeds-wood-visual {
+  border-radius: var(--v2-radius-lg, 16px);
+}
+
+.about-page.breeds-page .breeds-wood-visual .breeds-wood-visual__inner {
+  border-radius: inherit;
+}
+
+.about-page.breeds-page .breeds-corner-accent {
+  display: none;
+}
+
+.about-page.catalog-v2-page aside.content-v2-sidebar {
+  border-right: 1px solid var(--v2-border-s, var(--border));
+}
+
+.about-page.catalog-v2-page .content-v2-drawer {
+  border-radius: var(--v2-radius-lg, 16px) var(--v2-radius-lg, 16px) 0 0;
+}
+
+.about-page.breeds-page .content-v2-stat-num {
+  font-size: clamp(1.875rem, 4vw, 2.25rem);
+  font-weight: 600;
+  color: var(--v2-gold, var(--gold));
+}
+
+.about-page.breeds-page .content-v2-section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.about-page.breeds-page .content-v2-section-lead {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.2;
+}
+
+.about-page.works-v2-page .content-v2-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .about-page.breeds-page .breeds-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,83 +1,71 @@
-/* ── Breeds — Главный по слэбам ── */
+/* Породы — текстуры дерева и быстрая навигация */
 
-/* ── Hero ── */
-.breeds-hero {
-  background: linear-gradient(160deg, var(--bg) 0%, var(--bg3) 40%, var(--bg2) 100%);
+.breeds-quicknav-item {
+  text-decoration: none;
 }
-.breeds-hero-grain {
-  background-image: repeating-linear-gradient(
-    91deg,
-    transparent,
-    transparent 2px,
-    rgba(255,255,255,0.008) 2px,
-    rgba(255,255,255,0.008) 3px
-  );
-}
-.breeds-hero-line {
-  background: linear-gradient(90deg, transparent, var(--accent), var(--gold), var(--accent), transparent);
-}
-.breeds-hero-fade {
-  background: linear-gradient(to bottom, transparent, var(--bg));
-}
-
-/* ── Quick nav sidebar ── */
-.breeds-quicknav-item { text-decoration: none; }
 .breeds-quicknav-label {
   color: var(--muted);
   opacity: 0;
   transition: opacity 0.2s;
 }
-.breeds-quicknav-item:hover .breeds-quicknav-label { opacity: 1; }
-.breeds-quicknav-dot { background: var(--border); }
-.breeds-quicknav-item:hover .breeds-quicknav-dot { background: var(--accent); }
+.breeds-quicknav-item:hover .breeds-quicknav-label {
+  opacity: 1;
+}
+.breeds-quicknav-dot {
+  background: var(--border);
+}
+.breeds-quicknav-item:hover .breeds-quicknav-dot {
+  background: var(--accent);
+}
 
-/* ── Wood textures — richer gradients for breeds page ── */
 .breeds-page .wood-1 {
   background:
-    repeating-linear-gradient(92deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 4px),
-    repeating-linear-gradient(175deg, transparent, transparent 8px, rgba(0,0,0,0.08) 8px, rgba(0,0,0,0.08) 9px),
-    linear-gradient(160deg, #A07850 0%, #8B6540 25%, #C49A6C 45%, #7A5535 65%, #9C7248 80%, #B08050 100%);
+    repeating-linear-gradient(92deg, transparent, transparent 2px, rgba(255, 255, 255, 0.015) 2px, rgba(255, 255, 255, 0.015) 4px),
+    repeating-linear-gradient(175deg, transparent, transparent 8px, rgba(0, 0, 0, 0.08) 8px, rgba(0, 0, 0, 0.08) 9px),
+    linear-gradient(160deg, #a07850 0%, #8b6540 25%, #c49a6c 45%, #7a5535 65%, #9c7248 80%, #b08050 100%);
   position: relative;
 }
 .breeds-page .wood-1::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, rgba(26,20,16,0.25) 0%, transparent 50%, rgba(26,20,16,0.3) 100%);
+  background: linear-gradient(to bottom right, rgba(26, 20, 16, 0.25) 0%, transparent 50%, rgba(26, 20, 16, 0.3) 100%);
   pointer-events: none;
+  border-radius: inherit;
 }
 
 .breeds-page .wood-2 {
   background:
-    repeating-linear-gradient(88deg, transparent, transparent 3px, rgba(255,255,255,0.02) 3px, rgba(255,255,255,0.02) 5px),
-    repeating-linear-gradient(178deg, transparent, transparent 10px, rgba(0,0,0,0.06) 10px, rgba(0,0,0,0.06) 11px),
-    linear-gradient(150deg, #C49A6C 0%, #D4A87A 20%, #A87848 40%, #C8A272 60%, #B88858 80%, #D4A86C 100%);
+    repeating-linear-gradient(88deg, transparent, transparent 3px, rgba(255, 255, 255, 0.02) 3px, rgba(255, 255, 255, 0.02) 5px),
+    repeating-linear-gradient(178deg, transparent, transparent 10px, rgba(0, 0, 0, 0.06) 10px, rgba(0, 0, 0, 0.06) 11px),
+    linear-gradient(150deg, #c49a6c 0%, #d4a87a 20%, #a87848 40%, #c8a272 60%, #b88858 80%, #d4a86c 100%);
   position: relative;
 }
 .breeds-page .wood-2::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, rgba(26,20,16,0.2) 0%, transparent 55%, rgba(26,20,16,0.25) 100%);
+  background: linear-gradient(to bottom right, rgba(26, 20, 16, 0.2) 0%, transparent 55%, rgba(26, 20, 16, 0.25) 100%);
   pointer-events: none;
+  border-radius: inherit;
 }
 
 .breeds-page .wood-3 {
   background:
-    repeating-linear-gradient(91deg, transparent, transparent 2px, rgba(255,255,255,0.018) 2px, rgba(255,255,255,0.018) 3px),
-    repeating-linear-gradient(176deg, transparent, transparent 6px, rgba(0,0,0,0.1) 6px, rgba(0,0,0,0.1) 7px),
-    linear-gradient(155deg, #6B4828 0%, #8B6240 20%, #5C3A20 40%, #7A5030 60%, #6A4020 80%, #8B5C38 100%);
+    repeating-linear-gradient(91deg, transparent, transparent 2px, rgba(255, 255, 255, 0.018) 2px, rgba(255, 255, 255, 0.018) 3px),
+    repeating-linear-gradient(176deg, transparent, transparent 6px, rgba(0, 0, 0, 0.1) 6px, rgba(0, 0, 0, 0.1) 7px),
+    linear-gradient(155deg, #6b4828 0%, #8b6240 20%, #5c3a20 40%, #7a5030 60%, #6a4020 80%, #8b5c38 100%);
   position: relative;
 }
 .breeds-page .wood-3::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, rgba(26,20,16,0.3) 0%, transparent 50%, rgba(26,20,16,0.35) 100%);
+  background: linear-gradient(to bottom right, rgba(26, 20, 16, 0.3) 0%, transparent 50%, rgba(26, 20, 16, 0.35) 100%);
   pointer-events: none;
+  border-radius: inherit;
 }
 
-/* ── CTA button ── */
 .breeds-cta-btn {
   background: var(--accent);
   color: var(--bg);
@@ -86,9 +74,4 @@
 .breeds-cta-btn:hover {
   background: var(--accent2);
   color: var(--text);
-}
-
-/* ── Responsive ── */
-@media (max-width: 640px) {
-  .breeds-cta-btn { width: 100%; justify-content: center; }
 }
