@@ -109,7 +109,7 @@ export default function BreedsPage() {
         <QuickNav />
 
         <ContentV2Hero
-          kicker="Породы дерева"
+          imageSrc="/media/catalog-5.png"
           title={
             <>
               15 пород,
@@ -125,7 +125,7 @@ export default function BreedsPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT}
           transition={{ duration: 0.55, ease: 'easeOut' }}
-          className="mx-auto w-full max-w-[1440px] px-6 pb-12 sm:px-10 md:px-14 md:pb-16 lg:px-16"
+          className="breeds-intro mx-auto w-full max-w-[1440px] px-6 pb-12 sm:px-10 md:px-14 md:pb-16 lg:px-16"
         >
           <div className="about-border-l max-w-2xl border-l pl-5 md:pl-7">
             <p className="about-body text-base leading-[1.75] md:text-lg">
@@ -262,57 +262,55 @@ export default function BreedsPage() {
           ))}
         </div>
 
-        <section className="about-section--alt border-y">
-          <div className="mx-auto w-full max-w-[1440px] px-6 py-16 text-center sm:px-10 md:px-14 md:py-20 lg:px-16">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VIEWPORT}
-              transition={{ duration: 0.65, ease: 'easeOut' }}
-            >
-              <p className="about-kicker about-kicker--section">Каталог слэбов</p>
-              <h2 className="content-v2-section-lead mx-auto mt-4 max-w-3xl">Найдите свой слэб</h2>
-              <p className="about-body mx-auto mt-6 max-w-xl text-base leading-relaxed md:text-lg">
-                Более 900 слэбов в наличии. Каждый — уникален. Выберите породу и подберите идеальный экземпляр для
-                вашего проекта.
-              </p>
-              <Link
-                href="/catalog"
-                className="breeds-cta-btn group mt-10 inline-flex w-full items-center justify-center gap-3 px-10 py-4 text-xs font-medium uppercase tracking-[0.14em] transition-all duration-300 sm:w-auto sm:text-sm"
-              >
-                Перейти в каталог
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path
-                    d="M1 7h12M8 2l5 5-5 5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
-
-              <div className="about-border-y mx-auto mt-16 grid max-w-lg grid-cols-3 gap-4 border-y py-10 md:mt-20 md:gap-8 md:py-12">
+        <section className="mx-auto w-full max-w-[1440px] px-6 py-10 sm:px-10 md:px-14 md:py-14 lg:px-16 lg:py-16">
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT}
+            transition={{ duration: 0.65, ease: 'easeOut' }}
+            className="works-order-cta"
+          >
+            <div className="works-order-cta__inner">
+              <div className="works-order-cta__head">
+                <p className="works-order-cta__kicker">Каталог слэбов</p>
+                <h2 className="works-order-cta__title">
+                  Найдите
+                  <br />
+                  <span>свой слэб</span>
+                </h2>
+              </div>
+              <div className="works-order-cta__body">
+                <p className="works-order-cta__text">
+                  Более 900 слэбов в наличии. Каждый — уникален. Выберите породу и подберите идеальный экземпляр для
+                  вашего проекта.
+                </p>
+                <Link href="/catalog" className="works-order-cta__btn v2-btn group">
+                  Перейти в каталог
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path
+                      d="M1 7h12M8 2l5 5-5 5"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+              </div>
+              <div className="works-order-cta__stats">
                 {[
                   { value: '15', label: 'пород' },
                   { value: '900+', label: 'слэбов' },
                   { value: '8', label: 'лет опыта' },
-                ].map((stat, idx) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={VIEWPORT}
-                    transition={{ duration: 0.5, delay: idx * 0.1, ease: 'easeOut' }}
-                    className="text-center"
-                  >
-                    <p className="about-stat-num">{stat.value}</p>
-                    <p className="about-stat-label">{stat.label}</p>
-                  </motion.div>
+                ].map((stat) => (
+                  <div key={stat.label} className="works-order-cta__stat">
+                    <p className="works-order-cta__stat-num">{stat.value}</p>
+                    <p className="works-order-cta__stat-label">{stat.label}</p>
+                  </div>
                 ))}
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </section>
       </div>
     </V2PageShell>

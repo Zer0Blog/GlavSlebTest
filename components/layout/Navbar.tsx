@@ -37,14 +37,14 @@ export default function Navbar() {
           borderBottom: useV2Chrome ? '1px solid var(--border)' : '0.5px solid var(--border)',
         }}>
         <div
-          className={`site-chrome-nav__inner ${useV2Chrome ? 'site-chrome-nav__inner--v2' : 'container-page'} grid h-[var(--nav-h)] grid-cols-[1fr_auto_1fr] items-center gap-4`}
+          className={`site-chrome-nav__inner relative ${useV2Chrome ? 'site-chrome-nav__inner--v2' : 'container-page'} flex h-[var(--nav-h)] w-full items-center justify-between gap-3 sm:gap-4`}
         >
           {useForestoffLogo ? (
-            <Link href="/" className="nav-logo-link justify-self-start text-decoration-none">
+            <Link href="/" className="nav-logo-link relative z-10 shrink-0 text-decoration-none">
               <img src={assetUrl('/media/logo.png')} alt="FORESTOFF" className="nav-logo" />
             </Link>
           ) : (
-            <Link href="/" className="flex shrink-0 items-center gap-3 justify-self-start">
+            <Link href="/" className="relative z-10 flex shrink-0 items-center gap-3">
               <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="h-10 w-10 rounded-full object-contain" />
               <span className="font-display text-lg tracking-wide md:text-xl" style={{ color: 'var(--text)' }}>
                 Главный <span style={{ color: 'var(--accent)' }}>по слэбам</span>
@@ -53,7 +53,7 @@ export default function Navbar() {
           )}
 
           <div
-            className={`hidden items-center justify-center lg:flex ${useV2Chrome ? 'gap-5 xl:gap-7' : 'gap-7 xl:gap-9'}`}
+            className={`pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center lg:pointer-events-auto lg:flex ${useV2Chrome ? 'gap-5 xl:gap-7' : 'gap-7 xl:gap-9'}`}
           >
             {links.map((l) => (
               <Link
@@ -67,7 +67,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="flex items-center justify-end gap-2 justify-self-end sm:gap-3">
+          <div className="relative z-10 flex shrink-0 items-center justify-end gap-2 sm:gap-3">
             <button
               type="button"
               onClick={() => setModal(true)}

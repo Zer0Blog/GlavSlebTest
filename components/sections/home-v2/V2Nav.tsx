@@ -142,12 +142,12 @@ export default function V2Nav({ variant = 'home', theme, onToggleTheme }: V2NavP
           boxShadow: solidNav ? 'var(--shadow-sm)' : 'none',
         }}
       >
-        <div className="v2-nav-inner mx-auto grid w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-6">
-          <NavLink href={homeHref} className="nav-logo-link justify-self-start text-decoration-none">
+        <div className="v2-nav-inner relative mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-6 sm:gap-4">
+          <NavLink href={homeHref} className="nav-logo-link relative z-10 shrink-0 text-decoration-none">
             <img src={assetUrl('/media/logo.png')} alt="Главный по слэбам" className="nav-logo" />
           </NavLink>
 
-          <ul className="v2-nav-links hidden items-center justify-center gap-5 xl:gap-7 lg:flex">
+          <ul className="v2-nav-links pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-5 xl:gap-7 lg:pointer-events-auto lg:flex">
             {V2_NAV_LINKS.map((link) => (
               <li key={link.label}>
                 <NavLink
@@ -163,7 +163,7 @@ export default function V2Nav({ variant = 'home', theme, onToggleTheme }: V2NavP
             ))}
           </ul>
 
-          <div className="flex items-center justify-end gap-4 justify-self-end">
+          <div className="relative z-10 flex shrink-0 items-center justify-end gap-2 sm:gap-3 md:gap-4">
             <span className="hidden text-[10px] tracking-[0.1em] uppercase sm:block" style={{ color: 'var(--text-tertiary)' }}>
               {theme === 'thermo' ? 'Тёмная' : 'Светлая'}
             </span>

@@ -191,7 +191,8 @@ main.site-main:has(.home-v2) {
   color: var(--v2-text);
 }
 
-.home-v2 .about-page .about-hero-gradient {
+.home-v2 .about-page .about-hero-gradient,
+.home-v2 .breeds-page .about-hero-gradient {
   background: linear-gradient(
     to top,
     var(--v2-bg),
