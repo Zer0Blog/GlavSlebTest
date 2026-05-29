@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import ContentV2Hero from '@/components/ui/ContentV2Hero'
+import { assetUrl } from '@/lib/base-path'
 import V2PageShell from '@/components/sections/home-v2/V2PageShell'
 import '../modern-home.css'
 import '../v2/home-v2.css'
@@ -31,17 +31,55 @@ export default function WorksPage() {
   return (
     <V2PageShell variant="standalone">
       <div className="about-page works-v2-page">
-        <ContentV2Hero
-          kicker="Наши работы"
-          title={
-            <>
+        <section className="contacts-hero relative min-h-[78vh] overflow-hidden md:min-h-[82vh]">
+          <motion.div
+            className="absolute inset-0"
+            animate={{ scale: [1, 1.04, 1] }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <img
+              src={assetUrl('/media/works-hero.png')}
+              alt=""
+              className="h-full w-full object-cover"
+              style={{ objectPosition: 'center center' }}
+            />
+          </motion.div>
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="contacts-hero-gradient absolute inset-0" />
+
+          <div className="relative mx-auto flex min-h-[78vh] w-full max-w-[1440px] flex-col justify-end px-6 pb-14 pt-0 sm:px-10 md:min-h-[82vh] md:px-14 md:pb-16 lg:px-16">
+            <motion.p
+              className="contacts-hero-kicker mb-4 text-[11px] font-semibold uppercase tracking-[0.36em]"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+              Наши работы
+            </motion.p>
+            <motion.h1
+              className="contacts-hero-h1 mt-0 max-w-5xl font-semibold uppercase leading-[0.95] tracking-[0.04em]"
+              style={{ fontSize: 'clamp(2rem, 5.5vw, 4.2rem)' }}
+              initial={{ opacity: 0, y: 34 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: 'easeOut' }}
+            >
               Готовые
               <br />
-              <span className="content-v2-hero-accent">изделия</span>
-            </>
-          }
-          lead="Столы, столешницы и изделия на заказ из наших слэбов"
-        />
+              <span className="contacts-hero-h1-accent font-medium" style={{ letterSpacing: '0.06em' }}>
+                изделия
+              </span>
+            </motion.h1>
+            <motion.p
+              className="contacts-hero-lead mt-6 max-w-2xl font-light"
+              style={{ fontSize: 'clamp(14px, 1.45vw, 17px)', lineHeight: 1.75 }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+            >
+              Столы, столешницы и изделия на заказ из наших слэбов
+            </motion.p>
+          </div>
+        </section>
 
         <section className="mx-auto w-full max-w-[1440px] px-6 py-10 sm:px-10 md:px-14 md:py-14 lg:px-16 lg:py-16">
           <motion.div
