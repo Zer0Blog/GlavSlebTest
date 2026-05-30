@@ -11,26 +11,20 @@ export type V2NavVariant = 'home' | 'standalone'
 type V2NavLink = {
   label: string
   href: string
-  homeHref: string
 }
 
 const V2_NAV_LINKS: V2NavLink[] = [
-  { label: 'Каталог', href: '/catalog', homeHref: '#catalog' },
-  { label: 'Материалы', href: '/breeds', homeHref: '/breeds' },
-  { label: 'Работы', href: '/works', homeHref: '/works' },
-  { label: 'Производство', href: '/v2#process', homeHref: '#process' },
-  { label: 'О нас', href: '/about', homeHref: '/about' },
-  { label: 'Контакты', href: '/contacts', homeHref: '/contacts' },
+  { label: 'Каталог', href: '/catalog' },
+  { label: 'Материалы', href: '/breeds' },
+  { label: 'Работы', href: '/works' },
+  { label: 'О нас', href: '/about' },
+  { label: 'Контакты', href: '/contacts' },
 ]
 
 type V2NavProps = {
   variant?: V2NavVariant
   theme: V2Theme
   onToggleTheme: () => void
-}
-
-function navHref(link: V2NavLink, variant: V2NavVariant): string {
-  return variant === 'home' ? link.homeHref : link.href
 }
 
 function NavLink({
@@ -111,7 +105,7 @@ export default function V2Nav({ variant = 'home', theme, onToggleTheme }: V2NavP
           {V2_NAV_LINKS.map((link) => (
             <NavLink
               key={link.label}
-              href={navHref(link, variant)}
+              href={link.href}
               onClick={closeMenu}
               className="text-3xl font-bold uppercase tracking-wide transition-colors duration-300 hover:opacity-70"
               style={{ color: 'var(--text-primary)' }}
@@ -151,7 +145,7 @@ export default function V2Nav({ variant = 'home', theme, onToggleTheme }: V2NavP
             {V2_NAV_LINKS.map((link) => (
               <li key={link.label}>
                 <NavLink
-                  href={navHref(link, variant)}
+                  href={link.href}
                   className="whitespace-nowrap text-[13px] font-medium tracking-[0.06em] uppercase transition-colors duration-300"
                   style={{ color: 'var(--text-secondary)' }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
