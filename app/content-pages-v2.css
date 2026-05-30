@@ -6,7 +6,8 @@
 
 .about-page.catalog-v2-page,
 .about-page.works-v2-page,
-.about-page.breeds-page {
+.about-page.breeds-page,
+.about-page.product-v2-page {
   font-family: var(--font-inter), 'Montserrat', system-ui, sans-serif;
 }
 
@@ -683,4 +684,51 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+/* Страница товара */
+.about-page.product-v2-page {
+  background: var(--v2-bg);
+}
+
+.about-page.product-v2-page .product-v2-layout {
+  min-height: calc(100vh - var(--nav-h));
+}
+
+.about-page.product-v2-page .product-v2-input {
+  background: var(--v2-card-2);
+  border: 1px solid var(--v2-border-s);
+  border-radius: var(--v2-radius-md, 12px);
+  color: var(--v2-text);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.about-page.product-v2-page .product-v2-input::placeholder {
+  color: var(--v2-dim);
+}
+
+.about-page.product-v2-page .product-v2-input:focus {
+  border-color: var(--v2-accent);
+}
+
+.about-page.product-v2-page .slab-card-kicker {
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--v2-gold, var(--gold));
+}
+
+.about-page.product-v2-page .slab-card-title {
+  font-family: inherit;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  font-style: normal;
+}
+
+.about-page.product-v2-page em {
+  font-style: normal;
 }

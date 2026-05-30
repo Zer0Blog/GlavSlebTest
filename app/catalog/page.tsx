@@ -1,8 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { SlidersHorizontal, X } from 'lucide-react'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 import SlabCard from '@/components/ui/SlabCard'
 import V2PageShell from '@/components/sections/home-v2/V2PageShell'
 import { assetUrl } from '@/lib/base-path'
@@ -114,19 +113,8 @@ export default function CatalogPage() {
   const [thickness, setThickness] = useState('Любая')
   const [stock, setStock] = useState('Все')
   const [sort, setSort] = useState('По умолчанию')
-  const [filtersOpen, setFiltersOpen] = useState(false)
 
   const filtered = ALL_SLABS.filter((s) => breed === 'Все породы' || s.species === breed)
-  const hasActiveFilters = breed !== 'Все породы' || thickness !== 'Любая' || stock !== 'Все'
-
-  useEffect(() => {
-    if (!filtersOpen) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.body.style.overflow = prev
-    }
-  }, [filtersOpen])
 
   return (
     <V2PageShell variant="standalone">
@@ -209,17 +197,6 @@ export default function CatalogPage() {
                 </p>
 
                 <div className="catalog-v2-toolbar__controls">
-                  <button
-                    type="button"
-                    className="catalog-v2-filters-open lg:hidden"
-                    onClick={() => setFiltersOpen(true)}
-                    aria-expanded={filtersOpen}
-                  >
-                    <SlidersHorizontal size={15} strokeWidth={1.75} aria-hidden />
-                    <span>Фильтры</span>
-                    {hasActiveFilters ? <span className="catalog-v2-filters-open__dot" aria-hidden /> : null}
-                  </button>
-
                   <label className="catalog-v2-sort" htmlFor="catalog-sort">
                     <span className="catalog-v2-sort__label">Сортировка</span>
                     <select
@@ -261,57 +238,6 @@ export default function CatalogPage() {
             </div>
           </div>
         </motion.section>
-
-        <AnimatePresence>
-          {filtersOpen ? (
-            <div className="catalog-v2-filters-sheet lg:hidden" role="dialog" aria-modal="true" aria-label="Фильтры каталога">
-              <motion.button
-                type="button"
-                className="catalog-v2-filters-sheet__backdrop"
-                aria-label="Закрыть фильтры"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                onClick={() => setFiltersOpen(false)}
-              />
-              <motion.div
-                className="catalog-v2-drawer"
-                initial={{ y: '100%' }}
-                animate={{ y: 0 }}
-                exit={{ y: '100%' }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <div className="catalog-v2-drawer__head">
-                  <p className="catalog-v2-drawer__title">Фильтры</p>
-                  <button
-                    type="button"
-                    className="catalog-v2-drawer__close"
-                    onClick={() => setFiltersOpen(false)}
-                    aria-label="Закрыть"
-                  >
-                    <X size={20} />
-                  </button>
-                </div>
-                <FiltersPanel
-                  breed={breed}
-                  setBreed={setBreed}
-                  thickness={thickness}
-                  setThickness={setThickness}
-                  stock={stock}
-                  setStock={setStock}
-                />
-                <button
-                  type="button"
-                  onClick={() => setFiltersOpen(false)}
-                  className="catalog-v2-drawer__apply v2-btn w-full"
-                >
-                  Показать {filtered.length} слэбов
-                </button>
-              </motion.div>
-            </div>
-          ) : null}
-        </AnimatePresence>
       </div>
     </V2PageShell>
   )
